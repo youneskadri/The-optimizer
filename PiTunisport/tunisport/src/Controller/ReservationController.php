@@ -43,7 +43,6 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())  {
             $em = $doctrine->getManager();
-            $reservation->setMatch($form->get('matchFs')->getData());
             $em->persist($reservation);
             $em->flush();
             return $this->redirectToRoute("readReservation");

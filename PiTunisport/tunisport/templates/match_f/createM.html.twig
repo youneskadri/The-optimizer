@@ -2,31 +2,40 @@
 
 {% block body %}
     <h1> Ajouter match </h1>
-    {{ form_start(f, { 'attr': {'class': 'form-horizontal'}}) }}
-    
+    {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
+
         {{ form_label(f.equipeA, 'Equipe à domicile') }}
         {{ form_widget(f.equipeA, { 'attr': {'class': 'form-control'} }) }}
-        
+        {{ form_errors(f.equipeA)}}
+
         {{ form_label(f.equipeB, 'Equipe extérieure') }}
         {{ form_widget(f.equipeB, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(f.equipeB)}}
         
         {{ form_label(f.dateMatch, 'Date du match') }}
         {{ form_widget(f.dateMatch, { 'attr': {'class': 'form-control'} }) }}
-
+        {{ form_errors(f.dateMatch)}}
+        
         {{ form_label(f.HeureDebM, 'Heure de début du match') }}
         {{ form_widget(f.HeureDebM, { 'attr': {'class': 'form-control'} }) }}
-
+        {{ form_errors(f.HeureDebM)}}
+        
         {{ form_label(f.stade, 'Stade') }}
         {{ form_widget(f.stade, { 'attr': {'class': 'form-control'} }) }}
-
-        {{ form_label(f.tournois, 'Heure de tournoi') }}
-        {{ form_widget(f.tournois, { 'attr': {'class': 'form-control'} }) }}
-
+        {{ form_errors(f.stade)}}
+        
+        {{ form_label(f.tournoi, 'Tournoi') }}
+        {{ form_widget(f.tournoi, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(f.tournoi)}}
+        
         {{ form_label(f.resultatA, 'Résultat équipe à domicile') }}
         {{ form_widget(f.resultatA, { 'attr': {'class': 'form-control'} }) }}
-
+        {{ form_errors(f.resultatA)}}
+        
         {{ form_label(f.resultatB, 'Resultat équipe extérieure') }}
         {{ form_widget(f.resultatB, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(f.resultatB)}}
+        
         
     {{ form_end(f) }}
 {% endblock %}

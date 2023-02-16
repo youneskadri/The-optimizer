@@ -19,7 +19,6 @@ class ReservationType extends AbstractType
             ->add('etat')
             ->add('nombreBillet')
             ->add('matchFs')
-            ->add('billet')
             ->add('user')
             ->add('save', SubmitType::Class)
         ;

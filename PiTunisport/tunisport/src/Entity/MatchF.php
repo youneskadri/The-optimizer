@@ -20,33 +20,33 @@ class MatchF
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $HeureDebM = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $HeureFinM = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateMatch = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de la 1ère équipe est obligatoire")]
-    #[Assert\Length(min: 3)]
+    #[Assert\NotBlank(message: "Le nom de l équipe à domicile est obligatoire")]
+    #[Assert\Length(min: 3 , minMessage: "Le nom de l équipe à domicile contient moins de 3 charactères")]
     private ?string $equipeA = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de la 2ème équipe est obligatoire")]
-    #[Assert\Length(min: 3)]
+    #[Assert\NotBlank(message: "Le nom de l équipe éxterieure est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le nom de l équipe éxterieure contient moins de 3 charactères")]
     private ?string $equipeB = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le type du match est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le type du match contient moins de 3 charactères")]
     private ?string $typeMatch = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le nom du stade est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le type du match contient moins de 3 charactères")]
     private ?string $stade = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le nom du tournoi est obligatoire')]
-    private ?string $tournois = null;
+    #[Assert\Length(min: 3 ,minMessage: "Le nom du tournoi contient moins de 3 charactères")]
+    private ?string $tournoi = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Type(
@@ -65,8 +65,6 @@ class MatchF
     #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: 'matchFs')]
     private Collection $reservation;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
 
     public function __construct()
     {
@@ -86,18 +84,6 @@ class MatchF
     public function setHeureDebM(\DateTimeInterface $HeureDebM): self
     {
         $this->HeureDebM = $HeureDebM;
-
-        return $this;
-    }
-
-    public function getHeureFinM(): ?\DateTimeInterface
-    {
-        return $this->HeureFinM;
-    }
-
-    public function setHeureFinM(\DateTimeInterface $HeureFinM): self
-    {
-        $this->HeureFinM = $HeureFinM;
 
         return $this;
     }
@@ -162,14 +148,14 @@ class MatchF
         return $this;
     }
 
-    public function getTournois(): ?string
+    public function getTournoi(): ?string
     {
-        return $this->tournois;
+        return $this->tournoi;
     }
 
-    public function setTournois(string $tournois): self
+    public function setTournoi(string $tournoi): self
     {
-        $this->tournois = $tournois;
+        $this->tournoi = $tournoi;
 
         return $this;
     }
@@ -222,20 +208,8 @@ class MatchF
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     public function __toString()
     {
-        return $this->id; // return a string representation of the Billet object
+        return $this->id; 
     }
 }

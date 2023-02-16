@@ -15,17 +15,14 @@ class MatchFType extends AbstractType
     {
         $builder
             ->add('HeureDebM')
-            ->add('HeureFinM')
             ->add('dateMatch')
             ->add('equipeA')
             ->add('equipeB')
             ->add('typeMatch')
             ->add('stade')
-            ->add('tournois')
+            ->add('tournoi')
             ->add('resultatA')
             ->add('resultatB')
-            ->add('image')
-            ->add('reservation')
             ->add('save', SubmitType::Class)
         ;
     }

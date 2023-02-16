@@ -18,8 +18,10 @@ class Billet
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\OneToMany(mappedBy: 'billet', targetEntity: reservation::class)]
-    private Collection $reservation;
+    #[ORM\ManyToOne]
+    private ?reservation $reservation = null;
+
+
 
     public function __construct()
     {
@@ -43,38 +45,22 @@ class Billet
         return $this;
     }
 
-    /**
-     * @return Collection<int, reservation>
-     */
-    public function getReservation(): Collection
-    {
-        return $this->reservation;
-    }
-
-    public function addReservation(reservation $reservation): self
-    {
-        if (!$this->reservation->contains($reservation)) {
-            $this->reservation->add($reservation);
-            $reservation->setBillet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(reservation $reservation): self
-    {
-        if ($this->reservation->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getBillet() === $this) {
-                $reservation->setBillet(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->id; // return a string representation of the Billet object
     }
+
+    public function getReservation(): ?reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?reservation $reservation): self
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    
 }

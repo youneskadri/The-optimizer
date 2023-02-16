@@ -35,7 +35,7 @@ class MatchFController extends AbstractController
         $match = new MatchF();
         $form = $this->createForm(MatchFType::class, $match);
         $form->handleRequest($request);
-        if ($form->isSubmitted())  {
+        if ($form->isSubmitted() && $form->isValid())  {
             $em = $doctrine->getManager();
             $em->persist($match);
             $em->flush();

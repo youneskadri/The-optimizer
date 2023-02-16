@@ -30,12 +30,11 @@ class Reservation
 
     private Collection $matchFs;
 
-    #[ORM\ManyToOne(inversedBy: 'reservation')]
-    private ?Billet $billet = null;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservation')]
 
     private ?User $user = null;
+
+    
 
     public function __construct()
     {
@@ -110,18 +109,6 @@ class Reservation
         return $this;
     }
 
-    public function getBillet(): ?Billet
-    {
-        return $this->billet;
-    }
-
-    public function setBillet(?Billet $billet): self
-    {
-        $this->billet = $billet;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -138,4 +125,5 @@ class Reservation
     {
         return $this->id; // return a string representation of the Billet object
     }
+
 }
