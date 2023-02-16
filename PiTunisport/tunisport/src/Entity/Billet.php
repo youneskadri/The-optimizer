@@ -72,4 +72,9 @@ class Billet
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->id; // return a string representation of the Billet object
+    }
 }

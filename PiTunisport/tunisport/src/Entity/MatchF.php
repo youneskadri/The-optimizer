@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MatchFRepository::class)]
 class MatchF
@@ -26,27 +27,42 @@ class MatchF
     private ?\DateTimeInterface $dateMatch = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom de la 1ère équipe est obligatoire")]
+    #[Assert\Length(min: 3)]
     private ?string $equipeA = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom de la 2ème équipe est obligatoire")]
+    #[Assert\Length(min: 3)]
     private ?string $equipeB = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le type du match est obligatoire")]
     private ?string $typeMatch = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom du stade est obligatoire")]
     private ?string $stade = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom du tournoi est obligatoire')]
     private ?string $tournois = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'The value {{ value }} is not a valid {{ type }}.',
+    )]
     private ?int $resultatA = null;
 
     #[ORM\Column]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'The value {{ value }} is not a valid {{ type }}.',
+    )]
     private ?int $resultatB = null;
 
-    #[ORM\ManyToMany(targetEntity: reservation::class, inversedBy: 'matchFs')]
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: 'matchFs')]
     private Collection $reservation;
 
     #[ORM\Column(length: 255)]
@@ -190,7 +206,7 @@ class MatchF
         return $this->reservation;
     }
 
-    public function addReservation(reservation $reservation): self
+    public function addReservation(Reservation $reservation): self
     {
         if (!$this->reservation->contains($reservation)) {
             $this->reservation->add($reservation);
@@ -199,7 +215,7 @@ class MatchF
         return $this;
     }
 
-    public function removeReservation(reservation $reservation): self
+    public function removeReservation(Reservation $reservation): self
     {
         $this->reservation->removeElement($reservation);
 
@@ -216,5 +232,10 @@ class MatchF
         $this->image = $image;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->id; // return a string representation of the Billet object
     }
 }
