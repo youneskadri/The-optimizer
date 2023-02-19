@@ -39,6 +39,10 @@ class Blog
     {
         return $this->id;
     }
+    public function __toString()
+    {
+        return $this->id;
+    }
 
     public function getTitre(): ?string
     {
