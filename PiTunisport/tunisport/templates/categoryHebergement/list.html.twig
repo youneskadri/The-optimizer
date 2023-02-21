@@ -1,0 +1,39 @@
+{% extends "back.html.twig" %}
+{% block main %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<table border="1">
+	<tr>
+		<th>Name</th>
+		<th>Delete</th>
+		<th>Show</th>
+		<th>Afficher la liste des hebergement</th>
+	</tr>
+	{% for c in CategoryHebergements %}
+		<tr>
+			<td>{{ c.nomcategory}}</td>
+
+			<td>
+				<button>
+					<a href="{{ path ('delete_CategoryHebergement', {'id': c.id})}}">delete</a>
+				</button>
+			</td>
+			<td>
+				<button>
+					<a href="{{ path ('showC', {'id': c.id})}}">show</a>
+				</button>
+			</td>
+			<td>
+				<button>
+					<a href="{{ path ('app_CategoryHebergement_edit', {'id': c.id})}}">update</a>
+				</button>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+<br>
+{{form(formC)}}
+{% endblock %}

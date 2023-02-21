@@ -1,0 +1,34 @@
+{% extends 'back.html.twig' %}
+
+
+{% block main %}
+    <h1>Localisation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Lieux</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for localisation in localisations %}
+            <tr>
+                <td>{{ localisation.id }}</td>
+                <td>{{ localisation.lieux }}</td>
+                <td>
+                    <a href="{{ path('app_localisation_show', {'id': localisation.id}) }}">show</a>
+                    <a href="{{ path('app_localisation_edit', {'id': localisation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_localisation_new') }}">Create new</a>
+{% endblock %}

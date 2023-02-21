@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\validator\Constraints as Assert;
 
 use App\Repository\HebergementRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,17 +23,19 @@ class Hebergement
     #[ORM\Column(length: 255)]
     private ?string $deschebergement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'hebergements')]
+    #[ORM\ManyToOne(targetEntity: Hebergement::class, inversedBy: 'hebergements')]
     private ?localisation $localisation = null;
+    #[ORM\ManyToOne(targetEntity: CategoryHebergement::class, inversedBy: 'hebergements')]
 
-    #[ORM\ManyToOne(inversedBy: 'hebergements')]
     private ?categoryhebergement $categoryHebergement = null;
 
- 
+    public function __toString() {
+        return $this->id;
+    }
 
     public function getId(): ?int
     {
-        return $this->id;
+        return  $this->id;
     }
 
     public function getImage(): ?string

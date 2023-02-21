@@ -18,9 +18,9 @@ class CategoryTransport
     #[ORM\Column(length: 255)]
     private ?string $typetransport = null;
 
-    #[ORM\OneToMany(mappedBy: 'categoryTransport', targetEntity: Transport::class)]
+   
+    #[ORM\OneToMany(targetEntity: Transport::class, mappedBy: 'categoryTransport')]
     private Collection $transports;
-
     public function __construct()
     {
         $this->transports = new ArrayCollection();

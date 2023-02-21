@@ -21,10 +21,10 @@ class Transport
     #[ORM\Column(length: 255)]
     private ?string $nomTransport = null;
 
-    #[ORM\ManyToMany(targetEntity: localisation::class, inversedBy: 'transports')]
-    private Collection $localisation;
+    #[ORM\ManyToMany(targetEntity: Localisation::class, inversedBy: 'transports')]
+    private Collection $localisation ;
 
-    #[ORM\ManyToOne(inversedBy: 'transports')]
+    #[ORM\ManyToOne(inversedBy: 'transports',targetEntity: CategoryTransport::class)]
     private ?categoryTransport $categoryTransport = null;
 
     public function __construct()

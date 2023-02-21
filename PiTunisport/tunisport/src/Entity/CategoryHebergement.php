@@ -17,8 +17,8 @@ class CategoryHebergement
 
     #[ORM\Column(length: 255)]
     private ?string $nomcategory = null;
+    #[ORM\OneToMany(targetEntity: Hebergement::class, mappedBy: 'categoryHebergement')]
 
-    #[ORM\OneToMany(mappedBy: 'categoryHebergement', targetEntity: Hebergement::class)]
     private Collection $hebergements;
 
     public function __construct()
@@ -30,13 +30,16 @@ class CategoryHebergement
     {
         return $this->id;
     }
+    public function __toString() {
+        return $this->id;
+    }
 
     public function getNomcategory(): ?string
     {
         return $this->nomcategory;
     }
 
-    public function setNomcategory(string $nomcategory): self
+    public function setNomcategory(string $nomcategory)
     {
         $this->nomcategory = $nomcategory;
 

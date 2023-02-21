@@ -1,0 +1,39 @@
+{% extends 'back.html.twig' %}
+
+{% block main %}
+<br><br><br><br><br>
+{{form(form)}}
+
+<table border="1">
+	<tr>
+		<th>Map</th>
+		<th>Id</th>
+        <th>Transport name</th>
+		<th>Delete</th>
+		<th>Update</th>
+	</tr>
+	{% for s in Transports %}
+		<tr>
+			<TD><img src="{{ asset('/uploads/images/' ~ s.getImageTransport()) }}" width="100px" height="100px" alt="" /></TD>
+			<td>{{s.id}}</td>
+
+			<td>
+			{{s.nomTransport}}
+			</td>
+		
+			<td>
+				<button>
+					<a href="{{ path ('deleteTransport', {'id': s.id})}}">delete</a>
+				</button>
+			</td>
+			<td>
+				<button>
+					<a href="{{ path ('app_Transport_edit', {'id': s.id})}}">update</a>
+				</button>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+<br>
+<a href="{{path ('AddP')}}"> Ajouter</a>
+{% endblock %}

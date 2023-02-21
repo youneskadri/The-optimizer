@@ -1,0 +1,34 @@
+{% extends "back.html.twig" %}
+{% block main %}
+<br><br><br><br><br>
+<table border="1">
+	<tr>
+		<th>nomcategory</th>
+		<th>Delete</th>
+		<th>Show</th>
+		<th>Afficher la liste des transport</th>
+	</tr>
+	{% for c in CategoryTransport %}
+		<tr>
+			<td>{{ c.TypeTransport}}</td>
+
+			<td>
+				<button>
+				</button>
+			</td>
+			<td>
+				<button>
+					<a href="{{ path ('showC', {'id': c.id})}}">show</a>
+				</button>
+			</td>
+			<td>
+				<button>
+					<a href="{{ path ('app_CategoryTransport_edit', {'id': c.id})}}">update</a>
+				</button>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+<br>
+{{form(formC)}}
+{% endblock %}

@@ -20,8 +20,8 @@ class Localisation
 
     #[ORM\ManyToMany(targetEntity: Transport::class, mappedBy: 'localisation')]
     private Collection $transports;
+    #[ORM\OneToMany(targetEntity: Hebergement::class, mappedBy: 'localisation')]
 
-    #[ORM\OneToMany(mappedBy: 'localisation', targetEntity: Hebergement::class)]
     private Collection $hebergements;
 
     public function __construct()
@@ -31,6 +31,10 @@ class Localisation
     }
 
     public function getId(): ?int
+    {
+        return $this->id;
+    }
+    public function __toString()
     {
         return $this->id;
     }
