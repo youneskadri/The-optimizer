@@ -1,0 +1,44 @@
+
+{% block body %}
+<h1> Liste des types des événements</h1>
+    <div class="table-responsive border-0 rounded-3">
+        <!-- Table START -->
+        <table class="table table-dark-gray align-middle p-4 mb-0">
+            <!-- Table head -->
+            <thead>
+            <tr>
+                <th scope="col" class="border-0 rounded-start">id</th>
+	            <th scope="col" class="border-0">Type</th>
+                <th scope="col" class="border-0">Action</th>
+            </tr>
+            </thead>
+            <!-- Table body START -->
+            {%  for te in  TypeEvent %}
+            <tbody>
+            <!-- Table item -->
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <!-- Title -->
+                        <h6 class="mb-0 ms-2 table-responsive-title">
+                            <a href="#">{{ te.id }}</a>
+                        </h6>
+                    </div>
+                </td>
+                <td>{{ te.NomType }}</td>  
+                <!-- Action item -->
+                <td>
+                    <a href="{{ path('updateTypeEvent', {id:te.id}) }}" class="btn btn-sm btn-success-soft btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
+                    <a href="{{ path('deleteTypeEvent', {id:te.id}) }}" class="btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"></i></a>
+                </td>
+            </tbody>
+            {% endfor %}
+            <!-- Table body END -->
+        </table>
+        <!-- Table END -->
+    </div>
+    <form action="{{ path('createTypeEvent') }}">
+        <button class="btn btn-primary mb-0 mt-3" >Ajouter un type d'événement</button>
+    </form>
+{% endblock %}
+

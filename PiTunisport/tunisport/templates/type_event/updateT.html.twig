@@ -1,0 +1,13 @@
+
+
+{% block body %}
+    <h1> Modifier un type d événement </h1>
+    {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
+
+        {{ form_label(f.NomType, 'Type') }}
+        {{ form_widget(f.NomType, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(f.NomType)}}
+        
+        
+    {{ form_end(f) }}
+{% endblock %}
