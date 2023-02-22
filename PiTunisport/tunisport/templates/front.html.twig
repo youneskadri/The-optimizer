@@ -20,23 +20,43 @@
 <![endif]-->
 <div class=wrapper>
 {% block body1 %}{% endblock %}
-
+{% block headerUser %}{% endblock %}
 {% block header %}
+
     <header class=header-main>
         <div class=header-upper>
             <div class=container>
-                <div class=row>
-                    <ul>
-                        <li><a href="#">Signup/login</a></li>
-                        <li><a href=shopcart.html><i class="fa fa-shopping-cart"></i> <span>cart(<span
-                                class=cartitems>0</span>)</span></a></li>
+          
+                <div class="row">
+                <ul>
+                {% if is_granted('IS_AUTHENTICATED_FULLY')  %} 
+
+                 <li>                
+                 {% if app.user.image == null   %}
+                        <img src="{{asset('/uploads/images/user.jpg')}}" alt="Profile"  class="rounded-circle" style="width: 25px;padding-top:2px;">
+                        {% else %}
+                        <img src="{{asset('/uploads/images/' ~ app.user.image)}}" alt="Profile"  class="rounded-circle" style="width: 25px;padding-top:6px;">
+                       {% endif %}</li>
+                        <li><a href="{{path('clientProfile')}}">{{app.user.firstName}} {{app.user.secondName}}</a></li>
+                        
+                        <li><a href="{{path('app_logout')}}"><i class="fa fa-sign-out"></i> 
+                        <span>Logout</span></a>
+                    </li>                 
+                    {% else %}
+                     <ul>
+
+                        <li><a href="{{path('app_login')}}">Signup/login</a></li>
+                        <li><a href=shopcart.html><i class="fa fa-shopping-cart"></i> <span>cart(<span  class=cartitems>0</span>)</span></a></li>
                     </ul>
+                    {% endif %}
+                </ul>
+                   
                 </div>
             </div>
         </div>
         <div class=header-lower clearfix>
             <div class=container>
-                <div class=row><h1 class=logo><a href=index-2.html><img src=assetsFront/images/tunisport.png alt=image></a></h1>
+                <div class=row><h1 class=logo><a href=index-2.html><img src="{{asset('assetsFront/images/tunisport.png')}}" alt=image></a></h1>
 
                     <div class=menubar>
                         <nav class=navbar>
@@ -47,7 +67,7 @@
                                 </div>
                                 <div class=nav-menu>
                                     <ul class=nav navbar-nav menu-bar>
-                                        <li><a href=index-2.html class=active>Home <span></span> <span></span>
+                                        <li><a href="#" class=active>Home <span></span> <span></span>
                                             <span></span> <span></span></a></li>
                                         <li><a href=about.html>about <span></span> <span></span> <span></span>
                                             <span></span></a></li>
@@ -126,7 +146,8 @@
     </div>
 
 {% endblock %}
-{% block bodyKrichen %}{% endblock %}
+{% block login %}{% endblock %}
+{% block bodyFront %}{% endblock %}
     {% block body %}
     <section class="booking bg-smallwhite">
         <div class=container>
@@ -1047,6 +1068,7 @@
     
     {% block footer %}
     <footer class=footer-type01>
+        {% block footer2 %}
         <div class=container>
             <div class=row>
                 <ul class=footer-widget>
@@ -1134,6 +1156,7 @@
                 </ul>
             </div>
         </div>
+        {% endblock %}
         <div class=footer-type02>
             <div class=container>
                 <div class=row><a href=index-2.html class=footer-logo><img src=assetsFront/images/tunisport.png alt=image></a>

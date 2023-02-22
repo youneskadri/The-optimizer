@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,18 +20,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
-    private ?string $username = null;
-
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
+
+     
     #[ORM\Column]
     private ?string $password = null;
-
+/**
+ * @Assert\NotBlank(message="Please enter an email address")
+ * @Assert\Email(message="The email '{{ value }}' is not a valid email address.")
+ */
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
@@ -40,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity:Reservation::class, mappedBy: 'user')]
     private Collection $reservation;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable:true)]
     private ?string $image = null;
 
 
@@ -56,6 +60,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $banned = null;
+
+    #[ORM\Column(type: 'boolean', nullable:true)]
+    private $isVerified = false;
+
+
+  #[Assert\Length(
+     min: 2,
+       max: 20,
+     minMessage: 'Your first name must be at least {{ limit }} characters long',
+       maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $firstName = null;
+
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+        minMessage: 'Your second name must be at least {{ limit }} characters long',
+        maxMessage: 'Your second name cannot be longer than {{ limit }} characters',
+    )]
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $secondName = null;
 
     public function __construct()
     {
@@ -74,12 +100,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return (string) $this->email;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $email): self
     {
-        $this->username = $username;
+        $this->email = $email;
 
         return $this;
     }
@@ -294,6 +320,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBanned(bool $banned): self
     {
         $this->banned = $banned;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getSecondName(): ?string
+    {
+        return $this->secondName;
+    }
+
+    public function setSecondName(string $secondName): self
+    {
+        $this->secondName = $secondName;
 
         return $this;
     }
