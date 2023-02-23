@@ -22,6 +22,14 @@ class EventController extends AbstractController
             'event' => $e,
         ]);
     }
+    #[Route('/deatilsE/{id}', name: 'detailsEvent')]
+    public function deatilsE(EventRepository $repository, $id): Response
+    {
+        $event = $repository->find($id);
+        return $this->render('event/detailsE.html.twig', [
+            'event' => $event,
+        ]);
+    }
 
 
 /////////////// CREATE
@@ -79,6 +87,24 @@ class EventController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("readEvent");
         
+    }
+
+    #[Route('/readEvent', name: 'read_Event')]
+    public function readEvent(EventRepository $repository): Response
+    {
+        $e =$repository->findAll();
+        return $this->render('event/readEvent.html.twig', [
+            'event' => $e,
+        ]);
+    }
+
+    #[Route('/detailEvent', name: 'detailEvent')]
+    public function detailEvent(EventRepository $repository): Response
+    {
+        $e =$repository->findAll();
+        return $this->render('event/detailsEvent.html.twig', [
+            'event' => $e,
+        ]);
     }
 
 }

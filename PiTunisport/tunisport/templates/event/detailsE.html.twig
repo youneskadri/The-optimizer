@@ -19,10 +19,11 @@
                   <th scope="col" class="border-0">Nom</th>
                   <th scope="col" class="border-0">Date</th>
                   <th scope="col" class="border-0">Localisation</th>
+                  <th scope="col" class="border-0">Heure de debut</th>
+                  <th scope="col" class="border-0">Heure de fin</th>
                   <th scope="col" class="border-0">Type</th>
                   <th scope="col" class="border-0 rounded-end">supprimer</th>
                   <th scope="col" class="border-0 rounded-end">modifier</th>
-                  <th scope="col" class="border-0 rounded-end">details</th>
                 </tr>
               </thead>
               {%  for e in  event %}
@@ -42,6 +43,10 @@
                 
                 <!-- Amount item -->
                 <td>{{ e.localisation }}</td>
+                <td>{{ e.heureDeb.format('H:i') }}</td>
+                <td>{{ e.heureFin.format('H:i') }}</td>
+          
+               
             
                 <td>{{ e.typeEvent }}</td>
         
@@ -52,19 +57,17 @@
               <td><form action="{{ path('updateEvent', {id:e.id}) }}">
                 <button  >modifier</button>
             </form> </td>
-            <td><form action="{{ path('detailsEvent', {id:e.id}) }}">
-              <button  >details</button>
-          </form> </td>
             </tbody>
             {% endfor %}
             </table>
             <!-- End Table with stripped rows -->
 
           </div>
-          <form action="{{ path('createEvent') }}">
-            <button class="btn btn-primary mb-0 mt-3" >Ajouter un événement</button>
-        </form>
+          
         </div>
+        <form action="{{ path('createEvent') }}">
+          <button class="btn btn-primary mb-0 mt-3" >Ajouter un événement</button>
+      </form>
 
       </div>
     </div>
@@ -72,5 +75,3 @@
 
 </main><!-- End #main -->
 {% endblock %}
-
-

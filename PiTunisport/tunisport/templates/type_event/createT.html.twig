@@ -1,6 +1,7 @@
+{% extends 'back.html.twig' %}
 
-
-{% block body %}
+{% block main %}
+<main id="main" class="main">
     <h1> Ajouter un type d'évenement </h1>
     {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
 
@@ -10,5 +11,6 @@
         
         
     {{ form_end(f) }}
+</main>    
 {% endblock %}
 

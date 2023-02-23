@@ -8,20 +8,16 @@
           content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <title>soccer club</title>
     <link rel="shortcut icon" href=favicon.ico>
-    <link rel=stylesheet href="{{asset('assetsFront/vendor.css')}}">
-    <link rel=stylesheet href="{{asset('assetsFront/style.css')}}">
-    <link rel=stylesheet  href="{{asset('assetsFront/css/layerslider.css')}}">
-
-    <script src="{{asset('assetsFront/js/vendor/modernizr.js')}}"></script>
+    <link rel=stylesheet href=vendor.css>
+    <link rel=stylesheet href=style.css>
+    <link rel=stylesheet type=text/css href=css/layerslider.css>
+    <script src=js/vendor/modernizr.js></script>
 </head>
 <body><!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <div class=wrapper>
-{% block body1 %}{% endblock %}
-
-{% block header %}
     <header class=header-main>
         <div class=header-upper>
             <div class=container>
@@ -34,9 +30,9 @@
                 </div>
             </div>
         </div>
-        <div class=header-lower clearfix>
+        <div class="header-lower clearfix">
             <div class=container>
-                <div class=row><h1 class=logo><a href=index-2.html><img src=assetsFront/images/tunisport.png alt=image></a></h1>
+                <div class=row><h1 class=logo><a href=index-2.html><img src=images/logo.png alt=image></a></h1>
 
                     <div class=menubar>
                         <nav class=navbar>
@@ -46,12 +42,12 @@
                                         <span class=icon-bar></span></button>
                                 </div>
                                 <div class=nav-menu>
-                                    <ul class=nav navbar-nav menu-bar>
+                                    <ul class="nav navbar-nav menu-bar">
                                         <li><a href=index-2.html class=active>Home <span></span> <span></span>
                                             <span></span> <span></span></a></li>
                                         <li><a href=about.html>about <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        <li><a href="#">Event <span></span> <span></span> <span></span> <span></span></a>
+                                        <li><a>gallery <span></span> <span></span> <span></span> <span></span></a>
                                             <ul class=sub-menu>
                                                 <li><a href=gallerypage01.html>masonry</a></li>
                                                 <li><a href=gallery02.html>gallery column two</a></li>
@@ -66,7 +62,7 @@
                                             <span></span></a></li>
                                         <li><a href=contact.html>contact <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        {# <li><a>error <span></span> <span></span> <span></span> <span></span></a>
+                                        <li><a>error <span></span> <span></span> <span></span> <span></span></a>
                                             <ul class=sub-menu>
                                                 <li><a href=400.html>400 page</a></li>
                                                 <li><a href=401.html>401 page</a></li>
@@ -75,7 +71,7 @@
                                                 <li><a href=500.html>500 page</a></li>
                                                 <li><a href=503.html>503 page</a></li>
                                             </ul>
-                                        </li> #}
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -89,13 +85,11 @@
             </div>
         </div>
     </header>
-{% endblock %}
-{% block banner %}
-<div class=banner id=layerSlider style="width: 100%;">
-        <div class= data-ls="transition3d: 33,15; slidedelay: 8000 ; durationin:0;"><img
-                src=assetsFront/images/banner/background01.jpg class=ls-bg alt="Slide background">
+    <div class=banner id=layerSlider style="width: 100%;">
+        <div class=ls-slide data-ls="transition3d: 33,15; slidedelay: 8000 ; durationin:0;"><img
+                src=images/banner/background01.jpg class=ls-bg alt="Slide background">
 
-            {# <div class="ls-l layercontent01" style="top: 50%; left: 50%; z-index:4;"
+            <div class="ls-l layercontent01" style="top: 50%; left: 50%; z-index:4;"
                  data-ls="offsetxin:left; offsetxout:right; durationin: 4000; parallaxlevel: 8;"><img
                     src=images/banner/player.png alt=innerimage class=img-responsive
                     style="max-width: 100% !important ;"></div>
@@ -117,17 +111,13 @@
             <h2 class="ls-l bannertext01 layercontent06" style="left: 87%; top:760px;"
                 data-ls="offsetxin:left; flipxin:90 ; durationin: 5000;">21<sup>st</sup></h2><h6
                     class="ls-l bannertext03 layercontent07" data-ls="offsetxin:left; flipxin:90 ; durationin: 6000;">
-                july , 2015</h6></div> #}
+                july , 2015</h6></div>
     </div>
     <div class=banner-text>
         <div class=container>
             <div class=row>action start from 21<sup>st</sup> july , 2015.</div>
         </div>
     </div>
-
-{% endblock %}
-{% block bodyKrichen %}{% endblock %}
-    {% block body %}
     <section class="booking bg-smallwhite">
         <div class=container>
             <div class=booking-fig><h2>SCC football club</h2></div>
@@ -192,7 +182,7 @@
                             <p>Shannon Skelly(23)</p></div>
                         <div class=figure>
                             <div class=team-logo>
-                                <div style=background:url(assetsFront/images/team-logo/logo01.png) class=teamLogoImg></div>
+                                <div style=background:url(images/team-logo/logo01.png) class=teamLogoImg></div>
                             </div>
                         </div>
                     </div>
@@ -216,7 +206,7 @@
                             <p>Lelnd Lagos(39)</p></div>
                         <div class="figure figresult">
                             <div class=team-logo>
-                                <div style=background:url(assetsFront/images/team-logo/logo02.png) class=teamLogoImg></div>
+                                <div style=background:url(images/team-logo/logo02.png) class=teamLogoImg></div>
                             </div>
                         </div>
                     </div>
@@ -250,9 +240,9 @@
                                 Esse harum animi a ipsa distinctio veritatis suscipit amet.</p>
 
                                 <div class="wrap-logo clearfix">
-                                    <div class=logo-match><img src=assetsFront/images/matchResult/logo01.png alt=image></div>
+                                    <div class=logo-match><img src=images/matchResult/logo01.png alt=image></div>
                                     <div class=match_vs>vs</div>
-                                    <div class=logo-match><img src=assetsFront/images/matchResult/logo02.png alt=image></div>
+                                    <div class=logo-match><img src=images/matchResult/logo02.png alt=image></div>
                                 </div>
                                 <p class=match_dtls>October 31, 2015 | 18:25PM</p>
 
@@ -497,15 +487,15 @@
                     <ul class="nav accordion-news" role=tablist>
                         <li><a href=#world_news aria-controls=world_news role=tab data-toggle=tab id=world_news_button>world
                             news</a></li>
-                        <li class=active><a href="#" club_news aria-controls=club_news role=tab data-toggle=tab
-                                            id="club_news_button">club news</a></li>
+                        <li class=active><a href=#club_news aria-controls=club_news role=tab data-toggle=tab
+                                            id=club_news_button>club news</a></li>
                     </ul>
                     <div class="tab-content news_display_container clearfix">
-                        <ul id="world_news class=tab-pane">
+                        <ul id=world_news class=tab-pane>
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/w_news_01.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/w_news_01.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -520,7 +510,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/w_news_01.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/w_news_01.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -535,7 +525,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/w_news-02.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/w_news-02.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -550,7 +540,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/w_news-03.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/w_news-03.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -565,7 +555,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/w-news-04.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/w-news-04.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -583,7 +573,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/c_news_01.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/c_news_01.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -598,7 +588,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/c_news_02.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/c_news_02.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -613,7 +603,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/c_news_03.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/c_news_03.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -628,7 +618,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/c_news_04.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/c_news_04.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -643,7 +633,7 @@
                             <li>
                                 <div class=figure>
                                     <div class=column-news>
-                                        <div class=figure-01><img src=assetsFront/images/news/c_news_05.jpg alt=image></div>
+                                        <div class=figure-01><img src=images/news/c_news_05.jpg alt=image></div>
                                         <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
 
                                             <p class=red_p>Stories of the legends</p>
@@ -661,8 +651,6 @@
             </div>
         </div>
     </section>
-
-
     <section class=club_history>
         <div class=container>
             <div class=row><h2 class=heading>club <span>history</span></h2>
@@ -799,10 +787,10 @@
                         <li><a href="#">
                             <div class=playerFig>
                                 <div class=playerpic>
-                                    <div style=background:url(assetsFront/images/player/player01.jpg) class=bgimg></div>
+                                    <div style=background:url(images/player/player01.jpg) class=bgimg></div>
                                 </div>
                                 <ul class="playerDetails clearfix">
-                                    <li><span>Daren Difiore</span> <span><img src=assetsFront/images/icons/tShirt.png
+                                    <li><span>Daren Difiore</span> <span><img src=images/icons/tShirt.png
                                                                               alt=image></span></li>
                                     <li class=playinfodetails>age 28 (born 22 april ,1987)</li>
                                     <li class=playerInfo><span>goalkeeper</span> <span><i
@@ -813,10 +801,10 @@
                         <li><a href="#">
                             <div class=playerFig>
                                 <div class=playerpic>
-                                    <div style=background:url(assetsFront/images/player/player02.jpg) class=bgimg></div>
+                                    <div style=background:url(images/player/player02.jpg) class=bgimg></div>
                                 </div>
                                 <ul class="playerDetails clearfix">
-                                    <li><span>Terry Tijerina</span> <span><img src=assetsFront/images/icons/tShirt.png
+                                    <li><span>Terry Tijerina</span> <span><img src=images/icons/tShirt.png
                                                                                alt=image></span></li>
                                     <li class=playinfodetails>age 28 (born 22 april ,1987)</li>
                                     <li class=playerInfo><span>DEFENDER</span> <span><i
@@ -827,10 +815,10 @@
                         <li><a href="#">
                             <div class=playerFig>
                                 <div class=playerpic>
-                                    <div style=background:url(assetsFront/images/player/player03.jpg) class=bgimg></div>
+                                    <div style=background:url(images/player/player03.jpg) class=bgimg></div>
                                 </div>
                                 <ul class="playerDetails clearfix">
-                                    <li><span>Alex Alameda</span> <span><img src=assetsFront/images/icons/tShirt.png
+                                    <li><span>Alex Alameda</span> <span><img src=images/icons/tShirt.png
                                                                              alt=image></span></li>
                                     <li class=playinfodetails>age 28 (born 22 april ,1987)</li>
                                     <li class=playerInfo><span>STRIKER</span> <span><i class="fa fa-heart"></i>45</span>
@@ -841,10 +829,10 @@
                         <li><a href="#">
                             <div class=playerFig>
                                 <div class=playerpic>
-                                    <div style=background:url(assetsFront/images/player/player04.jpg) class=bgimg></div>
+                                    <div style=background:url(images/player/player04.jpg) class=bgimg></div>
                                 </div>
                                 <ul class="playerDetails clearfix">
-                                    <li><span>Lane Lavalley</span> <span><img src=assetsFront/images/icons/tShirt.png
+                                    <li><span>Lane Lavalley</span> <span><img src=images/icons/tShirt.png
                                                                               alt=image></span></li>
                                     <li class=playinfodetails>age 28 (born 22 april ,1987)</li>
                                     <li class=playerInfo><span>STRIKER</span> <span><i class="fa fa-heart"></i>45</span>
@@ -855,10 +843,10 @@
                         <li><a href="#">
                             <div class=playerFig>
                                 <div class=playerpic>
-                                    <div style=background:url(assetsFront/images/player/player05.jpg) class=bgimg></div>
+                                    <div style=background:url(images/player/player05.jpg) class=bgimg></div>
                                 </div>
                                 <ul class="playerDetails clearfix">
-                                    <li><span>Dominick Dumbleton</span> <span><img src=assetsFront/images/icons/tShirt.png
+                                    <li><span>Dominick Dumbleton</span> <span><img src=images/icons/tShirt.png
                                                                                    alt=image></span></li>
                                     <li class=playinfodetails>age 28 (born 22 april ,1987)</li>
                                     <li class=playerInfo><span>STRIKER</span> <span><i class="fa fa-heart"></i>78</span>
@@ -879,9 +867,10 @@
                     consequuntur animi, commodi, voluptatibus labore aperiam fugit maxime quos optio architecto cum?
                     Laborum nesciunt doloribus expedita atque error rem molestias, ducimus.</p></div>
         </div>
-        
+        <div class=galleryWrapper>
+            <div class=grid>
                 <div class=grid_item>
-                    <div class=gallery_dtl><img src=assetsFront/images/gallery/masonry/medium_01.jpg alt=image>
+                    <div class=gallery_dtl><img src=images/gallery/gallery.jpg alt=image>
 
                         <div class=gallery_info>
                             <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
@@ -891,7 +880,7 @@
                     </div>
                 </div>
                 <div class=grid_item>
-                    <div class=gallery_dtl><img src=assetsFront/images/gallery/gallery041.jpg alt=image>
+                    <div class=gallery_dtl><img src=images/gallery/gallery02.jpg alt=image>
 
                         <div class=gallery_info>
                             <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
@@ -901,7 +890,87 @@
                     </div>
                 </div>
                 <div class=grid_item>
-                    <div class=gallery_dtl><img src=assetsFront/images/gallery/masonry/medium_03.jpg alt=image>
+                    <div class=gallery_dtl><img src=images/gallery/gallery03.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/gallery04.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/gallery021.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/gallery031.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/five.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/gallery031.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/masonry/medium_01.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/gallery041.jpg alt=image>
+
+                        <div class=gallery_info>
+                            <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
+
+                                <p class=red_p>Magna aliqua</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=grid_item>
+                    <div class=gallery_dtl><img src=images/gallery/masonry/medium_03.jpg alt=image>
 
                         <div class=gallery_info>
                             <div class=galleryinfo_wrap><p class=uppercase>consectetur</p>
@@ -947,31 +1016,31 @@
 
                 <div class="wrapper-container clearfix"><a class="prv awards_prev"></a> <a class="nxt awards_next"></a>
                     <ul class="awards-wrap clearfix">
-                        <li><a href=achivement_details.html><img src=assetsFront/images/awards/awards01.png alt=image>
+                        <li><a href=achivement_details.html><img src=images/awards/awards01.png alt=image>
                             <ul class=awards-info>
                                 <li>uefa 2014</li>
                                 <li>champion</li>
                             </ul>
                         </a></li>
-                        <li><a href=achivement_details.html><img src=assetsFront/images/awards/awards02.png alt=image>
+                        <li><a href=achivement_details.html><img src=images/awards/awards02.png alt=image>
                             <ul class=awards-info>
                                 <li>uefa 2014</li>
                                 <li>champion</li>
                             </ul>
                         </a></li>
-                        <li><a href=achivement_details.html><img src=assetsFront/images/awards/awards03.png alt=image>
+                        <li><a href=achivement_details.html><img src=images/awards/awards03.png alt=image>
                             <ul class=awards-info>
                                 <li>uefa 2014</li>
                                 <li>champion</li>
                             </ul>
                         </a></li>
-                        <li><a href=#><img src=assetsFront/images/awards/awards04.png alt=image>
+                        <li><a href=#><img src=images/awards/awards04.png alt=image>
                             <ul class=awards-info>
                                 <li>uefa 2014</li>
                                 <li>champion</li>
                             </ul>
                         </a></li>
-                        <li><a href=achivement_details.html><img src=assetsFront/images/awards/awards02.png alt=image>
+                        <li><a href=achivement_details.html><img src=images/awards/awards02.png alt=image>
                             <ul class=awards-info>
                                 <li>uefa 2014</li>
                                 <li>champion</li>
@@ -993,7 +1062,7 @@
                     <li><a href=#>
                         <div>
                             <div class=product-img
-                                 style="background:url(assetsFront/images/product/product01.jpg) center no-repeat"></div>
+                                 style="background:url(images/product/product01.jpg) center no-repeat"></div>
                         </div>
                         <ul class="oswald16 product_info">
                             <li class=detailsContainer><span>soccer jersey</span> <span><i
@@ -1005,7 +1074,7 @@
                     <li><a href=#>
                         <div>
                             <div class=product-img
-                                 style="background:url(assetsFront/images/product/product02.jpg) center no-repeat"></div>
+                                 style="background:url(images/product/product02.jpg) center no-repeat"></div>
                         </div>
                         <ul class="oswald16 product_info">
                             <li class=detailsContainer><span>soccer jersey</span> <span><i
@@ -1017,7 +1086,7 @@
                     <li><a href=#>
                         <div>
                             <div class=product-img
-                                 style="background:url(assetsFront/images/product/product03.jpg) center no-repeat"></div>
+                                 style="background:url(images/product/product03.jpg) center no-repeat"></div>
                         </div>
                         <ul class="oswald16 product_info">
                             <li class=detailsContainer><span>soccer jersey</span> <span><i
@@ -1029,7 +1098,7 @@
                     <li><a href=#>
                         <div>
                             <div class=product-img
-                                 style="background:url(assetsFront/images/product/product04.jpg) center no-repeat"></div>
+                                 style="background:url(images/product/product04.jpg) center no-repeat"></div>
                         </div>
                         <ul class="oswald16 product_info">
                             <li class=detailsContainer><span>soccer jersey</span> <span><i
@@ -1043,9 +1112,6 @@
             </div>
         </div>
     </section>
-    {% endblock %}
-    
-    {% block footer %}
     <footer class=footer-type01>
         <div class=container>
             <div class=row>
@@ -1064,7 +1130,7 @@
                         <ul class="widget-newsdetails clearfix">
                             <li class=clearfix><a href="#" class=clearfix>
                                 <div class=widget-pic
-                                     style="background:url(assetsFront/images/widget/widget01.jpg) center no-repeat"></div>
+                                     style="background:url(images/widget/widget01.jpg) center no-repeat"></div>
                                 <div class=widget-newsinfo><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Numquam soluta excepturi.</p>
 
@@ -1072,7 +1138,7 @@
                             </a></li>
                             <li class=clearfix><a href="#" class=clearfix>
                                 <div class=widget-pic
-                                     style="background:url(assetsFront/images/widget/widget02.jpg) center no-repeat"></div>
+                                     style="background:url(images/widget/widget02.jpg) center no-repeat"></div>
                                 <div class=widget-newsinfo><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Numquam soluta excepturi.</p>
 
@@ -1080,7 +1146,7 @@
                             </a></li>
                             <li class=clearfix><a href="#" class=clearfix>
                                 <div class=widget-pic
-                                     style="background:url(assetsFront/images/widget/widget03.jpg) center no-repeat"></div>
+                                     style="background:url(images/widget/widget03.jpg) center no-repeat"></div>
                                 <div class=widget-newsinfo><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Numquam soluta excepturi.</p>
 
@@ -1101,7 +1167,7 @@
                         <ul class=widget_commentDetails>
                             <li><a href=# class=clearfix>
                                 <div class=comment-pic>
-                                    <div class=columnpic><img src=assetsFront/images/widget/comment01.jpg alt=image></div>
+                                    <div class=columnpic><img src=images/widget/comment01.jpg alt=image></div>
                                 </div>
                                 <div class=commentinfo><p class=uppercaseheading>jhon doe</p>
 
@@ -1111,7 +1177,7 @@
                             </a></li>
                             <li><a href=# class=clearfix>
                                 <div class=comment-pic>
-                                    <div class=columnpic><img src=assetsFront/images/widget/comment02.jpg alt=image></div>
+                                    <div class=columnpic><img src=images/widget/comment02.jpg alt=image></div>
                                 </div>
                                 <div class=commentinfo><p class=uppercaseheading>jhon doe</p>
 
@@ -1121,7 +1187,7 @@
                             </a></li>
                             <li><a href=# class=clearfix>
                                 <div class=comment-pic>
-                                    <div class=columnpic><img src=assetsFront/images/widget/comment03.jpg alt=image></div>
+                                    <div class=columnpic><img src=images/widget/comment03.jpg alt=image></div>
                                 </div>
                                 <div class=commentinfo><p class=uppercaseheading>jhon doe</p>
 
@@ -1136,7 +1202,7 @@
         </div>
         <div class=footer-type02>
             <div class=container>
-                <div class=row><a href=index-2.html class=footer-logo><img src=assetsFront/images/tunisport.png alt=image></a>
+                <div class=row><a href=index-2.html class=footer-logo><img src=images/logo.png alt=image></a>
 
                     <div class=footer-container>
                         <ul class=clearfix>
@@ -1149,18 +1215,16 @@
                         </ul>
                         <p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p></div>
                     <div class=footer-appstore>
-                        <figure><a href=#><img src=assetsFront/images/appstore/apple.png alt=image></a></figure>
-                        <figure><a href=#><img src=assetsFront/images/appstore/google.png alt=image></a></figure>
+                        <figure><a href=#><img src=images/appstore/apple.png alt=image></a></figure>
+                        <figure><a href=#><img src=images/appstore/google.png alt=image></a></figure>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 </div>
-    {% endblock %}
-    
-<script src="{{asset('js/vendor/vendor.js')}}"></script>
-<script src="{{asset('js/main.js')}}"></script>
+<script src=js/vendor/vendor.js></script>
+<script src=js/main.js></script>
 </body>
 
 </html>

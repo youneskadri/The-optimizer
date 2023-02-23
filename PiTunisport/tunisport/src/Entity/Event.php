@@ -32,14 +32,11 @@ class Event
     private ?string $localisation = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?typeEvent $typeEvent = null;
+    private ?TypeEvent $typeEvent = null;
 
    
 
-    public function __construct()
-    {
-        $this->typeEvent = new ArrayCollection();
-    }
+   
 
     public function getId(): ?int
     {
@@ -106,12 +103,12 @@ class Event
         return $this;
     }
 
-    public function getTypeEvent(): ?typeEvent
+    public function getTypeEvent(): ?TypeEvent
     {
         return $this->typeEvent;
     }
 
-    public function setTypeEvent(?typeEvent $typeEvent): self
+    public function setTypeEvent(?TypeEvent $typeEvent): self
     {
         $this->typeEvent = $typeEvent;
 

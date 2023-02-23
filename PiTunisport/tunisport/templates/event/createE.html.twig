@@ -1,14 +1,13 @@
+{% extends 'back.html.twig' %}
 
-
-{% block body %}
+{% block main %}
+<main id="main" class="main">
     <h1> Ajouter un événement </h1>
     {{ form_start(f, { 'attr': {'class': 'form-horizontal'}}) }}
 
         {{ form_label(f.nomEvent, 'Nom ') }}
         {{ form_widget(f.nomEvent, { 'attr': {'class': 'form-control'} }) }}
     
-        {{ form_label(f.dateEvent, 'Date ') }}
-        {{ form_widget(f.dateEvent, { 'attr': {'class': 'form-control'} }) }}
         
         {{ form_label(f.localisation, 'Localisation') }}
         {{ form_widget(f.localisation, { 'attr': {'class': 'form-control'} }) }}
@@ -18,4 +17,5 @@
         
         
     {{ form_end(f) }}
+</main>    
 {% endblock %}
