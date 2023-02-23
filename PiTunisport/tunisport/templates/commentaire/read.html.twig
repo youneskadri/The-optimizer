@@ -1,8 +1,8 @@
-{% extends 'front.html.twig' %}
-{% block body %}
-
-<h1> Liste des commentaire</h1>
-<table border="2">
+{% extends 'back.html.twig' %}
+{% block main %}
+<br><br><br><br><br><br>
+<center><h1 class="card-title"> Liste des commentaire</h1></center>
+<table border="2" class="table datatable dataTable-table">
     <tr> <th>Id</th>
         
         {# <th> User Id</th> #}
@@ -27,8 +27,9 @@
         </tr>
     {% endfor %}
 </table>
+<center>
 <a href="{{ path('add_commentaire') }}">
-    <button>Add commentaire</button>
+    <button class="btn btn-primary">Add commentaire</button>
 </a>
-
+</center>
 {% endblock %}

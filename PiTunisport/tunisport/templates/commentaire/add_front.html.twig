@@ -1,0 +1,18 @@
+{% extends 'blogDetails.html.twig' %}
+{% block blogshow %}
+<main id="main" class="main">
+    <div class=headlinewrap01><h4 class=headline02> <span
+                                            class=red>Ajouter un Commentaire</span> </h4>
+    {{ form_start(f, { 'attr': {'class': 'form-horizontal'}}) }}
+
+        {{ form_label(f.contenuCom, 'Commentaire ') }}
+        {{ form_widget(f.contenuCom, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_label(f.dateC, 'Date ') }}
+        {{ form_widget(f.dateC, { 'attr': {'class': ''} }) }}
+        
+        {{ form_label(f.ajouter, 'hello ') }}
+        {{ form_widget(f.ajouter, { 'attr': {'class': ''} }) }}
+    {{ form_end(f) }}
+</main>    
+{% endblock %}

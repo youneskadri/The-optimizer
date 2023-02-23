@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Blog;
+use App\Entity\Commentaire;
 use App\Form\BlogFormType;
 use App\Repository\BlogRepository;
+use App\Repository\CommentaireRepository;
 use  Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,13 +26,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class BlogController extends AbstractController
 {
-    #[Route('/blog', name: 'app_blog')]
-    public function index(): Response
-    {
-        return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
-        ]);
-    }
+ 
 
 
 
@@ -42,6 +38,15 @@ public function read(BlogRepository $repository): Response
         ["blogs" => $blogs]);
 }
 
+
+
+#[Route('/readblogfront', name: 'readblogfront')]
+public function readfront(BlogRepository $repository): Response
+{
+    $blogs = $repository->findAll();
+    return $this->render('blog/read_front.html.twig',
+        ["blogs" => $blogs]);
+}
 
 
 
@@ -62,6 +67,15 @@ public function  update(ManagerRegistry $doctrine,$id,  Request  $request) : Res
         ["f"=>$form]) ;
 }
 
+
+
+#[Route("/blogdetails/{id}", name:'blogdetails')]
+public function detail($id, BlogRepository $repository, CommentaireRepository $rep)
+{$blogs = $repository->findByid($id);
+    $resultOfSearch = $rep->findByExampleField($id);
+    return $this->render('blog/show_front.html.twig',
+        ["blogs" => $blogs,"comments"=>$resultOfSearch]);
+}
 
 
 #[Route("/delete/{id}", name:'delete_blog')]
@@ -122,6 +136,8 @@ public function  add(Request $request,SluggerInterface $slugger,ManagerRegistry 
 }
 
 
+
+
 #[Route('/findblog', name: 'find_blog')]
 public function find(BlogRepository $rep, Request $request): Response
 {   $blogs = $rep->findAll();
@@ -136,4 +152,10 @@ public function find(BlogRepository $rep, Request $request): Response
         ["blogs"=>$blogs]);
 }
 
+
+
+
+
+
+    
 }

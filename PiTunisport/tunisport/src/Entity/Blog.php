@@ -6,6 +6,7 @@ use App\Repository\BlogRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
 class Blog
@@ -15,12 +16,40 @@ class Blog
     #[ORM\Column]
     private ?int $id = null;
 
+
+/**
+     * @Assert\NotBlank(message="Please enter a commentaire")
+     * @Assert\Length(
+     *     min=3,
+     *     max=20,
+     *     minMessage="Username must be at least {{ limit }} characters long",
+     *     maxMessage="Username cannot be longer than {{ limit }} characters"
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
+/**
+     * @Assert\NotBlank(message="Please enter a commentaire")
+     * @Assert\Length(
+     *     min=3,
+     *     max=20,
+     *     minMessage="titre must be at least {{ limit }} characters long",
+     *     maxMessage="titre cannot be longer than {{ limit }} characters"
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $descreption = null;
 
+/**
+     * @Assert\NotBlank(message="Please enter a commentaire")
+     * @Assert\Length(
+     *     min=3,
+     *     max=20,
+     *     minMessage="descreption must be at least {{ limit }} characters long",
+     *     maxMessage="descreption cannot be longer than {{ limit }} characters"
+     * )
+     */
     #[ORM\Column(length: 255)]
     private ?string $contenu = null;
 
@@ -38,6 +67,12 @@ class Blog
     public function getId(): ?int
     {
         return $this->id;
+    }
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
     public function __toString()
     {

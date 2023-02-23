@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Entity\Blog;
 use App\Form\CommentaireFormType;
 use App\Repository\CommentaireRepository;
+use App\Repository\BlogRepository;
 use  Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -82,5 +84,42 @@ public function  add(ManagerRegistry $doctrine, Request  $request) : Response
 
 
 }
+
+#[Route('/addtest', name: 'add_commentairetest')]
+public function  add_commentairetest(ManagerRegistry $doctrine, Request  $request) : Response
+{ $commentaire = new commentaire() ;
+    $form = $this->createForm(commentaireFormType::class, $commentaire);
+    $form->add('ajouter', SubmitType::class) ;
+    $form->handleRequest($request);
+    if ($form->isSubmitted())
+    { $em = $doctrine->getManager();
+        $em->persist($commentaire);
+        $em->flush();
+        return $this->redirectToRoute('readblogfront');
+    }
+    return $this->renderForm("commentaire/add_front.html.twig",
+        ["f"=>$form]) ;
+
+
+}
+
+#[Route('/addfont/{id}', name: 'add_commentairefront')]
+public function  addfont(ManagerRegistry $doctrine,$id,  Request  $request) : Response
+{ $commentaire = $doctrine
+    ->getRepository(blog::class)
+    ->find($id);
+    $form = $this->createForm(commentaireFormType::class, $commentaire);
+    $form->add('ajouter', SubmitType::class) ;
+    $form->handleRequest($request);
+    if ($form->isSubmitted())
+    { $em = $doctrine->getManager();
+        $em -> persist($commentaire);
+        $em->flush();
+        return $this->redirectToRoute('read_commentaire');
+    }
+    return $this->renderForm("commentaire/update.html.twig",
+        ["f"=>$form]) ;
+}
+
 
 }

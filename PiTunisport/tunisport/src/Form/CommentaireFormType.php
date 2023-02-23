@@ -19,7 +19,7 @@ class CommentaireFormType extends AbstractType
                     new Length(['min' => 6])]
                 ])
             ->add('dateC')
-            ->add('blog')
+           
             
         ;
     }

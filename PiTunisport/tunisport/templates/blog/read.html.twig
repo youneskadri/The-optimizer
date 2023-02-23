@@ -1,18 +1,21 @@
 
 {% extends 'back.html.twig' %}
 {% block main %}
-<br><br><br><br><br>
-<center>
 
+<main id="main" class="main">
+<center>
+{#
 <form method="post" action="{{ path('find_blog') }}">
     <label> search</label>
     <input type="text" id="titre" name="titre"/>
 <input type="submit" value="search"/>
 </form>
+#}
 
+<h1 class="card-title"> Liste des blog</h1>
+<div class="card-body">
 
-<h1> Liste des blog</h1>
-<table border="2">
+<table border="2" class="table datatable dataTable-table">
     <tr> <th>Id</th>
         <th> Titre</th>
         <th> Descreption</th>
@@ -35,9 +38,11 @@
         </tr>
     {% endfor %}
 </table>
+</div>
 <form action="{{ path('add_blog') }}">
-    <button>Add blog</button>
+    <button type="submit" class="btn btn-primary">Add blog</button>
 </form>
 </center>
 
+</main>
 {% endblock %}

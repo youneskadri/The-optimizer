@@ -1,0 +1,45 @@
+
+{% extends 'blog.html.twig' %}
+
+{% block blogshow %}
+
+{#
+<form method="post" action="{{ path('find_blog') }}">
+    <label> search</label>
+    <input type="text" id="titre" name="titre"/>
+<input type="submit" value="search"/>
+</form>
+
+#}
+
+ 
+<h1> Liste des blog</h1>
+
+<main class=contentinner>
+
+   {%  for c in  blogs %}
+<div class=blogDetails>
+                            
+                            <div class=blog_info>
+                                <div class=clearfix>
+                                    <div class=headlineimgwrap01><img src="{{ asset('/uploads/images/' ~ c.getImage()) }}" width="100px" height="100px" alt="" />
+                                    <div class=headlinewrap01><h4 class=headline02><span
+                                            class=red>{{c.titre}} </span> </h4>
+
+                                        </div>
+                                </div>
+                                <p class=blog-content> {{c.descreption}}</p>
+
+                                <div class="blog-detailsfooter clearfix">
+                                    
+                                    <div class=blog-detailsfooter02><a href="{{ path('blogdetails', {id:c.id}) }}">Show more </a> </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endfor %}
+
+</main>
+
+{% endblock %}

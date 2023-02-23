@@ -39,6 +39,15 @@ class CommentaireRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('u')
+        ->andWhere('u.blog = :val')
+        ->setParameter('val', $value)
+        ->getQuery()
+        ->getResult();
+ }
 //    /**
 //     * @return Commentaire[] Returns an array of Commentaire objects
 //     */
