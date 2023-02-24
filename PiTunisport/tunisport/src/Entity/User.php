@@ -37,8 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private Collection $commentaire;
 
-    #[ORM\OneToMany(targetEntity:Reservation::class, mappedBy: 'user')]
-    private Collection $reservation;
+    
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
@@ -60,7 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
-        $this->reservation = new ArrayCollection();
+        
         $this->reclamation = new ArrayCollection();
     }
 
@@ -296,5 +295,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->banned = $banned;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->username; 
     }
 }

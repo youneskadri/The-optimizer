@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -17,29 +18,29 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Range( min : "today",notInRangeMessage : "The date must be minimum today " )]
     private ?\DateTimeInterface $dateResevation = null;
 
-    #[ORM\Column]
-    private ?bool $etat = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Le nombre de billets est obligatoire")]
     private ?int $nombreBillet = null;
 
-    #[ORM\ManyToMany(targetEntity: MatchF::class, mappedBy: 'reservation')]
-
-
-    private Collection $matchFs;
-
-    #[ORM\ManyToOne(inversedBy: 'reservation')]
-    private ?Billet $billet = null;
-
+    
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reservation')]
 
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reservation')]
+    private ?MatchF $matchF = null;
+
+    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Billet::class)]
+    private Collection $billet;
+
     public function __construct()
     {
         $this->matchFs = new ArrayCollection();
+        $this->billet = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,18 +60,7 @@ class Reservation
         return $this;
     }
 
-    public function isEtat(): ?bool
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(bool $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
+   
     public function getNombreBillet(): ?int
     {
         return $this->nombreBillet;
@@ -83,44 +73,6 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection<int, MatchF>
-     */
-    public function getMatchFs(): Collection
-    {
-        return $this->matchFs;
-    }
-
-    public function addMatchF(MatchF $matchF): self
-    {
-        if (!$this->matchFs->contains($matchF)) {
-            $this->matchFs->add($matchF);
-            $matchF->addReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMatchF(MatchF $matchF): self
-    {
-        if ($this->matchFs->removeElement($matchF)) {
-            $matchF->removeReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function getBillet(): ?Billet
-    {
-        return $this->billet;
-    }
-
-    public function setBillet(?Billet $billet): self
-    {
-        $this->billet = $billet;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -130,6 +82,48 @@ class Reservation
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMatchF(): ?MatchF
+    {
+        return $this->matchF;
+    }
+
+    public function setMatchF(?MatchF $matchF): self
+    {
+        $this->matchF = $matchF;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Billet>
+     */
+    public function getBillet(): Collection
+    {
+        return $this->billet;
+    }
+
+    public function addBillet(Billet $billet): self
+    {
+        if (!$this->billet->contains($billet)) {
+            $this->billet->add($billet);
+            $billet->setReservation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBillet(Billet $billet): self
+    {
+        if ($this->billet->removeElement($billet)) {
+            // set the owning side to null (unless already changed)
+            if ($billet->getReservation() === $this) {
+                $billet->setReservation(null);
+            }
+        }
 
         return $this;
     }

@@ -9,7 +9,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Form\EventType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class EventController extends AbstractController
 {
@@ -22,10 +25,12 @@ class EventController extends AbstractController
             'event' => $e,
         ]);
     }
-    #[Route('/deatilsE/{id}', name: 'detailsEvent')]
-    public function deatilsE(EventRepository $repository, $id): Response
+
+
+    #[Route('/detailsE/{id}', name: 'detailsE')]
+    public function detailsE(EventRepository $repository, $id): Response
     {
-        $event = $repository->find($id);
+        $event = $repository->findByid($id);
         return $this->render('event/detailsE.html.twig', [
             'event' => $event,
         ]);
@@ -36,13 +41,34 @@ class EventController extends AbstractController
 
 
     #[Route('/createE', name: 'createEvent')]
-    public function createE(ManagerRegistry $doctrine, EventRepository $repository, Request $request): Response
+    public function createE(ManagerRegistry $doctrine, EventRepository $repository, Request $request, SluggerInterface $slugger): Response
     {
 
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())  {
+            $brochureFile = $form->get('image')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('event_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $event->setImage($newFilename);
+            }
             $em = $doctrine->getManager();
             $em->persist($event);
             $em->flush();
@@ -98,10 +124,10 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/detailEvent', name: 'detailEvent')]
-    public function detailEvent(EventRepository $repository): Response
+    #[Route('/detailsEvent/{id}', name: 'detailsEvent')]
+    public function detailsEvent(EventRepository $repository, $id): Response
     {
-        $e =$repository->findAll();
+        $e =$repository->findByid($id);
         return $this->render('event/detailsEvent.html.twig', [
             'event' => $e,
         ]);

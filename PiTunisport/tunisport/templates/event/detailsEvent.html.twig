@@ -18,31 +18,36 @@
                 voluptatem temporibus doloremque non, vel ipsam, nesciunt dolores consequatur, est tempora ut!
                 Est.</p>
 
-            <div class="LatestNews_wrap clearfix">
-                <ul class="nav accordion-news" role=tablist>
-                    <li><a href=#world_news aria-controls=world_news role=tab data-toggle=tab id=world_news_button>world
-                        news</a></li>
-                    <li class=active><a href="#" club_news aria-controls=club_news role=tab data-toggle=tab
-                                        id="club_news_button">club news</a></li>
-                </ul>
-                <div class="tab-content news_display_container clearfix">
-                    <ul id="world_news class=tab-pane">
-                        <li>
-                            <div class=figure>
-                                <div class=column-news>
-                                    <div class=figure-01><img src=assetsFront/images/news/w_news_01.jpg alt=image></div>
-                                    <div class=content-01><h6><a href=#>consectetur adipisicing elit</a></h6>
+                <div class="matchSchedule_details row">
+                    {% for e in event %}
+                    <div class="match_next right-triangle">
+                        <div class="wrap_match_next right-triangle">
+                            <div class=right-padding><h4 class=headline03>{{e.nomEvent}}</h4>
 
-                                        <p class=red_p>Stories of the legends</p>
+                                <p>{{e.typeEvent}}</p></div>
+                        </div>
+                    </div>
+                    <div class=match_versus>
+                        <div class="bg-blackimg match_versus02">
+                            <div class=nextmatchDetails><p></p>
 
-                                        <p class=describtion>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                            elit.</p></div>
-                                    <div class="news_date clearfix"><span>october 14,2015</span> <span class=like><a
-                                            href=#>45</a></span></div>
+                                <div class="wrap-logo clearfix">
+                                    <div class=logo-match><img src="{{ asset('uploads/event/' ~ e.getImage()) }}" alt=image></div>
+                                  
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                                
+                               </div>
+                        </div>
+                    </div>
+                    <div class=match_timing>
+                        <ul class=counter-wrap>
+                            <li><span>{{ e.dateEvent.format('d/m/Y') }}</span>date de l'evenement</li>
+                            <li><span>{{ e.heureDeb.format('H:i') }}</span>heure de debut</li>
+                            <li><span>{{ e.heureFin.format('H:i') }}</span>heure de fin</li>
+                            <li><span>{{e.localisation}}</span>localisation</li>
+                        </ul>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

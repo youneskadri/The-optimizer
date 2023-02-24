@@ -21,6 +21,7 @@
                   <th scope="col" class="border-0">Localisation</th>
                   <th scope="col" class="border-0">Heure de debut</th>
                   <th scope="col" class="border-0">Heure de fin</th>
+                  <th scope="col" class="border-0">Image</th>
                   <th scope="col" class="border-0">Type</th>
                   <th scope="col" class="border-0 rounded-end">supprimer</th>
                   <th scope="col" class="border-0 rounded-end">modifier</th>
@@ -45,9 +46,8 @@
                 <td>{{ e.localisation }}</td>
                 <td>{{ e.heureDeb.format('H:i') }}</td>
                 <td>{{ e.heureFin.format('H:i') }}</td>
+                <td><img src="{{ asset('uploads/event/' ~ e.getImage()) }}"/></td>
           
-               
-            
                 <td>{{ e.typeEvent }}</td>
         
                 <!-- Action item -->

@@ -6,7 +6,7 @@
     <meta name=description content="">
     <meta name="viewport"
           content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>soccer club</title>
+    <title>tunisport</title>
     <link rel="shortcut icon" href=favicon.ico>
     <link rel=stylesheet href="{{asset('assetsFront/vendor.css')}}">
     <link rel=stylesheet href="{{asset('assetsFront/style.css')}}">
@@ -47,11 +47,11 @@
                                 </div>
                                 <div class=nav-menu>
                                     <ul class=nav navbar-nav menu-bar>
-                                        <li><a href=index-2.html class=active>Home <span></span> <span></span>
+                                        <li><a href="{{path('front')}}" class=active>Home <span></span> <span></span>
                                             <span></span> <span></span></a></li>
                                         <li><a href=about.html>about <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        <li><a href="#">Event <span></span> <span></span> <span></span> <span></span></a>
+                                        <li><a href="{{path('read_Event')}}">Event <span></span> <span></span> <span></span> <span></span></a>
                                             <ul class=sub-menu>
                                                 <li><a href=gallerypage01.html>masonry</a></li>
                                                 <li><a href=gallery02.html>gallery column two</a></li>
@@ -60,9 +60,9 @@
                                         </li>
                                         <li><a href=blog.html>blog <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        <li><a href=bookTicket.html>book Tickets <span></span> <span></span>
+                                        <li><a href="{{path('read_Match')}}">Matchs <span></span> <span></span>
                                             <span></span> <span></span></a></li>
-                                        <li><a href=shop.html>shop <span></span> <span></span> <span></span>
+                                        <li><a href="{{path('create_Reservation')}}">réservation <span></span> <span></span> <span></span>
                                             <span></span></a></li>
                                         <li><a href=contact.html>contact <span></span> <span></span> <span></span>
                                             <span></span></a></li>

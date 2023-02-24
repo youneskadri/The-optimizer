@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -17,9 +18,12 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom l'évènement est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le nom de l'évènement contient moins de 3 charactères")]
     private ?string $nomEvent = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Range( min : "today",notInRangeMessage : "The date must be minimum today " )]
     private ?\DateTimeInterface $dateEvent = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
@@ -29,10 +33,18 @@ class Event
     private ?\DateTimeInterface $heureFin = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La localisation de l'évènement est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "La localisation de l'évènement contient moins de 3 charactères")]
     private ?string $localisation = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
+    #[Assert\NotBlank(message: "Le type de l'évènement est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le type de l'évènement contient moins de 3 charactères")]
     private ?TypeEvent $typeEvent = null;
+
+    #[ORM\Column(length: 255)]
+    
+    private ?string $image = null;
 
    
 
@@ -111,6 +123,18 @@ class Event
     public function setTypeEvent(?TypeEvent $typeEvent): self
     {
         $this->typeEvent = $typeEvent;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

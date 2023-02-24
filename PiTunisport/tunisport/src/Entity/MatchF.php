@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MatchFRepository::class)]
 class MatchF
@@ -23,34 +24,58 @@ class MatchF
     private ?\DateTimeInterface $HeureFinM = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Range( min : "today",notInRangeMessage : "The date must be minimum today " )]
     private ?\DateTimeInterface $dateMatch = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom de l équipe à domicile est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le nom de l équipe à domicile contient moins de 3 charactères")]
     private ?string $equipeA = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom de l équipe éxterieure est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le nom de l équipe éxterieure contient moins de 3 charactères")]
     private ?string $equipeB = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le type du match est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le type du match contient moins de 3 charactères")]
     private ?string $typeMatch = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom du stade est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le nom du stade contient moins de 3 charactères")]
     private ?string $stade = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom du tournoi est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le nom du tournoi contient moins de 3 charactères")]
     private ?string $tournois = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'La valeur {{ value }} n est pas valide {{ type }}.',
+    )]
     private ?int $resultatA = null;
 
     #[ORM\Column]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'La valeur {{ value }} n est pas valide {{ type }}.',
+    )]
     private ?int $resultatB = null;
 
-    #[ORM\ManyToMany(targetEntity: reservation::class, inversedBy: 'matchFs')]
+    #[ORM\OneToMany(mappedBy: 'matchF', targetEntity: Reservation::class)]
     private Collection $reservation;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    #[ORM\Column]
+    private ?int $prix = null;
+
+ 
+    
+
+    
 
     public function __construct()
     {
@@ -183,38 +208,65 @@ class MatchF
     }
 
     /**
-     * @return Collection<int, reservation>
+     * @return Collection<int, Reservation>
      */
     public function getReservation(): Collection
     {
         return $this->reservation;
     }
 
-    public function addReservation(reservation $reservation): self
+    public function addReservation(Reservation $reservation): self
     {
         if (!$this->reservation->contains($reservation)) {
             $this->reservation->add($reservation);
+            $reservation->setMatchF($this);
         }
 
         return $this;
     }
 
-    public function removeReservation(reservation $reservation): self
+    public function removeReservation(Reservation $reservation): self
     {
-        $this->reservation->removeElement($reservation);
+        if ($this->reservation->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getMatchF() === $this) {
+                $reservation->setMatchF(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getImage(): ?string
+   
+
+    public function getImageEquipeB(): ?string
     {
-        return $this->image;
+        return $this->imageEquipeB;
     }
 
-    public function setImage(string $image): self
+    public function setImageEquipeB(string $imageEquipeB): self
     {
-        $this->image = $image;
+        $this->imageEquipeB = $imageEquipeB;
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->id; 
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    
 }

@@ -30,7 +30,7 @@
                                             <span></span> <span></span></a></li>
                                         <li><a href=about.html>about <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        <li><a href="{{path('read_Event')}}" class=active>Event <span></span> <span></span> <span></span> <span></span></a>
+                                        <li><a href="{{path('read_Event')}}">Event <span></span> <span></span> <span></span> <span></span></a>
                                             <ul class=sub-menu>
                                                 <li><a href=gallerypage01.html>masonry</a></li>
                                                 <li><a href=gallery02.html>gallery column two</a></li>
@@ -39,9 +39,9 @@
                                         </li>
                                         <li><a href=blog.html>blog <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        <li><a href="{{path('read_Match')}}">Matchs <span></span> <span></span>
+                                        <li><a href="{{path('read_Match')}}" >Matchs <span></span> <span></span>
                                             <span></span> <span></span></a></li>
-                                        <li><a href="{{path('create_Reservation')}}">réservation <span></span> <span></span> <span></span>
+                                        <li><a href="{{path('create_Reservation')}}" class=active>réservation <span></span> <span></span> <span></span>
                                             <span></span></a></li>
                                         <li><a href=contact.html>contact <span></span> <span></span> <span></span>
                                             <span></span></a></li>
@@ -69,48 +69,64 @@
         </div>
     </header>
 {% endblock %}
-
 {% block banner %}
-<div class=innerbannerwrap>
-    <div class=content></div>
-    <div class=innerbanner><h2 class=bannerHeadline>Découvrir<span>Tunisie</span></h2></div>
-</div>
+    <div class=innerbannerwrap>
+        <div class=content></div>
+        <div class=innerbanner><h2 class=bannerHeadline>Réserver <span>Billet</span></h2></div>
+    </div>
 {% endblock %}
+
 {% block body %}
-<section class=matchSchedule>
-    <div class=container>
-        <div class=row><h2 class=heading>Trouver <span>un evenement</span></h2>
+    <section class=cartwrap>
+        <div class=cartshop>
+            <div class=bg-red></div>
+            <div class=container>
+                <div class=row>
+                    <div class=modal-body>
+                        <div class="cartHeader clearfix">
+                            <div class=header01><h4>your basket</h4></div>
+                            <div class=header02><h4><span>you have selected <span class=cartitems></span> billet</span>
+                                <a href=#><i class="fa fa-cart-plus"></i> <span class=cartitems>1</span></a></h4>
 
-        
+                                
 
-            <div class="matchSchedule_details row">
-                <div class=match_next>
-                    <div class="wrap_match_next right-triangle">
-                        <div class=right-padding><h4 class=headline03>liste des evenements</h4>
-
+                                <p class=datetime></p></div>
+                        </div>
+                        <div class="card-item clearfix">
+                            
+                            <div>
+                                <div class=big-content><h4>Référence réservation</h4></div>
+                                
+                                <div class="big-content medium-content"><h4>Nombre de billets</h4></div>
+                                
+                                <div class="big-content small-content"><h4>prix</h4></div>
+                                
                             </div>
-                    </div>
-                </div>
-                <div class=match_versus-wrap>
-                    <div class=wrap_match-innerdetails>
-                        <ul class="point_table scrollable">
-                            {% for e in event %}
-                            <li class=clearfix>
-                                <div class=subPoint_table>
-        
-                                    <div class="headline01 largepoint">{{ e.nomEvent }}</div>
-                                    <div ><span> <form action="{{ path('detailsEvent', {id:e.id}) }}">
-                                    <button  >details</button>
-                                           </form>
-                                    </span></div>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        
+                            <div id=cartItems></div>
+                            <div class="card-item cart-total clearfix"></div>
+                            <div class="card-item clearfix">
+                                <div class=big-content><h4>select destination country</h4><select class=form-control>
+                                    <option>India</option>
+                                    <option>USA</option>
+                                </select></div>
+                                <div class=big-content><h4>select delivery method</h4><select class=form-control>
+                                    <option>Standard Delivery - $299.00 (7 days)</option>
+                                    <option>Fast Delivery - $199.00 (7 days)</option>
+                                </select></div>
+                            </div>
+                            <div class="card-item cart-total clearfix">
+                                <div class="big-content medium-content"><h4>total cost</h4></div>
+                                <div class="big-content small-content"><h4 id=carttotal>$210</h4></div>
+                            </div>
+                        </div>
+                        <div class=modal-footer>
+                            <button class=btn-red>order now</button>
+                        </div>
+                      
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

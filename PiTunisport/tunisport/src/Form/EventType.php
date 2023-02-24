@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class EventType extends AbstractType
 {
@@ -19,6 +22,26 @@ class EventType extends AbstractType
             ->add('heureFin')
             ->add('localisation')
             ->add('typeEvent')
+            ->add('image', FileType::class, [
+                'label' => 'Brochure (PDF file)',
+
+                
+                'mapped' => false,
+
+                
+                'required' => false,
+
+                
+                'constraints' => [
+                    new File([
+                        'maxSize' => '500k',
+                        
+                        'mimeTypesMessage' => 'Please upload a valid image',
+                    ]),
+                    
+                    
+                ],
+            ])
             ->add('save', SubmitType::Class)
         ;
     }
