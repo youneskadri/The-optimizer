@@ -22,7 +22,19 @@
 {% block body1 %}{% endblock %}
 {% block headerUser %}{% endblock %}
 {% block header %}
-
+<script>
+            var botmanWidget = {
+            bubbleAvatarUrl: '{{ asset('/uploads/images/user.jpg') }}',
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("tunibot") }}',
+            introMessage: 'Hello, my name is TUNIBOT. Say "Help" to see what I can do :) ',
+            title: 'ChatBot', 
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4s',
+            aboutText: ''
+        };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
     <header class=header-main>
         <div class=header-upper>
             <div class=container>
@@ -67,7 +79,7 @@
                                 </div>
                                 <div class=nav-menu>
                                     <ul class=nav navbar-nav menu-bar>
-                                        <li><a href="#" class=active>Home <span></span> <span></span>
+                                        <li><a href="{{path('tunisport')}}" class=active>Home <span></span> <span></span>
                                             <span></span> <span></span></a></li>
                                         <li><a href=about.html>about <span></span> <span></span> <span></span>
                                             <span></span></a></li>

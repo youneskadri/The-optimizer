@@ -13,8 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;   
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
-
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 class EditProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -47,8 +50,25 @@ class EditProfileType extends AbstractType
             ->add('firstName')
             ->add('secondName')
             ->add('email')          
-            ->add('phone')    
-          
+            ->add('phone', TelType::class, [
+            
+                'label' => 'Phone Number',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => '+216XXXXXXXX', // replace X with actual digits
+                ],
+                'constraints' => [
+                   
+               
+                    new Length([
+                        'min' => 8,
+                        'max' => 8,
+                        'minMessage' => 'Your phone number must be at least {{ limit }} numbers',
+                        'maxMessage' => 'Your phone number cannot be longer than {{ limit }} numbers',
+                    ]),
+                    
+                    ]
+            ])
            
         ;
     }

@@ -38,14 +38,19 @@
                     
                {# {% if form_errors(form.firstName) and form_errors(form.secondName) %} #}
                                
-                     <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+   {% if   form.vars.submitted and not form.vars.valid %}
+
+ <div class="alert alert-danger alert-dismissible fade show"  role="alert">
                 <i class="bi bi-exclamation-octagon me-1"></i>
                 {{ form_errors(form.firstName) }}
                  {{ form_errors(form.secondName) }}
                  {{ form_errors(form.email) }}
+                  {{ form_errors(form.password.first) }}
+                  {{ form_errors(form.password.second) }}
+                  {{ form_errors(form.phone) }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-
+{% endif %}
                  {# {% endif %} #}
                  
                    <div class="col-12">

@@ -35,34 +35,34 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/changePass', name: 'changePass')]
-    public function ChangePassword(Request $request, UserPasswordHasherInterface $hasher): Response
-    {
-        $user = $this->getUser();
+    // #[Route('/changePass', name: 'changePass')]
+    // public function ChangePassword(Request $request, UserPasswordHasherInterface $hasher): Response
+    // {
+    //     $user = $this->getUser();
 
-        if (!$user) {
-            return $this->redirectToRoute('app_login');
-        }
+    //     if (!$user) {
+    //         return $this->redirectToRoute('app_login');
+    //     }
 
-        $formPass = $this->createform(ChangePasswordType::class);
-     $formPass->add('Add',SubmitType::class);
-        $formPass->handleRequest($request);
+    //     $formPass = $this->createform(ChangePasswordType::class);
+    //  $formPass->add('Add',SubmitType::class);
+    //     $formPass->handleRequest($request);
 
-        if ($formPass->isSubmitted() && $formPass->isValid()) {
-            $data = $formPass->getData();
-            $newhashedPassword = $hasher->encodePassword($user, $data['newPassword']);
+    //     if ($formPass->isSubmitted() && $formPass->isValid()) {
+    //         $data = $formPass->getData();
+    //         $newhashedPassword = $hasher->encodePassword($user, $data['newPassword']);
 
-            $user->setPassword($newhashedPassword);
-            $this->getDoctrine()->getManager()->flush();
+    //         $user->setPassword($newhashedPassword);
+    //         $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Password changed successfully!');
+    //         $this->addFlash('success', 'Password changed successfully!');
 
-            return $this->redirectToRoute('admin');
-        }
+    //         return $this->redirectToRoute('admin');
+    //     }
 
-        return $this->render('admin/changePassword.html.twig', [
-            'formPass' => $formPass->createView(),
-        ]);
-    }
+    //     return $this->render('admin/changePassword.html.twig', [
+    //         'formPass' => $formPass->createView(),
+    //     ]);
+    // }
     
 }

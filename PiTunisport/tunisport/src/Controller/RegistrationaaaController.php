@@ -25,7 +25,7 @@ class RegistrationaaaController extends AbstractController
     }
 
    
-    #[Route('/registration', name: 'registration')]
+    #[Route('/registration', name: 'registration',methods: ['GET', 'POST'])]
 
     public function index(Request $request,ManagerRegistry $doctrine)
     {

@@ -52,7 +52,7 @@
 
                 <li class="nav-item" >
                 {# <a href="{{path('changePass')}}">aaaaaa</a> #}
-                 <a class="nav-link" href="{{path('changePass')}}" >Change Password</a>
+                 {# <a class="nav-link" href="{{path('changePass')}}" >Change Password</a> #}
                 </li>
 
               </ul>
@@ -66,22 +66,22 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8">{{app.user.firstName}} {{app.user.secondName}}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Company</div>
-                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                    <div class="col-lg-9 col-md-8">TUNISPORT</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div class="col-lg-9 col-md-8">Web Designer</div>
+                    <div class="col-lg-9 col-md-8">BACKEND DEV</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Country</div>
-                    <div class="col-lg-9 col-md-8">USA</div>
+                    <div class="col-lg-9 col-md-8">TUNISIA</div>
                   </div>
 
                   <div class="row">
@@ -91,12 +91,12 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                    <div class="col-lg-9 col-md-8">{{app.user.phone}}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                    <div class="col-lg-9 col-md-8">{{app.user.email}}</div>
                   </div>
 
                 </div>
@@ -106,6 +106,19 @@
                   <!-- Profile Edit Form -->
                   {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
 
+
+{% if   form.vars.submitted and not form.vars.valid %}
+
+ <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                {{ form_errors(form.firstName) }}
+                 {{ form_errors(form.secondName) }}
+                 {{ form_errors(form.email) }}
+          
+                  {{ form_errors(form.phone) }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+{% endif %}
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -154,7 +167,30 @@
                   
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      
+                      
+                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete">Save Changes</button>
+{# <button type="submit" class="btn btn-primary">Save Changes</button> #}
+<!-- Modal -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modify Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Are you sure to Modify your profile ? 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                   <!-- End Profile Edit Form -->
 {{form_end(form)}}

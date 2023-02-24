@@ -13,7 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;   
-
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -36,7 +39,7 @@ class UserEditType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '5000k',
                         'mimeTypes' => [
                             'image/jpg',
                             'image/png',
@@ -45,7 +48,24 @@ class UserEditType extends AbstractType
                     ])
                 ],
             ]) 
-            ->add('phone')
+            ->add('phone', TelType::class, [
+            
+                'label' => 'Phone Number',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => '+216XXXXXXXX', // replace X with actual digits
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                    new Length([
+                        'min' => 8,
+                        'max' => 8,
+                        'minMessage' => 'Your phone number must be at least {{ limit }} numbers',
+                        'maxMessage' => 'Your phone number cannot be longer than {{ limit }} numbers',
+                    ]),
+                    
+                    ]
+            ])
             ->add('firstName')
             ->add('secondName')
         ;

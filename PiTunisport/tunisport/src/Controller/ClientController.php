@@ -17,38 +17,49 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 class ClientController extends AbstractController
 {
+    private $requestStack;
 
-    #[Route('/front', name: 'front')]
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+
+        
+    }
+
+    
+    #[Route('/front', name: 'front',methods: ['GET', 'POST'])]
     public function Front(): Response
     {
         return $this->render('frontTest.html.twig');
     }
 
-    #[Route('/', name: 'tunisport')]
+    #[Route('/', name: 'tunisport',methods: ['GET', 'POST'])]
     public function index(): Response
     {
         return $this->render('front.html.twig');
     }
 
-    #[Route('/client', name: 'client')]
+    #[Route('/client', name: 'client',methods: ['GET', 'POST'])]
     public function Client(): Response
     {
         return $this->render('frontUser.html.twig');
     }
 
+#[Route('/client/profile/modifier', name: 'clientProfile',methods: ['GET', 'POST'])]
 
-    #[Route('/client/profile/modifier', name: 'clientProfile')]
-
-    public function userProfile(ManagerRegistry $doctrine , Request $request,UserRepository $repository,SluggerInterface $slugger): response
-{ 
+public function userProfile(ManagerRegistry $doctrine, Request $request, UserRepository $repository, SluggerInterface $slugger): response
+{
     $user= $this->getUser();
     $form=$this->createForm(UserEditType::class,$user);
 
     $form->handleRequest($request);
 
-    if($form->isSubmitted() && $form->isValid()){
+    if ($form->isSubmitted() && $form->isValid()) {
 
         $photo = $form->get('image')->getData();
 
@@ -58,7 +69,7 @@ class ClientController extends AbstractController
             $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             // this is needed to safely include the file name as part of the URL
             $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $photo->guessExtension();
 
             // Move the file to the directory where brochures are stored
             try {
@@ -78,7 +89,6 @@ class ClientController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        $this->addFlash('message', 'Profil mis à jour');
         return $this->redirectToRoute('client');
     }
 
@@ -88,24 +98,27 @@ class ClientController extends AbstractController
 }
 
 
-#[Route('/client/profile/modifier/{email}', name: 'deleteProfile')]
+ #[Route('/client/profile/modifier/{id}', name: 'deleteProfile')]
      
-function DeleteUser($email,UserRepository $repository ,ManagerRegistry $doctrine){
- 
-$user=$repository->find($email);
-$em=$doctrine->getManager();
-$em->remove($user);
-$em->flush();
+public function DeleteUser(EntityManagerInterface $entityManager,User $user, UserRepository $repository,$id,ManagerRegistry $doctrine,Request $request ){
 
-return $this->redirectToRoute('front');
+    $session = $request->getSession();
 
- }
+        $user = $repository->find($id);
+        $entityManager =$doctrine->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
 
+      $session->remove($id);
+        return $this->redirectToRoute('registration');
 
-
-
-
-
+  }
 
 
 }
+
+
+
+
+
+
