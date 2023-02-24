@@ -21,7 +21,7 @@ class Blog
      * @Assert\NotBlank(message="Please enter a commentaire")
      * @Assert\Length(
      *     min=3,
-     *     max=20,
+     *     max=100,
      *     minMessage="Username must be at least {{ limit }} characters long",
      *     maxMessage="Username cannot be longer than {{ limit }} characters"
      * )
@@ -33,7 +33,7 @@ class Blog
      * @Assert\NotBlank(message="Please enter a commentaire")
      * @Assert\Length(
      *     min=3,
-     *     max=20,
+     *     max=200,
      *     minMessage="titre must be at least {{ limit }} characters long",
      *     maxMessage="titre cannot be longer than {{ limit }} characters"
      * )
@@ -45,7 +45,7 @@ class Blog
      * @Assert\NotBlank(message="Please enter a commentaire")
      * @Assert\Length(
      *     min=3,
-     *     max=20,
+     *     max=3000,
      *     minMessage="descreption must be at least {{ limit }} characters long",
      *     maxMessage="descreption cannot be longer than {{ limit }} characters"
      * )

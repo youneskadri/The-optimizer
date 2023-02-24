@@ -8,6 +8,10 @@
         {{ form_widget(f.contenuCom, { 'attr': {'class': 'form-control'} }) }}
          {{form_errors(f.contenuCom) }}
 
+{{ form_label(f.blog, 'Blog ') }}
+        {{ form_widget(f.blog, { 'attr': {'class': 'form-control'} }) }}
+         {{form_errors(f.blog) }}
+
     {{ form_label(f.dateC, 'Date ') }}
         {{ form_widget(f.dateC, { 'attr': {} }) }}
          {{form_errors(f.dateC) }}

@@ -8,7 +8,7 @@
                         <div class=blogDetails>
                             <div class=blogimg><a class="prv blog_prev"></a> <a class="nxt blog_next"></a>
                                 <ul class=blog_slider>
-                                    <li><img src="{{ asset('/uploads/images/' ~ c.getImage()) }}" width="100px" height="100px" alt="" /></li>
+                                    <li><img src="{{ asset('/uploads/images/' ~ c.getImage()) }}"  alt="" /></li>
                                     
                                 </ul>
                             </div>
@@ -22,6 +22,8 @@
                                         <p class="paragraph02 uppercaseheading">october 27 ,<span class=red>2015</span>
                                         </p></div>
                                 </div>
+
+
                                 <p class=blog-content>{{c.contenu}}</p>
 
                                 
@@ -30,8 +32,11 @@
                             {% endfor %}
                 
                         </div>
+                        <div class="contact-form clearfix">
+                        <h6>Comments</h6>
+                        </div>
                         {%  for c in  comments %}
-                        <div class="contact-form clearfix"><h6>Comments</h6>
+                        <div class="contact-form clearfix">
 
                                     <form method=post name=contact id=contact >
                                        
