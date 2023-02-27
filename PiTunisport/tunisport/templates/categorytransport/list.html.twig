@@ -1,35 +1,42 @@
-{% extends "front.html.twig" %}
+{% extends "back.html.twig" %}
 {% block main %}
 <br><br><br><br><br>
-<table border="1">
-	<tr>
-		<th>nomcategory</th>
-		<th>Delete</th>
-		<th>Show</th>
-		<th>Afficher la liste des transport</th>
-	</tr>
-	{% for c in CategoryTransports %}
+<div class="card" style=" padding-left:400px;">
+	<div class="card-body">
+	  <h5 class="card-title">table de categorie de Transport</h5>
+
+	  <!-- Default Table -->
+	  <table class="table" style="width: 50px;">
+		<thead>
+		  <tr>
+			
+			<th scope="col">type de transport</th>
+		  </tr>
+		</thead>
+		<tbody>
+	{% for s in CategoryTransports %}
 		<tr>
-			<td>{{ c.TypeTransport}}</td>
+			<td>{{ s.Typetransport}}</td>
 
 			<td>
-				<button>
-					<a href="{{ path ('delete', {'id': c.id})}}">delete</a>
+				<button  type="button" class="btn btn-success">
+					<a href="{{ path ('delete', {'id': s.id})}}">delete</a>
 				</button>
 			</td>
 			<td>
-				<button>
-					<a href="{{ path ('showC', {'id': c.id})}}">show</a>
-				</button>
-			</td>
-			<td>
-				<button>
-					<a href="{{ path ('app_CategoryTransport_edit', {'id': c.id})}}">update</a>
-				</button>
-			</td>
+		            	<button  type="button" class="btn btn-success" >		
+						<a href="{{ path ('app_CategoryTransport_edit',{'id': s.id})}}">update</a>
+					</button>
+		</td>
 		</tr>
 	{% endfor %}
-</table>
-<br>
-{{form(formC)}}
+</tbody>
+	  </table>
+	  <!-- End Default Table Example -->
+	</div>
+  </div>
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+{{form_widget(form.typetransport)}}
+{{form_errors(form.typetransport)}}
+{{form_end(form)}}
 {% endblock %}

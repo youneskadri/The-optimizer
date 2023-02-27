@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\CategoryHebergement;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\CategoryHebergementType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class CategoryHebergementController extends AbstractController
         $form = $this->createForm(CategoryHebergementType::class, $CategoryHebergement);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted()&& $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($CategoryHebergement);
             $em->flush();
@@ -79,7 +80,7 @@ class CategoryHebergementController extends AbstractController
         $form = $this->createForm(CategoryHebergementType::class, $CategoryHebergement);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($CategoryHebergement);
             $em->flush();

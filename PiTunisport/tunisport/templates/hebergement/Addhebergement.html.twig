@@ -3,4 +3,11 @@
 <br><br>
 <br><br>
 <br><br>
-{{form(form)}}{% endblock  %}
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+{{form_widget(form.nomHeberg)}}
+{{form_errors(form.nomHeberg)}}
+{{form_end(form)}}
+
+
+
+{% endblock  %}

@@ -19,6 +19,7 @@ class CategoryTransportController extends AbstractController
             'CategoryTransport_name' => 'CategoryTransportController',
         ]);
     }
+   
 
     #[Route('/list', name: 'list_CategoryTransport')]
     public function list(ManagerRegistry $doctrine, Request $request): Response
@@ -30,7 +31,7 @@ class CategoryTransportController extends AbstractController
         $form = $this->createForm(CategoryTransportType::class, $CategoryTransport);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted()&& $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($CategoryTransport);
             $em->flush();
@@ -40,7 +41,7 @@ class CategoryTransportController extends AbstractController
         return $this->render('CategoryTransport/list.html.twig', [
             'controller_name' => 'CategoryTransportController',
             'CategoryTransports' => $CategoryTransports,
-            'formC' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
@@ -56,7 +57,7 @@ class CategoryTransportController extends AbstractController
             'CategoryTransport' => $CategoryTransport,
         ]);
     }
-
+   
     #[Route('/delete/{id}', name: 'delete')]
     public function deleteClass(ManagerRegistry $doctrine, $id): Response
     {
@@ -78,22 +79,23 @@ class CategoryTransportController extends AbstractController
         $form = $this->createForm(CategoryTransportType::class, $CategoryTransport);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted()&& $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($CategoryTransport);
             $em->flush();
             return $this->redirectToRoute('list_CategoryTransport');
         }
         // return $this->render('classroom/detail.html.twig', [
-        //     'formC' => $form->createView()
+        //     'form' => $form->createView()
         // ]);
         return $this->renderForm('CategoryTransport/list.html.twig', [
-            'formC' => $form,
+            'form' => $form,
             'CategoryTransports' => $CategoryTransports
         ]);
     }
-    #[Route('/{id}/edit', name: 'app_CategoryTransport_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, CategoryTransport $CategoryTransport, CategoryTransportRepository $CategoryTransportRepository): Response
+   
+    #[Route('/{id}/editc', name: 'app_CategoryTransport_edit')]
+    public function editc(Request $request, CategoryTransport $CategoryTransport, CategoryTransportRepository $CategoryTransportRepository): Response
     {
         $form = $this->createForm(CategoryTransportType::class, $CategoryTransport);
         $form->handleRequest($request);
@@ -104,10 +106,29 @@ class CategoryTransportController extends AbstractController
             return $this->redirectToRoute('list_CategoryTransport', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('CategoryTransport/edit.html.twig', [
+        return $this->renderForm('categorytransport/edit.html.twig', [
             'CategoryTransport' => $CategoryTransport,
-            'formC' => $form,
+            'form' => $form,
         ]);
-    }
-}
 
+ 
+     }
+     
+    /* #[Route('/{id}/updatec', name: 'update_commentaire')]
+     public function  update(ManagerRegistry $doctrine,$id,  Request  $request) : Response
+     { $CategoryTransport = $doctrine
+         ->getRepository(CategoryTransport::class)
+         ->find($id);
+         $form = $this->createForm(CategoryTransportType::class, $CategoryTransport);
+         $form->add('update', SubmitType::class) ;
+         $form->handleRequest($request);
+         if ($form->isSubmitted())
+         { $em = $doctrine->getManager();
+             $em->flush();
+             return $this->redirectToRoute('list_CategoryTransport');
+         }
+         return $this->renderForm("categorytransport/edit.html.twig",
+             ["form"=>$form]) ;
+     }*/
+    
+}

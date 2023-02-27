@@ -1,40 +1,58 @@
-{% extends 'back.html.twig' %}
 
+
+
+
+{% extends "back.html.twig" %}
 {% block main %}
 <br><br><br><br><br>
-{{form(form_NSC)}}
 
-<table border="1">
-	<tr>
-		<th>NSC</th>
-		<th>Name</th>
-        <th>Email</th>
-		<th>Delete</th>
-		<th>Show</th>
-	</tr>
-	{% for s in Hebergements %}
-		<tr>
-			<TD><img src="{{ asset('/uploads/images/' ~ s.getImage()) }}" width="100px" height="100px" alt="" /></TD>
-			<td>{{s.id}}</td>
-			<td>{{ s.nomheberg}}</td>
-			<td>
-				<button>
-					<a href="{{ path ('delete_Hebergement', {'id': s.id})}}">delete</a>
-				</button>
-			</td>
-			<td>
-				<button>
-					<a href="{{ path ('showS', {'id': s.id})}}">show</a>
-				</button>
-			</td>
-			<td>
-				<button>
-					<a href="{{ path ('app_Hebergementedit', {'id': s.id})}}">update</a>
-				</button>
-			</td>
-		</tr>
-	{% endfor %}
-</table>
-<br>
-<a href="{{path ('Add')}}"> Ajouter</a>
+{{form(form_NSC)}}
+<div class="card"  style=" padding-left:200px;">
+	<div class="card-body">
+	  <h5 class="card-title">liste hebergement</h5>
+
+	  <!-- Default Table -->
+	  <table class="table" style="width: 50px;">
+		<thead>
+		  <tr>
+			<th scope="col">image hebergement</th>
+
+			<th scope="col">id</th>
+
+			<th scope="col">nom hebergement</th>
+			<th scope="col">description hebergement</th>
+			<th scope="col">Lieux</th>
+
+		  </tr>
+		</thead>
+		<tbody>
+			{% for s in Hebergements %}
+			<tr>
+				<TD><img src="{{ asset('/uploads/images/' ~ s.getImage()) }}" width="100px" height="100px" alt="" /></TD>
+				<td>{{s.id}}</td>
+				<td>{{ s.nomheberg}}</td>
+				<td>{{ s.deschebergement}}</td>
+				<td>{{ s.localisation}}</td>
+
+				<td>
+					<button  type="button" class="btn btn-secondary rounded-pill">
+						<a href="{{ path ('delete_Hebergement', {'id': s.id})}}">delete</a>
+					</button>
+				</td>
+				
+				<td>
+					<button  type="button" class="btn btn-secondary rounded-pill">
+						<a href="{{ path ('app_Hebergementedit', {'id': s.id})}}">update</a>
+					</button>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	  </table>
+	  <!-- End Default Table Example -->
+	</div>
+  </div>
+  <button class="btn btn-danger">
+  <a href="{{path ('Add')}}"> Ajouter</a>
+</button>
 {% endblock %}

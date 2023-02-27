@@ -53,18 +53,23 @@ class HebergementRepository extends ServiceEntityRepository
     #filtrer les etudiants par NSC
 #QueryBuilder
 public function findHebergementByNSC($NSC){
-    return $this->createQueryBuilder('s')
-    ->where('s.id LIKE :NSC')
-    ->setParameter('NSC','%'.$NSC.'%')
-    ->getQuery()
-    ->getResult();
+    return $this->createQueryBuilder('h')
+        ->join('h.localisation', 'l')
+        ->where('l.lieux LIKE :NSC')
+        ->setParameter('NSC', '%' . $NSC . '%')
+        ->getQuery()
+        ->getResult();
 }
 #DQL
     public function findHebergementByNSCDQL($NSC){
         $entityManager=$this->getEntityManager();
-        $query=$entityManager->createQuery('SELECT p from App\Entity\Hebergement p WHERE p.id LIKE :NSC');
-        $query->setParameter('NSC','%'.$NSC.'%');
-        return $query->getResult();
+        $query=$entityManager->createQuery('
+    SELECT p FROM App\Entity\Hebergement p
+    WHERE p.localisation = :NSC'
+)
+->setParameter('NSC', '%' . $NSC . '%');
+
+return $query->getResult();
 
     }
 //    /**

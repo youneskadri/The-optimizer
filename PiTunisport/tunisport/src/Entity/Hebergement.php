@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use App\Repository\HebergementRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,19 +14,28 @@ class Hebergement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable:true)]
     private ?string $image = null;
 
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'Your  namecategory must be at least {{ limit }} characters long',
+       )]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le nom est obligatoire")]
     private ?string $nomHeberg = null;
-
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'Your description must be at least {{ limit }} characters long',
+       )]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"la desc est obligatoire")]
     private ?string $deschebergement = null;
 
-    #[ORM\ManyToOne(targetEntity: Hebergement::class, inversedBy: 'hebergements')]
+    #[ORM\ManyToOne(targetEntity: Localisation::class, inversedBy: 'hebergements')]
     private ?localisation $localisation = null;
-    #[ORM\ManyToOne(targetEntity: CategoryHebergement::class, inversedBy: 'hebergements')]
 
+    #[ORM\ManyToOne(targetEntity: CategoryHebergement::class, inversedBy: 'hebergements')]
     private ?categoryhebergement $categoryHebergement = null;
 
     public function __toString() {

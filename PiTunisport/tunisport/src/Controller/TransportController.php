@@ -44,7 +44,7 @@ class TransportController extends AbstractController
          $form=$this->createForm(TransportType::class,$Transport);
          $form->add('AddP',SubmitType::class);
          $form->handleRequest($request);
-         if($form->isSubmitted()){
+         if($form->isSubmitted() && $form->isValid()){
             $photo = $form->get('image')->getData();
 
             // this condition is needed because the 'brochure' field is not required

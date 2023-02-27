@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CategoryHebergementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,9 +14,14 @@ class CategoryHebergement
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'name category must be at least {{ limit }} characters long',
+       )]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le nom categorie est obligatoire")]
     private ?string $nomcategory = null;
+    
     #[ORM\OneToMany(targetEntity: Hebergement::class, mappedBy: 'categoryHebergement')]
 
     private Collection $hebergements;

@@ -1,3 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{{form(formC)}}
+{{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+{{form_widget(form.nomcategory)}}
+{{form_errors(form.nomcategory)}}
+{{form_end(form)}}

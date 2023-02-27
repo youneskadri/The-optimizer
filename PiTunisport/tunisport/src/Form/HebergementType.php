@@ -12,7 +12,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class HebergementType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -42,7 +45,12 @@ class HebergementType extends AbstractType
          //   ],
         ])
             ->add('nomHeberg')
-            ->add('deschebergement')
+            ->add('deschebergement', TextareaType::class, [
+                'label' => 'description',
+                'attr' => [
+                    'class' => 'deschebergement'::class,
+                ]
+            ])
             ->add('localisation',Entitytype::class,[
                 'class'=>Localisation::class,
                 'choice_label'=>'lieux',

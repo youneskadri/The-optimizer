@@ -42,7 +42,7 @@ class HebergementController extends AbstractController
          $form=$this->createForm(HebergementType::class,$hebergement);
          $form->add('Add',SubmitType::class);
          $form->handleRequest($request);
-         if($form->isSubmitted()){
+         if($form->isSubmitted() && $form->isValid()){
              $photo = $form->get('image')->getData();
 
             // // this condition is needed because the 'brochure' field is not required
@@ -112,6 +112,7 @@ class HebergementController extends AbstractController
         if ($form->isSubmitted()) { 
             $NSC=$form->get('NSC')->getData();
             $Hebergements=$repository->findHebergementByNSC($NSC);
+
         }
         return $this->render('Hebergement/list.html.twig', [
             'controller_name' => 'HebergementController',
@@ -130,31 +131,22 @@ class HebergementController extends AbstractController
             $NSC=$form->get('NSC')->getData();
             $Hebergements=$repository->findHebergementByNSC($NSC);
         }
-        return $this->render('Hebergement/affichage.html.twig', [
+        return $this->render('Hebergement/test.html.twig', [
             'controller_name' => 'HebergementController',
             'Hebergements' => $Hebergements,
             'form_NSC'=>$form->createView()
             ]);
 
     }
-  /*  #[Route('/{id}/editH', name: 'app_Hebergementedit', methods: ['GET', 'POST'])]
-    
-    public function edit($id,Request $request, Hebergement $Hebergement, HebergementRepository $HebergementRepository): Response
-    {   $Hebergement = $HebergementRepository->find($id);
-        $form = $this->createForm(HebergementType::class, $Hebergement);
-        $form->handleRequest($request);
+  
+    #[Route('/map', name: 'map')]
+    public function map(): Response
+    {
+        return $this->render('Hebergement/map.html.twig', [
+            'controller_name' => 'HebergementController',
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $HebergementRepository->save($Hebergement, true);
-
-            return $this->redirectToRoute('list_Hebergement', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('Hebergement/edit.html.twig', [
-            'Hebergement' => $Hebergement,
-            'form_NSC' => $form,
         ]);
-    }*/
+    }
 #[Route('/recherche/{id}', name: 'recherche')]
 public function afficherListeEtudiant_Class(HebergementRepository $repository,ManagerRegistry $doctrine,$id){
     $Hebergements=$repository->ListHebergementByClass($id);
@@ -217,8 +209,9 @@ public function  update(ManagerRegistry $doctrine,$id,  Request  $request) : Res
                 $Hebergement->setImage($newFilename);
             }
             $em = $doctrine->getManager();
+            
             $em->flush();
-            $this->redirectToRoute("list_Hebergement");
+            $this->redirectToRoute('list_Hebergement');
         }
         return $this->renderForm("Hebergement/edit.html.twig", array("form_NSC" => $form));
     }
