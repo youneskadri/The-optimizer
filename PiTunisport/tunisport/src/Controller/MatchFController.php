@@ -10,17 +10,36 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\MatchFType;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MatchFController extends AbstractController
 {
-
-
-
     #[Route('/readM', name: 'readMatch')]
     public function readM(MatchFRepository $repository): Response
     {
         $m =$repository->findAll();
         return $this->render('match_f/readM.html.twig', [
+            'match' => $m,
+        ]);
+    }
+    
+
+    #[Route('/readMatch', name: 'read_Match')]
+    public function readMatch(MatchFRepository $repository): Response
+    {
+        $m =$repository->findAll();
+        return $this->render('match_f/readMatch.html.twig', [
+            'match' => $m,
+        ]);
+    }
+
+    #[Route('/detailsM/{id}', name: 'detailsM')]
+    public function detailsM(MatchFRepository $repository, $id): Response
+    {
+        $m =$repository->findByid($id);
+        return $this->render('match_f/detailsM.html.twig', [
             'match' => $m,
         ]);
     }
@@ -30,12 +49,14 @@ class MatchFController extends AbstractController
 
 
     #[Route('/createM', name: 'createMatch')]
-    public function createM(ManagerRegistry $doctrine, MatchFRepository $repository, Request $request): Response
+    public function createM(ManagerRegistry $doctrine, MatchFRepository $repository, Request $request, SluggerInterface $slugger): Response
     {
         $match = new MatchF();
         $form = $this->createForm(MatchFType::class, $match);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())  {
+           
+
             $em = $doctrine->getManager();
             $em->persist($match);
             $em->flush();

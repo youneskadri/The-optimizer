@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class MatchFType extends AbstractType
 {
@@ -16,13 +15,14 @@ class MatchFType extends AbstractType
         $builder
             ->add('HeureDebM')
             ->add('dateMatch')
-            ->add('equipeA')
-            ->add('equipeB')
-            ->add('typeMatch')
-            ->add('stade')
-            ->add('tournoi')
             ->add('resultatA')
             ->add('resultatB')
+            ->add('prix')
+            ->add('tournoi')
+            ->add('type')
+            ->add('stade')
+            ->add('equipeA')
+            ->add('equipeB')
             ->add('save', SubmitType::Class)
         ;
     }

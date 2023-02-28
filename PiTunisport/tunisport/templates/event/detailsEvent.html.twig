@@ -1,0 +1,56 @@
+{% extends 'front.html.twig' %}
+
+{% block banner %}
+<div class=innerbannerwrap>
+    <div class=content></div>
+    <div class=innerbanner><h2 class=bannerHeadline>book <span>ticket</span></h2></div>
+</div>
+{% endblock %}
+{% block body %}
+<section class="latest_news bg-white">
+    <div class=container>
+        <div class=row><h2 class=heading>latest <span>news</span></h2>
+
+            <p class=headParagraph>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil debitis mollitia
+                qui libero voluptate ratione, molestias! Necessitatibus voluptatem temporibus doloremque non, vel
+                ipsam, nesciunt dolores consequatur, est tempora ut! Est?>Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Nihil debitis mollitia qui libero voluptate ratione, molestias! Necessitatibus
+                voluptatem temporibus doloremque non, vel ipsam, nesciunt dolores consequatur, est tempora ut!
+                Est.</p>
+
+                <div class="matchSchedule_details row">
+                    {% for e in event %}
+                    <div class="match_next right-triangle">
+                        <div class="wrap_match_next right-triangle">
+                            <div class=right-padding><h4 class=headline03>{{e.nomEvent}}</h4>
+
+                                <p>{{e.typeEvent}}</p></div>
+                        </div>
+                    </div>
+                    <div class=match_versus>
+                        <div class="bg-blackimg match_versus02">
+                            <div class=nextmatchDetails><p></p>
+
+                                <div class="wrap-logo clearfix">
+                                    <div class=logo-match><img src="{{ asset('uploads/event/' ~ e.getImage()) }}" alt=image></div>
+                                  
+                                </div>
+                                
+                               </div>
+                        </div>
+                    </div>
+                    <div class=match_timing>
+                        <ul class=counter-wrap>
+                            <li><span>{{ e.dateEvent.format('d/m/Y') }}</span>date de l'evenement</li>
+                            <li><span>{{ e.heureDeb.format('H:i') }}</span>heure de debut</li>
+                            <li><span>{{ e.heureFin.format('H:i') }}</span>heure de fin</li>
+                            <li><span>{{e.localisation}}</span>localisation</li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

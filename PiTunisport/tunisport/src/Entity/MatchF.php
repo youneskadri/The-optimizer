@@ -20,55 +20,61 @@ class MatchF
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $HeureDebM = null;
 
+  
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Range( min : "today",notInRangeMessage : "The date must be minimum today " )]
     private ?\DateTimeInterface $dateMatch = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de l équipe à domicile est obligatoire")]
-    #[Assert\Length(min: 3 , minMessage: "Le nom de l équipe à domicile contient moins de 3 charactères")]
-    private ?string $equipeA = null;
+    
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de l équipe éxterieure est obligatoire")]
-    #[Assert\Length(min: 3 ,minMessage: "Le nom de l équipe éxterieure contient moins de 3 charactères")]
-    private ?string $equipeB = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le type du match est obligatoire")]
-    #[Assert\Length(min: 3 ,minMessage: "Le type du match contient moins de 3 charactères")]
-    private ?string $typeMatch = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom du stade est obligatoire")]
-    #[Assert\Length(min: 3 ,minMessage: "Le type du match contient moins de 3 charactères")]
-    private ?string $stade = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le nom du tournoi est obligatoire')]
-    #[Assert\Length(min: 3 ,minMessage: "Le nom du tournoi contient moins de 3 charactères")]
-    private ?string $tournoi = null;
-
+    
     #[ORM\Column(length: 255)]
     #[Assert\Type(
         type: 'integer',
-        message: 'The value {{ value }} is not a valid {{ type }}.',
+        message: 'La valeur {{ value }} n est pas valide {{ type }}.',
     )]
     private ?int $resultatA = null;
 
     #[ORM\Column]
     #[Assert\Type(
         type: 'integer',
-        message: 'The value {{ value }} is not a valid {{ type }}.',
+        message: 'La valeur {{ value }} n est pas valide {{ type }}.',
     )]
     private ?int $resultatB = null;
 
-    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: 'matchFs')]
+    #[ORM\OneToMany(mappedBy: 'matchF', targetEntity: Reservation::class)]
     private Collection $reservation;
 
+    #[ORM\Column]
+    private ?int $prix = null;
+
+    #[ORM\ManyToOne(inversedBy: 'matchFs')]
+    private ?Tournoi $tournoi = null;
+
+    #[ORM\ManyToOne(inversedBy: 'matchFs')]
+    private ?TypeMatch $type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'matchFs')]
+    private ?Stade $stade = null;
+
+    #[ORM\ManyToOne(inversedBy: 'matchFs')]
+    private ?Equipe $equipeA = null;
+
+    #[ORM\ManyToOne(inversedBy: 'matchFs')]
+    private ?Equipe $equipeB = null;
+
+   
+
+ 
+    
+
+    
 
     public function __construct()
     {
         $this->reservation = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -88,6 +94,18 @@ class MatchF
         return $this;
     }
 
+    public function getHeureFinM(): ?\DateTimeInterface
+    {
+        return $this->HeureFinM;
+    }
+
+    public function setHeureFinM(\DateTimeInterface $HeureFinM): self
+    {
+        $this->HeureFinM = $HeureFinM;
+
+        return $this;
+    }
+
     public function getDateMatch(): ?\DateTimeInterface
     {
         return $this->dateMatch;
@@ -100,29 +118,7 @@ class MatchF
         return $this;
     }
 
-    public function getEquipeA(): ?string
-    {
-        return $this->equipeA;
-    }
-
-    public function setEquipeA(string $equipeA): self
-    {
-        $this->equipeA = $equipeA;
-
-        return $this;
-    }
-
-    public function getEquipeB(): ?string
-    {
-        return $this->equipeB;
-    }
-
-    public function setEquipeB(string $equipeB): self
-    {
-        $this->equipeB = $equipeB;
-
-        return $this;
-    }
+    
 
     public function getTypeMatch(): ?string
     {
@@ -148,17 +144,7 @@ class MatchF
         return $this;
     }
 
-    public function getTournoi(): ?string
-    {
-        return $this->tournoi;
-    }
-
-    public function setTournoi(string $tournoi): self
-    {
-        $this->tournoi = $tournoi;
-
-        return $this;
-    }
+    
 
     public function getResultatA(): ?int
     {
@@ -185,7 +171,7 @@ class MatchF
     }
 
     /**
-     * @return Collection<int, reservation>
+     * @return Collection<int, Reservation>
      */
     public function getReservation(): Collection
     {
@@ -196,6 +182,7 @@ class MatchF
     {
         if (!$this->reservation->contains($reservation)) {
             $this->reservation->add($reservation);
+            $reservation->setMatchF($this);
         }
 
         return $this;
@@ -203,13 +190,86 @@ class MatchF
 
     public function removeReservation(Reservation $reservation): self
     {
-        $this->reservation->removeElement($reservation);
+        if ($this->reservation->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getMatchF() === $this) {
+                $reservation->setMatchF(null);
+            }
+        }
 
         return $this;
     }
+
+   
+
+    
 
     public function __toString()
     {
         return $this->id; 
     }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getTournoi(): ?Tournoi
+    {
+        return $this->tournoi;
+    }
+
+    public function setTournoi(?Tournoi $tournoi): self
+    {
+        $this->tournoi = $tournoi;
+
+        return $this;
+    }
+
+    public function getType(): ?TypeMatch
+    {
+        return $this->type;
+    }
+
+    public function setType(?TypeMatch $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getEquipeA(): ?Equipe
+    {
+        return $this->equipeA;
+    }
+
+    public function setEquipeA(?Equipe $equipeA): self
+    {
+        $this->equipeA = $equipeA;
+
+        return $this;
+    }
+
+    public function getEquipeB(): ?Equipe
+    {
+        return $this->equipeB;
+    }
+
+    public function setEquipeB(?Equipe $equipeB): self
+    {
+        $this->equipeB = $equipeB;
+
+        return $this;
+    }
+
+  
+
+    
 }

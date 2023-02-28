@@ -1,60 +1,71 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-<h1> Liste des matchs</h1>
-    <div class="table-responsive border-0 rounded-3">
-        <!-- Table START -->
-        <table class="table table-dark-gray align-middle p-4 mb-0">
-            <!-- Table head -->
-            <thead>
-            <tr>
-                <th scope="col" class="border-0 rounded-start">Numéro_match</th>
-                <th scope="col" class="border-0">Equipe1</th>
-                <th scope="col" class="border-0">Equipe2</th>
-	            <th scope="col" class="border-0">Type</th>
-                <th scope="col" class="border-0">Stade</th>
-                <th scope="col" class="border-0 rounded-end">Tournoi</th>
-	            <th scope="col" class="border-0 rounded-end">Resultat_Equipe1</th>
-                <th scope="col" class="border-0 rounded-end">Resultat_Equipe2</th>
-                <th scope="col" class="border-0 rounded-end">Action</th>
-            </tr>
-            </thead>
-            <!-- Table body START -->
-            {%  for m in  match %}
-            <tbody>
-            <!-- Table item -->
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <!-- Title -->
-                        <h6 class="mb-0 ms-2 table-responsive-title">
-                            <a href="#">{{ m.id }}</a>
-                        </h6>
-                    </div>
-                </td>
-                <td>{{ m.equipeA }}</td>
-                <!-- Amount item -->
-                <td>{{ m.equipeB }}</td>
-                <td>{{ m.typeMatch }}</td>
-                <!-- Period item -->
-                <td>
-                    <span class="badge bg-primary bg-opacity-10 text-primary">{{ m.stade }}</span>
-                </td>
-                <td>{{ m.tournoi }}</td>
-                <td>{{ m.resultatA }}</td>
-	            <td>{{ m.resultatB }}</td>   
-                <!-- Action item -->
-                <td>
-                    <a href="{{ path('updateMatch', {id:m.id}) }}" class="btn btn-sm btn-success-soft btn-round me-1 mb-0"><i class="far fa-fw fa-edit"></i></a>
-                    <a href="{{ path('deleteMatch', {id:m.id}) }}" class="btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"></i></a>
-                </td>
-            </tbody>
-            {% endfor %}
-            <!-- Table body END -->
-        </table>
-        <!-- Table END -->
-    </div>
-    <form action="{{ path('createMatch') }}">
-        <button class="btn btn-primary mb-0 mt-3" >Ajouter un match</button>
-    </form>
+{% extends 'back.html.twig' %}
+{% block main %}
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+    
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Liste des matchs</h5>
+                
+    
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                        <th scope="col" class="border-0 rounded-start">Numéro_match</th>
+                        <th scope="col" class="border-0">Equipe1</th>
+                        <th scope="col" class="border-0">Equipe2</th>
+                        <th scope="col" class="border-0">Date du Match</th>
+                        <th scope="col" class="border-0">Heure de début du Match</th>
+                        <th scope="col" class="border-0 rounded-end">Supprimer</th>
+                        <th scope="col" class="border-0 rounded-end">Modifier</th>
+                        <th scope="col" class="border-0 rounded-end">Details</th>
+                    </tr>
+                  </thead>
+                  {%  for m in  match %}
+                <tbody>
+                <!-- Table item -->
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <!-- Title -->
+                            <h6 class="mb-0 ms-2 table-responsive-title">
+                                <a href="#">{{ m.id }}</a>
+                            </h6>
+                        </div>
+                    </td>
+                    <td>{{ m.equipeA }}</td>
+                    <td>{{ m.equipeB }}</td>
+                    <td>{{ m.dateMatch.format('d/m/Y') }}</td>
+                    <td>{{ m.HeureDebM.format('H:i') }}</td>
+                    
+                    
+            
+                    <!-- Action item -->
+                    <td><form action="{{ path('deleteMatch', {id:m.id}) }}">
+                      <button  >supprimer</button>
+                      </form> </td>
+                      <td><form action="{{ path('updateMatch', {id:m.id}) }}">
+                    <button  >modifier</button>
+                </form>  </td>
+                <td> <form action="{{ path('detailsM', {id:m.id}) }}">
+                  <button  >details</button>
+              </form> </td>
+                
+                </tbody>
+                {% endfor %}
+                </table>
+    
+              <form action="{{ path('createMatch') }}">
+                <button class="btn btn-primary mb-0 mt-3" >Ajouter un match</button>
+            </form>
+            
+    
+          </div>
+        </div>
+      </section>
+    </main><!-- End #main -->
 {% endblock %}
 

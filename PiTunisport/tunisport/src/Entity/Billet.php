@@ -18,15 +18,9 @@ class Billet
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\ManyToOne]
-    private ?reservation $reservation = null;
+    #[ORM\ManyToOne(inversedBy: 'billet')]
+    private ?Reservation $reservation = null;
 
-
-
-    public function __construct()
-    {
-        $this->reservation = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -45,22 +39,24 @@ class Billet
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->id; // return a string representation of the Billet object
-    }
-
-    public function getReservation(): ?reservation
+    public function getReservation(): ?Reservation
     {
         return $this->reservation;
     }
 
-    public function setReservation(?reservation $reservation): self
+    public function setReservation(?Reservation $reservation): self
     {
         $this->reservation = $reservation;
 
         return $this;
     }
 
-    
+ 
+
+  
 }
+
+
+
+    
+

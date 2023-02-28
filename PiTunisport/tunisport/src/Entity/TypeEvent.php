@@ -6,6 +6,7 @@ use App\Repository\TypeEventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TypeEventRepository::class)]
 class TypeEvent
@@ -16,6 +17,8 @@ class TypeEvent
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le type de l'évènement est obligatoire")]
+    #[Assert\Length(min: 3 ,minMessage: "Le type de l'évènement contient moins de 3 charactères")]
     private ?string $NomType = null;
 
     #[ORM\OneToMany(mappedBy: 'typeEvent', targetEntity: Event::class)]
@@ -86,4 +89,9 @@ class TypeEvent
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->NomType; 
+    }
+
 }

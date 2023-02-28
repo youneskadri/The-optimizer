@@ -1,17 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'back.html.twig' %}
 
-{% block body %}
+{% block main %}
+<main id="main" class="main">
     <h1> Ajouter une réservation </h1>
-    {{ form_start(f, { 'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
     
-        {{ form_label(f.dateResevation, 'Date de réservation') }}
-        {{ form_widget(f.dateResevation, { 'attr': {'class': 'form-control'} }) }}
-        
-        {{ form_label(f.etat, 'Etat de la réservation') }}
-        {{ form_widget(f.etat, { 'attr': {'class': 'form-control'} }) }}
-        
         {{ form_label(f.nombreBillet, 'Nombre de billets') }}
         {{ form_widget(f.nombreBillet, { 'attr': {'class': 'form-control'} }) }}
-        
+
+   
+    
+    
     {{ form_end(f) }}
+</main>    
 {% endblock %}
