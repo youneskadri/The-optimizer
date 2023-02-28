@@ -2,60 +2,64 @@
 
 {% block main %}
 <main id="main" class="main">
-    <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Modifier un match</h5>
+    <h1> Modifier un match </h1>
     
-          <!-- Multi Columns Form -->
-          <form class="row g-3">
-            <div class="col-md-12">
-                {{ form_label(f.equipeA, 'Equipe à domicile') }}
-                {{ form_widget(f.equipeA, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.equipeA)}}
-            </div>
-            <div class="col-md-6">
-                {{ form_label(f.equipeB, 'Equipe extérieure') }}
-                {{ form_widget(f.equipeB, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.equipeB)}}
-            </div>
-            <div class="col-md-6">
-                {{ form_label(f.dateMatch, 'Date du match') }}
-                {{ form_widget(f.dateMatch, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.dateMatch)}}
-                
-            </div>
-            <div class="col-12">
-                {{ form_label(f.HeureDebM, 'Heure de début du match') }}
-                {{ form_widget(f.HeureDebM, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.HeureDebM)}}
-            </div>
-            <div class="col-12">
-                {{ form_label(f.tournois, 'Tournoi') }}
-                {{ form_widget(f.tournois, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.tournois)}}
-            </div>
-            <div class="col-md-6">
-                {{ form_label(f.resultatA, 'Résultat équipe à domicile') }}
-                {{ form_widget(f.resultatA, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.resultatA)}}
-            </div>
-            <div class="col-md-2">
-                {{ form_label(f.resultatB, 'Resultat équipe extérieure') }}
-                {{ form_widget(f.resultatB, { 'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(f.resultatB)}}
-            </div>
-            <div class="col-12">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                  Check me out
-                </label>
-              </div>
-            </div>
+        {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
+       
+            {{ form_label(f.equipeA, 'Equipe à domicile') }}
+            {{ form_widget(f.equipeA, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.equipeA)}}
+        
+            {{ form_label(f.equipeB, 'Equipe extérieure') }}
+            {{ form_widget(f.equipeB, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.equipeB)}}
+        
+            {{ form_label(f.dateMatch, 'Date du match') }}
+            {{ form_widget(f.dateMatch, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.dateMatch)}}
             
-          </form>
+        
+       
+            {{ form_label(f.HeureDebM, 'Heure de début du match') }}
+            {{ form_widget(f.HeureDebM, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.HeureDebM)}}
+     
+        
+            {{ form_label(f.tournois, 'Tournoi') }}
+            {{ form_widget(f.tournois, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.tournois)}}
+     
+       
+            {{ form_label(f.typeMatch, 'Type') }}
+            {{ form_widget(f.typeMatch, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.typeMatch)}}
+        
+      
+          {{ form_label(f.stade, 'Stade') }}
+          {{ form_widget(f.stade, { 'attr': {'class': 'form-control'} }) }}
+          {{ form_errors(f.stade)}}
+       
+          {{ form_label(f.resultatA, 'Résultat équipe extérieure') }}
+          {{ form_widget(f.resultatA, { 'attr': {'class': 'form-control'} }) }}
+          {{ form_errors(f.resultatA)}}
+     
+        
+            {{ form_label(f.resultatB, 'Résultat équipe extérieure') }}
+            {{ form_widget(f.resultatB, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.resultatB)}}
+
+            {{ form_label(f.prix, 'Prix') }}
+            {{ form_widget(f.prix, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.prix)}}
+
+           
+
+           
+     
+       
+          
     
-        </div>
-      </div>
-</main>
+    
+        {{ form_end(f) }}
+</main>    
 {% endblock %}

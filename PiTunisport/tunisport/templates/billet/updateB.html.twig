@@ -1,0 +1,19 @@
+{% extends 'back.html.twig' %}
+
+{% block main %}
+<main id="main" class="main">
+    <h1> Ajouter une billet </h1>
+    {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
+    
+        {{ form_label(b.prix, 'Prix') }}
+        {{ form_widget(f.dateResevation, { 'attr': {'class': 'form-control'} }) }}
+    
+        {{ form_label(f.reservation, 'Réservation associée') }}
+        {{ form_widget(f.reservation, { 'attr': {'class': 'form-control'} }) }}
+
+   
+    
+    
+    {{ form_end(f) }}
+</main>    
+{% endblock %}

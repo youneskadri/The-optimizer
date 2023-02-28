@@ -34,7 +34,7 @@ class EventType extends AbstractType
                 
                 'constraints' => [
                     new File([
-                        'maxSize' => '500k',
+                        'maxSize' => '200k',
                         
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ]),

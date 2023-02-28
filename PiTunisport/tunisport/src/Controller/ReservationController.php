@@ -88,7 +88,7 @@ class ReservationController extends AbstractController
 
 
     #[Route('/updateR/{id}', name: 'updateReservation')]
-    public function updateR(ManagerRegistry $doctrine, MReservationRepository $repository, Request $request, $id): Response
+    public function updateR(ManagerRegistry $doctrine, ReservationRepository $repository, Request $request, $id): Response
     {
         $reservation = $repository->find($id);
         $form = $this->createForm(ReservationType::class, $reservation);
