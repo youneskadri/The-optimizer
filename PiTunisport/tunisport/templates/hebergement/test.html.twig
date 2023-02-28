@@ -15,7 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
   </head>
+  <div class="card" style=" padding-left:700px;">
+
+  <button  type="button" class="btn btn-secondary rounded-pill">
+						<a href="{{ path ('map')}}">voir en map</a>
+					</button>
+          <br>
   <body>
+    </div>
   
     {% for s in Hebergements %}
 			<tr>
@@ -25,10 +32,13 @@
 				<td>{{s.nomheberg}}</td>			<br>
         <td>{{ s.deschebergement}}</td><br>
         <td>{{ s.localisation}}</td><br>
-
+        <td>
+					
+				</td>
 			</tr>	
 		{% endfor %}
   </body>
+    {{ knp_pagination_render(Hebergements) }}
 </html>
     {{form(form_NSC)}}
 {% endblock %}

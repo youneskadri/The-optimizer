@@ -30,7 +30,9 @@ body {
     
 
 function initMap() {
-  const myLatLng = { lat: -25.363, lng: 131.044 };
+  const myLatLng = { lat: 36.793712874149705, lng: 10.18292126662962 };
+  const sfaxLatLng = { lat: 34.7232387, lng: 10.3358474 };
+  const sousseLatLng = { lat: 35.8288175, lng:10.6405392 };
 
 
 
@@ -38,24 +40,34 @@ function initMap() {
 
   
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
+    zoom: 7,
     center: myLatLng,
   });
 
-  new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: myLatLng,
     map,
-    title: "Hello World!",
+    title: "Tunis",
+  });
+  var marker = new google.maps.Marker({
+    position: sfaxLatLng,
+    map,
+    title: "sfax",
+  });
+  var marker = new google.maps.Marker({
+    position: sousseLatLng,
+    map,
+    title: "sousse",
   });
 }
-
-window.initMap = initMap;
+   
+     window.initMap = initMap;
 
 
 </script>
    
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnMYctlIvbcbnFq801DauM02euEaJR9Aw&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly"
       defer
     ></script>
     {% endblock %}

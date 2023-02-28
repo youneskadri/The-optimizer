@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use App\Form\HebergementType;
 use App\Form\NSCType;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPaginationInterface;
 
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
@@ -122,14 +124,25 @@ class HebergementController extends AbstractController
 
     }
     #[Route('/listA', name: 'listHebergement')]
-    public function listA(HebergementRepository $repository,Request $request):Response
+    public function listA(HebergementRepository $repository,Request $request,PaginatorInterface $paginator):Response
     {
         $form=$this->createForm(NSCType::class);
         $Hebergements=$repository->findHebergementByemail();
+
+        $Hebergements = $paginator->paginate(
+            $Hebergements, /* query NOT result */
+            $request->query->getInt('page', 1),
+            2
+        );
         $form=$form->handleRequest($request);
-        if ($form->isSubmitted()) { 
+        if ($form->isSubmitted()&& $form->isValid()) { 
             $NSC=$form->get('NSC')->getData();
             $Hebergements=$repository->findHebergementByNSC($NSC);
+            $Hebergements = $paginator->paginate(
+                $Hebergements, /* query NOT result */
+                $request->query->getInt('page', 1),
+                2
+            );
         }
         return $this->render('Hebergement/test.html.twig', [
             'controller_name' => 'HebergementController',
