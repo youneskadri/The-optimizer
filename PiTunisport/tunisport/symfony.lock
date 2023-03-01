@@ -50,6 +50,31 @@
             "./migrations/.gitignore"
         ]
     },
+    "hwi/oauth-bundle": {
+        "version": "1.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.6",
+            "ref": "18ce21f16066cccfa0803c9e846a2e4f4bec92ab"
+        },
+        "files": [
+            "./config/packages/hwi_oauth.yaml",
+            "./config/routes/hwi_oauth_routing.yaml"
+        ]
+    },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "2.13",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.20",
+            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
+        },
+        "files": [
+            "./config/packages/knpu_oauth2_client.yaml"
+        ]
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.18",
         "recipe": {
@@ -74,6 +99,19 @@
             "./.env.test",
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
+        ]
+    },
+    "scheb/2fa-bundle": {
+        "version": "6.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.0",
+            "ref": "1e6f68089146853a790b5da9946fc5974f6fcd49"
+        },
+        "files": [
+            "./config/packages/scheb_2fa.yaml",
+            "./config/routes/scheb_2fa.yaml"
         ]
     },
     "sensio/framework-extra-bundle": {

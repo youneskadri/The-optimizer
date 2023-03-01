@@ -152,4 +152,23 @@ class AdminController extends AbstractController
             'userClient'=>$userClient
         ]);
     }
+
+
+     /**
+     * @param Request $request
+     * @return Response
+     * @Route ("/search",name="searchAdmin")
+     */
+    public function searchrdProd(Request $request,UserRepository $repository)
+    {
+
+        $user = $repository->findByRole('ROLE_ADMIN');
+      
+        $requestString=$request->get('searchValue');
+        $user = $repository->findAdmin($requestString);
+        return $this->render('admin/showAdmins.html.twig' ,[
+            "user"=>$user,
+
+        ]);
+    }  
 }

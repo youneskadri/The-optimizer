@@ -31,8 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
 
-     
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $password = null;
 /**
  * @Assert\NotBlank(message="Please enter an email address")
@@ -61,6 +60,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateJoin = null;
+ 
+    #[ORM\Column(name: 'googleId', type: 'integer', length: 255, nullable: true)]
+    private ?string $googleId = null;
+   
+    /**
+     * @ORM\OneToOne(targetEntity=ConfirmToken::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebookId;
 
     #[ORM\Column]
     private ?bool $banned = null;
@@ -155,7 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return (string) $this->password;
     }
 
     public function setPassword(string $password): self
@@ -367,6 +380,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSecondName(string $secondName): self
     {
         $this->secondName = $secondName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of googleId
+     */ 
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
+
+    /**
+     * Set the value of googleId
+     *
+     * @return  self
+     */ 
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
 
         return $this;
     }

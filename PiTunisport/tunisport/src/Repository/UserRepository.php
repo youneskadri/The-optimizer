@@ -94,4 +94,12 @@ public function findByRole($roles)
 }
 
 
+public function findAdmin($firstName){
+    return $this->createQueryBuilder('user')
+    ->where('user.firstName LIKE :firstName')
+    ->setParameter('firstName', '%'.$firstName.'%')
+       ->getQuery()
+       ->getResult();
+}
+
 }
