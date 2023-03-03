@@ -63,17 +63,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
  
     #[ORM\Column(name: 'googleId', type: 'integer', length: 255, nullable: true)]
     private ?string $googleId = null;
-   
+
+
+    #[ORM\Column(name: 'facebookId', type: 'integer', length: 255, nullable: true)]
+    private ?string $facebookId = null;
+
+
     /**
      * @ORM\OneToOne(targetEntity=ConfirmToken::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $token;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $facebookId;
+   
 
     #[ORM\Column]
     private ?bool $banned = null;
@@ -400,6 +402,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGoogleId($googleId)
     {
         $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of facebookId
+     */ 
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * Set the value of facebookId
+     *
+     * @return  self
+     */ 
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
 
         return $this;
     }

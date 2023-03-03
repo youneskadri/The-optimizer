@@ -13,7 +13,8 @@ use App\Service\MailerService;
 use App\Service\ValidService;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class RegistrationaaaController extends AbstractController
 {
@@ -27,7 +28,7 @@ class RegistrationaaaController extends AbstractController
    
     #[Route('/registration', name: 'registration',methods: ['GET', 'POST'])]
 
-    public function index(Request $request,ManagerRegistry $doctrine)
+    public function index(Request $request,ManagerRegistry $doctrine ,MailerInterface $mailer)
     {
         $user = new User();
     
@@ -50,8 +51,16 @@ class RegistrationaaaController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($user);
             $em->flush();
-            // $mailMessage=$user->getuserName();
-            // $mailer->sendEmail($mailMessage);
+             $message="a ete ajouter correctement";
+            $email = (new Email())
+            ->from('mailtrap@example.com')
+            ->to($user->getEmail())
+            ->subject($message)
+            ->text('This is a test email.');
+
+        $mailer->send($email);
+
+
             return $this->redirectToRoute('app_login');
 
 
