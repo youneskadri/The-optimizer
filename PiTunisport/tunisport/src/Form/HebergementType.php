@@ -33,16 +33,16 @@ class HebergementType extends AbstractType
 
             // unmapped fields can't define their validation using annotations
             // in the associated entity, so you can use the PHP constraint classes
-          //  'constraints' => [
-                // new File([
-                //     'maxSize' => '1024k',
-                //     'mimeTypes' => [
-                //         'image/jpg',
-                //         'image/png',
-                //     ],
-                //     'mimeTypesMessage' => 'Please upload a valid PDF document',
-                // ])
-         //   ],
+          //'constraints' => [
+        //          new File([
+        //              'maxSize' => '1024k',
+        //              'mimeTypes' => [
+        //                  'image/jpg',
+        //                  'image/png',
+        //              ],
+        //              'mimeTypesMessage' => 'Please upload a valid PDF document',
+        //         ])
+        //    ],
         ])
             ->add('nomHeberg')
             ->add('deschebergement', TextareaType::class, [

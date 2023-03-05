@@ -138,6 +138,8 @@ class HebergementController extends AbstractController
         if ($form->isSubmitted()&& $form->isValid()) { 
             $NSC=$form->get('NSC')->getData();
             $Hebergements=$repository->findHebergementByNSC($NSC);
+            $Hebergements=$repository->findHebergementByNSC($NSC);
+
             $Hebergements = $paginator->paginate(
                 $Hebergements, /* query NOT result */
                 $request->query->getInt('page', 1),

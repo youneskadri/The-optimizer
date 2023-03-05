@@ -66,12 +66,15 @@ public function findHebergementByNSC($NSC){
         $query=$entityManager->createQuery('
     SELECT p FROM App\Entity\Hebergement p
     WHERE p.localisation = :NSC'
+
 )
 ->setParameter('NSC', '%' . $NSC . '%');
 
 return $query->getResult();
 
     }
+
+
 //    /**
 //     * @return Hebergement[] Returns an array of Hebergement objects
 //     */

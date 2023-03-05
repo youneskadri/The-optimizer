@@ -15,6 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
   </head>
+              <div class=row><h2 class=heading>Liste Hebergement <span>dans Tunisie</span></h2>
+              </div
   <div class="card" style=" padding-left:700px;">
 
   <button  type="button" class="btn btn-secondary rounded-pill">
@@ -25,20 +27,31 @@
     </div>
   
     {% for s in Hebergements %}
-			<tr>
-				<TD><img src="{{ asset('/uploads/images/' ~ s.getImage()) }}" width="100px" height="100px" alt="" /></TD>
-				<td>{{s.id}}</td>
+		   <div class=shop_detais>
+                                <div class="shop01 clearfix">
+                                    <div class=shop-img>
+                                        <div class=bgimg>			
+                                        <img src="{{ asset('/uploads/images/' ~ s.getImage()) }}" width="400px" height="300px" alt="" />
 
-				<td>{{s.nomheberg}}</td>			<br>
-        <td>{{ s.deschebergement}}</td><br>
-        <td>{{ s.localisation}}</td><br>
-        <td>
-					
-				</td>
-			</tr>	
+</div>
+                                    </div>
+                                    <div class=shop_info><h4 class=headline01><a href=product-details.html>{{s.nomheberg}}</a></h4>
+
+                                        <div class=star><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                class="fa fa-star"></i></div>
+                                        <p>{{ s.deschebergement}}</p>
+
+                                        <div class=headline01>{{ s.localisation}}</div>
+                                        <div class=addcart-wrap><a href=# class=btn-fav>add to wish list</a></div>
+                                    </div>
+                                </div>
+                            </div>
 		{% endfor %}
   </body>
     {{ knp_pagination_render(Hebergements) }}
+    
 </html>
     {{form(form_NSC)}}
 {% endblock %}
+                           
