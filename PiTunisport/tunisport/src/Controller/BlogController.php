@@ -97,7 +97,8 @@ public function  add(Request $request,SluggerInterface $slugger,ManagerRegistry 
     $form = $this->createForm(blogFormType::class, $blog);
     $form->add('ajouter', SubmitType::class) ;
     $form->handleRequest($request);
-    if ($form->isSubmitted())
+    if ($form->isSubmitted()&&$form->isValid()
+    )
 
     {
         $photo = $form->get('image')->getData();

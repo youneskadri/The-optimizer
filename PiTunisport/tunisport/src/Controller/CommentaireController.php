@@ -43,7 +43,8 @@ public function  update(ManagerRegistry $doctrine,$id,  Request  $request) : Res
     $form = $this->createForm(commentaireFormType::class, $commentaire);
     $form->add('update', SubmitType::class) ;
     $form->handleRequest($request);
-    if ($form->isSubmitted())
+    if ($form->isSubmitted()&&$form->isValid())
+
     { $em = $doctrine->getManager();
         $em->flush();
         return $this->redirectToRoute('read_commentaire');
@@ -73,7 +74,8 @@ public function  add(ManagerRegistry $doctrine, Request  $request) : Response
     $form = $this->createForm(commentaireFormType::class, $commentaire);
     $form->add('ajouter', SubmitType::class) ;
     $form->handleRequest($request);
-    if ($form->isSubmitted())
+    if ($form->isSubmitted()&&$form->isValid()
+    )
     { $em = $doctrine->getManager();
         $em->persist($commentaire);
         $em->flush();

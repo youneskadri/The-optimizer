@@ -33,7 +33,7 @@
  </td>
             <td> <a href="{{ path('delete_blog', {id:c.id}) }}">Delete </a>
                 <a href="{{ path('update_blog', {id:c.id}) }}">Update </a>
-
+                <a href="{{ path('app_resume', {text:c.contenu}) }}">Resume </a>
             </td>
         </tr>
     {% endfor %}

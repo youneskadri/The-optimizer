@@ -20,7 +20,7 @@ class Commentaire
      * @Assert\NotBlank(message="Please enter a commentaire")
      * @Assert\Length(
      *     min=3,
-     *     max=20,
+     *     max=10000,
      *     minMessage="Commentaire must be at least {{ limit }} characters long",
      *     maxMessage="Commentaire cannot be longer than {{ limit }} characters"
      * )
@@ -32,7 +32,7 @@ class Commentaire
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateC = null;
 
-
+ 
     #[ORM\ManyToOne(inversedBy: 'commentaire')]
     private ?Blog $blog = null;
 

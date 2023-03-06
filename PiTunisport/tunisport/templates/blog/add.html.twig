@@ -2,7 +2,8 @@
 {% block main %}
 <main id="main" class="main">
     <h1> Ajouter un Blog </h1>
-    {{ form_start(f, { 'attr': {'class': 'form-horizontal'}}) }}
+    {{form_start(f,{'attr':{'novalidate':'novalidate'}})}}
+   
 
         {{ form_label(f.titre, 'titre ') }}
         {{ form_widget(f.titre, { 'attr': {'class': 'form-control'} }) }}

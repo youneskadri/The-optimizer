@@ -7,56 +7,44 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups ;
 
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
 class Blog
 {
+   
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("blog")]
     private ?int $id = null;
 
 
-/**
-     * @Assert\NotBlank(message="Please enter a commentaire")
-     * @Assert\Length(
-     *     min=3,
-     *     max=100,
-     *     minMessage="Username must be at least {{ limit }} characters long",
-     *     maxMessage="Username cannot be longer than {{ limit }} characters"
-     * )
-     */
+
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le nom est obligatoire ")]
+    #[Groups("blog")]
+
     private ?string $titre = null;
 
-/**
-     * @Assert\NotBlank(message="Please enter a commentaire")
-     * @Assert\Length(
-     *     min=3,
-     *     max=200,
-     *     minMessage="titre must be at least {{ limit }} characters long",
-     *     maxMessage="titre cannot be longer than {{ limit }} characters"
-     * )
-     */
+   
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"le nom est obligatoire ")]
+    #[Groups("blog")]
     private ?string $descreption = null;
 
-/**
-     * @Assert\NotBlank(message="Please enter a commentaire")
-     * @Assert\Length(
-     *     min=3,
-     *     max=3000,
-     *     minMessage="descreption must be at least {{ limit }} characters long",
-     *     maxMessage="descreption cannot be longer than {{ limit }} characters"
-     * )
-     */
-    #[ORM\Column(length: 255)]
+    
+    #[ORM\Column(length: 100000)]
+    #[Assert\NotBlank(message:"le nom est obligatoire ")]
+    #[Groups("blog")]
+
     private ?string $contenu = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("blog")]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class)]
+    #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class )]
     private Collection $commentaire;
 
     public function __construct()
