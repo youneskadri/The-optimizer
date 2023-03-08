@@ -1,0 +1,10 @@
+knp_paginator:
+    page_range: 5                  # number of links shown in the pagination bar
+    default_options:
+        page_name: page            # parameter name used for pagination
+        sort_field_name: sort      # parameter name used for sorting
+        sort_direction_name: dir   # parameter name used for sorting direction
+        distinct: true             # ensure distinct results, useful when ORM queries are used
+    template:
+        pagination: '@KnpPaginator/Pagination/sliding.html.twig'   # template used to render the pagination bar
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'  # template used to render sortable links

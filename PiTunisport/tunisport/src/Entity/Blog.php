@@ -42,7 +42,7 @@ class Blog
 
     #[ORM\Column(length: 255)]
     #[Groups("blog")]
-    private ?string $image = null;
+    private ?string $image = "ps.png";
 
     #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Commentaire::class )]
     private Collection $commentaire;

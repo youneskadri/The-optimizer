@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
+use Knp\Component\Pager\PaginatorInterface;
 
 use Symfony\Component\Form\FormTypeInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -31,11 +31,17 @@ class BlogController extends AbstractController
 
 
 #[Route('/readblog', name: 'read_blog')]
-public function read(BlogRepository $repository): Response
+public function read(PaginatorInterface $paginator,BlogRepository $repository, Request $request): Response
 {
     $blogs = $repository->findAll();
+    $length = intdiv(count($blogs),3);
+    $pagination = $paginator->paginate(
+        $blogs, /* query NOT result */
+        $request->query->getInt('page', 1), /*page number*/
+        $length /*limit per page*/
+    );
     return $this->render('blog/read.html.twig',
-        ["blogs" => $blogs]);
+        ["blogs" => $pagination]);
 }
 
 
@@ -95,7 +101,7 @@ public function delete($id, ManagerRegistry $doctrine)
 public function  add(Request $request,SluggerInterface $slugger,ManagerRegistry $doctrine) : Response
 { $blog = new blog() ;
     $form = $this->createForm(blogFormType::class, $blog);
-    $form->add('ajouter', SubmitType::class) ;
+    // $form->add('ajouter', SubmitType::class) ;
     $form->handleRequest($request);
     if ($form->isSubmitted()&&$form->isValid()
     )

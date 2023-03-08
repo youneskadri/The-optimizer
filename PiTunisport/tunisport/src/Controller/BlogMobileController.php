@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use  Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -27,18 +27,19 @@ class BlogMobileController extends AbstractController
     }
 
       /**
-     * @Route("/SupprimerBlog", name="SupprimerBlog")
+     * @Route("/SupprimerBlog/{id}", name="SupprimerBlog")
      */
-    public function SupprimerBlog(Request $request)
+    public function SupprimerBlog(Request $request,$id, ManagerRegistry $doctrine)
     {
 
-        $idE = $request->get("id");
-        $em = $this->getDoctrine()->getManager();
-        $blog = $em->getRepository(blog::class)->find($idE);
+        $blog = $doctrine
+        ->getRepository(blog::class)
+        ->find($id);
         if($blog != null)                         
         {
+            $em = $doctrine->getManager();
             $em->remove($blog);
-            $em->flush();
+            $em->flush() ;
             $serializer = new Serializer([new ObjectNormalizer()]);
             $formated = $serializer->normalize("blog ete supprimer avec succées ");
             return new JsonResponse($formated);
@@ -48,21 +49,21 @@ class BlogMobileController extends AbstractController
 
     
        /**
-     * @Route("/newblog_mobile/{titre}/{descreption}/{contenu}", name="newblog_mobile", methods={"GET","POST"})
+     * @Route("/newblog_mobile/{titre}/{descreption}/{contenu}", name="newblog_mobile")
      */
-    public function newblog($tite,$descreption,$contenu,NormalizerInterface  $normalizer )
+    public function add($titre,$descreption,$contenu,NormalizerInterface  $normalizer,ManagerRegistry $doctrine )
     {
 
-        $blog = new blog();
+        $blog = new Blog();
         $blog->setTitre($titre);
-        $blog->setDescription($descreption);
+        $blog->setDescreption($descreption);
         $blog->setContenu($contenu);
 
 
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($blog);
-        $entityManager->flush();
+        $em = $doctrine->getManager();
+        $em->persist($blog);
+        $em->flush();
         $json = $normalizer->normalize($blog, "json", ['groups' => ['blog']]);
         return new JsonResponse($json);
     }
