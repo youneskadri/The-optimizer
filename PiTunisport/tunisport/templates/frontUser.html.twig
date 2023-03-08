@@ -14,7 +14,25 @@
 
     <script src="{{asset('assetsFront/js/vendor/modernizr.js')}}"></script>
 </head>
+<<<<<<< Updated upstream
 <body><!--[if lt IE 10]>
+=======
+<body>
+<script>
+            var botmanWidget = {
+            bubbleAvatarUrl: '{{ asset('/uploads/images/user.jpg') }}',
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("tunibot") }}',
+            introMessage: 'Hello, my name is TUNIBOT. Say "Help" to see what I can do :) ',
+            title: 'ChatBot', 
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4s',
+            aboutText: ''
+        };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+<!--[if lt IE 10]>
+>>>>>>> Stashed changes
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->

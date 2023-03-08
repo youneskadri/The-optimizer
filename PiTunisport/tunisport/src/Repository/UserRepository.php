@@ -102,4 +102,15 @@ public function findAdmin($firstName){
        ->getResult();
 }
 
+<<<<<<< Updated upstream
+=======
+// public function findOneByEmail($email){
+//     return $this->createQueryBuilder('user')
+//     ->where('user.email LIKE :email')
+//     ->setParameter('email', '%'.$email.'%')
+//        ->getQuery()
+//        ->getResult();
+// }
+
+>>>>>>> Stashed changes
 }

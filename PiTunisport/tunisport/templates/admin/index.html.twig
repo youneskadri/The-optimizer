@@ -547,11 +547,19 @@ $('#exampleModal').on('show.bs.modal', function (event) {
                       <td>{{u.isVerified}}</td>
                       <td>
                       
+<<<<<<< Updated upstream
                       {% if u.banned == 0 %}
                       
                        <span class="badge d-block bg-theme bg-opacity-50 rounded-0 pt-5px w-70px" style="min-height: 18px">ACTIVE</span>
                          {% else %}
                         <span class="badge d-block bg-red bg-opacity-50 rounded-0 pt-5px w-70px" style="min-height: 18px">  BANNED </span>
+=======
+                      {% if u.banned == false %}
+                      
+                      <a class="btn btn-danger" href="{{path('banUser',{id:u.id})}}" >Ban</a>
+                         {% else %}
+                         <a class="btn btn-primary" href="{{path('banUser',{id:u.id})}}" >Unban</a>
+>>>>>>> Stashed changes
                        {% endif %}
                     
                       </td>

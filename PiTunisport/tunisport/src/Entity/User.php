@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,8 +10,15 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+<<<<<<< Updated upstream
 
 
+=======
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfiguration;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfigurationInterface;
+use Scheb\TwoFactorBundle\Model\Totp\TwoFactorInterface;
+use symfony\Component\Serializer\Annotation\Groups;
+>>>>>>> Stashed changes
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 
@@ -21,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column, Groups('user')]
     private ?int $id = null;
 
     #[ORM\Column(type: 'json')]
@@ -30,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+<<<<<<< Updated upstream
 
     #[ORM\Column(nullable: true)]
     private ?string $password = null;
@@ -38,6 +45,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
  * @Assert\Email(message="The email '{{ value }}' is not a valid email address.")
  */
     #[ORM\Column(length: 255)]
+=======
+
+    #[ORM\Column(nullable: true), Groups('user')]
+    private ?string $password = null;
+
+    #[ORM\Column(nullable: true), Groups('user')]
+    private ?string $token = null;
+/**
+ * @Assert\Email(message="The email '{{ value }}' is not a valid email address.")
+ */
+    #[ORM\Column(length: 255,nullable: true), Groups('user')]
+>>>>>>> Stashed changes
     private ?string $email = null;
 
     #[ORM\OneToMany(targetEntity:Commentaire::class, mappedBy: 'user')]
@@ -55,12 +74,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private Collection $reclamation;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true), Groups('user')]
     private ?int $phone = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE), Groups('user')]
     private ?\DateTimeInterface $dateJoin = null;
  
+<<<<<<< Updated upstream
     #[ORM\Column(name: 'googleId', type: 'integer', length: 255, nullable: true)]
     private ?string $googleId = null;
 
@@ -76,11 +96,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $token;
 
    
+=======
+    #[ORM\Column(name: 'googleId', type: 'integer', length: 255, nullable: true), Groups('user')]
+    private ?string $googleId = null;
+>>>>>>> Stashed changes
 
-    #[ORM\Column]
+
+    #[ORM\Column(name: 'facebookId', type: 'integer', length: 255, nullable: true), Groups('user')]
+    private ?string $facebookId = null;
+
+
+    // /**
+    //  * @ORM\OneToOne(targetEntity=ConfirmToken::class, cascade={"persist", "remove"})
+    //  * @ORM\JoinColumn(onDelete="SET NULL")
+    //  */
+    // private $token;
+
+   
+    #[ORM\Column(nullable: true), Groups('user')]
     private ?bool $banned = null;
 
+<<<<<<< Updated upstream
     #[ORM\Column(type: 'boolean', nullable:true)]
+=======
+    #[ORM\Column(type: 'boolean', nullable:true), Groups('user')]
+>>>>>>> Stashed changes
     private $isVerified = false;
 
 
@@ -90,7 +130,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      minMessage: 'Your first name must be at least {{ limit }} characters long',
        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
+<<<<<<< Updated upstream
     #[ORM\Column(length: 255, nullable:true)]
+=======
+    #[ORM\Column(length: 255, nullable:true), Groups('user')]
+>>>>>>> Stashed changes
     private ?string $firstName = null;
 
     #[Assert\Length(
@@ -99,9 +143,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your second name must be at least {{ limit }} characters long',
         maxMessage: 'Your second name cannot be longer than {{ limit }} characters',
     )]
+<<<<<<< Updated upstream
     #[ORM\Column(length: 255, nullable:true)]
     private ?string $secondName = null;
 
+=======
+    #[ORM\Column(length: 255, nullable:true), Groups('user')]
+    private ?string $secondName = null;
+    
+  
+>>>>>>> Stashed changes
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
@@ -425,4 +476,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+<<<<<<< Updated upstream
+=======
+
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set the value of token
+     *
+     * @return  self
+     */ 
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+   
+
+
+>>>>>>> Stashed changes
 }

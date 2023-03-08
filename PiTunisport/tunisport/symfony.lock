@@ -75,6 +75,7 @@
             "./config/packages/knpu_oauth2_client.yaml"
         ]
     },
+<<<<<<< Updated upstream
     "lexik/jwt-authentication-bundle": {
         "version": "2.18",
         "recipe": {
@@ -86,6 +87,10 @@
         "files": [
             "./config/packages/lexik_jwt_authentication.yaml"
         ]
+=======
+    "marvin255/random-string-generator": {
+        "version": "v2.0.0"
+>>>>>>> Stashed changes
     },
     "phpunit/phpunit": {
         "version": "9.6",
