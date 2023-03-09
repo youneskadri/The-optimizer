@@ -37,10 +37,10 @@ class Event
     #[Assert\Length(min: 3 ,minMessage: "La localisation de l'évènement contient moins de 3 charactères")]
     private ?string $localisation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le type de l'évènement est obligatoire")]
     #[Assert\Length(min: 3 ,minMessage: "Le type de l'évènement contient moins de 3 charactères")]
-    private ?TypeEvent $typeEvent = null;
+    private ?string $typeEvent = null;
 
     #[ORM\Column(length: 255)]
     
@@ -115,12 +115,12 @@ class Event
         return $this;
     }
 
-    public function getTypeEvent(): ?TypeEvent
+    public function getTypeEvent(): ?string
     {
         return $this->typeEvent;
     }
 
-    public function setTypeEvent(?TypeEvent $typeEvent): self
+    public function setTypeEvent(?string $typeEvent): self
     {
         $this->typeEvent = $typeEvent;
 

@@ -20,9 +20,9 @@
             
         
        
-            {{ form_label(f.HeureDebM, 'Heure de début du match') }}
-            {{ form_widget(f.HeureDebM, { 'attr': {'class': 'form-control'} }) }}
-            {{ form_errors(f.HeureDebM)}}
+            {{ form_label(f.heureDebM, 'Heure de début du match') }}
+            {{ form_widget(f.heureDebM, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.heureDebM)}}
      
         
             {{ form_label(f.tournoi, 'Tournoi') }}
@@ -30,12 +30,16 @@
             {{ form_errors(f.tournoi)}}
      
        
-            {{ form_label(f.type, 'Type') }}
-            {{ form_widget(f.type, { 'attr': {'class': 'form-control'} }) }}
-            {{ form_errors(f.type)}}
+            {{ form_label(f.typeMatch, 'Type') }}
+            {{ form_widget(f.typeMatch, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.typeMatch)}}
+
+            {{ form_label(f.stade, 'Stade') }}
+            {{ form_widget(f.stade, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(f.stade)}}
         
        
-          {{ form_label(f.resultatA, 'Résultat équipe extérieure') }}
+          {{ form_label(f.resultatA, 'Résultat équipe à domicile') }}
           {{ form_widget(f.resultatA, { 'attr': {'class': 'form-control'} }) }}
           {{ form_errors(f.resultatA)}}
      

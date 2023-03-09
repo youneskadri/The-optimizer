@@ -84,9 +84,9 @@
                 <div class=row>
                     <div class=modal-body>
                         <div class="cartHeader clearfix">
-                            <div class=header01><h4>your basket</h4></div>
-                            <div class=header02><h4><span>you have selected <span class=cartitems></span> billet</span>
-                                <a href=#><i class="fa fa-cart-plus"></i> <span class=cartitems>1</span></a></h4>
+                            <div class=header01><h4>Vos Billets</h4></div>
+                            <div class=header02><h4><span> <span class=cartitems></span> </span>
+                                <a href=#><i class="fa fa-cart-plus"></i> <span class=cartitems>{{reservation.nombreBillet}}</span></a></h4>
 
                                 
 
@@ -95,33 +95,35 @@
                         <div class="card-item clearfix">
                             
                             <div>
-                                <div class=big-content><h4>Référence réservation</h4></div>
+                                <div class=big-content><h4>Référence réservation: </h4><h3>{{ reservation.id }}</h3></div>
                                 
-                                <div class="big-content medium-content"><h4>Nombre de billets</h4></div>
+                                <div class="big-content medium-content"><h4>Nombre de billets: </h4><h3>{{ reservation.nombreBillet }}</h3></div>
                                 
-                                <div class="big-content small-content"><h4>prix</h4></div>
+                                <div class="big-content small-content"><h4>Prix billet: </h4><h3>{{ reservation.matchF.prix}}</h3></div>
                                 
                             </div>
                         
                             <div id=cartItems></div>
                             <div class="card-item cart-total clearfix"></div>
                             <div class="card-item clearfix">
-                                <div class=big-content><h4>select destination country</h4><select class=form-control>
-                                    <option>India</option>
-                                    <option>USA</option>
-                                </select></div>
-                                <div class=big-content><h4>select delivery method</h4><select class=form-control>
-                                    <option>Standard Delivery - $299.00 (7 days)</option>
-                                    <option>Fast Delivery - $199.00 (7 days)</option>
-                                </select></div>
+                                <div class=big-content><h4>date de réservation</h4>
+                                    <p>{{reservation.dateResevation.format('d/m/Y')}}</p>
+                                </div>
+                                <div class=big-content><h4>Etat de la réservation</h4>
+                                    {{reservation.Etat}}
+                                </div>
                             </div>
                             <div class="card-item cart-total clearfix">
-                                <div class="big-content medium-content"><h4>total cost</h4></div>
+                                <div class="big-content medium-content"><h4>Cout total</h4></div>
                                 <div class="big-content small-content"><h4 id=carttotal>$210</h4></div>
                             </div>
                         </div>
                         <div class=modal-footer>
-                            <button href="{{ path('reservation_pay') }}" class=btn-red>order now</button>
+                            <form action="{{ path('payment',{'id':reservation.id}) }}" ><button class=btn-red>Procéder au paiement</button></form
+                        </div>
+
+                        <div class=modal-footer>
+                            <form action="{{ path('update_Reservation',{'id':reservation.id}) }}" ><button class=btn-red>Modifier réservation</button></form>
                         </div>
                       
                     </div>

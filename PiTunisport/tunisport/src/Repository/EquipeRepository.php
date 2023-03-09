@@ -39,6 +39,15 @@ class EquipeRepository extends ServiceEntityRepository
         }
     }
 
+    public function getClassementEquipe()
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->orderBy('e.classement', 'ASC');
+        $qb->orderBy('e.points', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Equipe[] Returns an array of Equipe objects
 //     */

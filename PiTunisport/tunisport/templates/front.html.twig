@@ -11,8 +11,56 @@
     <link rel=stylesheet href="{{asset('assetsFront/vendor.css')}}">
     <link rel=stylesheet href="{{asset('assetsFront/style.css')}}">
     <link rel=stylesheet  href="{{asset('assetsFront/css/layerslider.css')}}">
+    <style>
+        /**
+         * The CSS shown here will not be introduced in the Quickstart guide, but shows
+         * how you can use CSS to style your Element's container.
+         */
+        .StripeElement {
+            box-sizing: border-box;
+            height: 40px;
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: white;
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+        }
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+        .StripeElement--invalid {
+            border-color: #0A9B01;
+        }
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+
+        .pagination-links {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination-links a {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        margin: 0 5px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .pagination-links .current {
+        font-weight: bold;
+        background-color: #fff;
+        color: #000000;
+        border-color: #007bff;
+    }
+    </style>
 
     <script src="{{asset('assetsFront/js/vendor/modernizr.js')}}"></script>
+    {% block stylesheets %}{% endblock %}
 </head>
 <body><!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -178,33 +226,36 @@
         <div class=container>
             <div class=row><h2 class=heading>latest <span>result</span></h2>
 
-                <div class=latestResult-wrap><h4>uefa champions league</h4>
+                <div class=latestResult-wrap><h4>Ligue 1 Tunisie</h4>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, nemo tenetur magnam eveniet sed
                         aut, iste facere quisquam, cumque, vitae quis deleniti animi. A ipsum iusto, temporibus, beatae
                         porro nemo.</p></div>
                 <div class="result clearfix">
                     <div class=result-details>
-                        <div class=content><h4>fc Dragons</h4>
+                    
+                        <div class=content><h4>CA</h4>
 
                             <p>lose</p>
 
-                            <p>Shannon Skelly(23)</p></div>
+                            <p>EST</p></div>
                         <div class=figure>
                             <div class=team-logo>
-                                <div style=background:url(assetsFront/images/team-logo/logo01.png) class=teamLogoImg></div>
+                            
+                                <div style=background:url(uploads/equipe/EST-New-Logo-2012-6408a751bd2d0.png) class=teamLogoImg></div>
                             </div>
                         </div>
                     </div>
                     <div class=result-count>
-                        <div class=count-number><span class=lose-team>1</span> <span>-</span> <span
-                                class=win-team>3</span></div>
+                        <div class=count-number><span class=lose-team>3</span> <span>-</span> <span
+                                class=win-team>1</span></div>
                         <div class=dateTime>
-                            <div class=dateTime-container><span class=date>may 16,2015</span> <span
-                                    class=time>15:30pm</span></div>
-                            <div class=country-wrap><span class=field>wbeysley stadium</span> <span class=country>(london)</span>
+                            <div class=dateTime-container><span class=date>5/4/2023</span> <span
+                                    class=time>16:45PM</span></div>
+                            <div class=country-wrap><span class=field>rades</span> 
                             </div>
                         </div>
+                        
                     </div>
                     <div class=result-details>
                         <div class="content contentresult"><h4>fc Zulu Ninjas</h4>
@@ -227,7 +278,7 @@
     </section>
     <section class=matchSchedule>
         <div class=container>
-            <div class=row><h2 class=heading>match <span>schedule</span></h2>
+            <div class=row><h2 class=heading>calendrier <span>des matchs</span></h2>
 
                 <p class=headParagraph>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil debitis mollitia
                     qui libero voluptate ratione, molestias! Necessitatibus voluptatem temporibus doloremque non, vel
@@ -239,24 +290,27 @@
                 <div class="matchSchedule_details row">
                     <div class="match_next right-triangle">
                         <div class="wrap_match_next right-triangle">
-                            <div class=right-padding><h4 class=headline03>next match</h4>
+                            <div class=right-padding><h4 class=headline03>dernier résultat</h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div>
+                                </div>
                         </div>
                     </div>
                     <div class=match_versus>
                         <div class="bg-blackimg match_versus02">
                             <div class=nextmatchDetails><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                 Esse harum animi a ipsa distinctio veritatis suscipit amet.</p>
-
+                                {% for m in finishedMatches %}
                                 <div class="wrap-logo clearfix">
-                                    <div class=logo-match><img src=assetsFront/images/matchResult/logo01.png alt=image></div>
-                                    <div class=match_vs>vs</div>
-                                    <div class=logo-match><img src=assetsFront/images/matchResult/logo02.png alt=image></div>
+                                
+                                    <div class=logo-match><img  width="150" height="150"src="{{ asset('uploads/equipe/' ~ m.getImage()) }}"/></div>
+                                    <div class=match_vs><span>{{m.resultatA}}</span>vs<span>{{m.resultatB}}</span></div>
+                                    <div class=logo-match><img  width="150" height="150"src="{{ asset('uploads/equipe/' ~ m.getImage2()) }}"/></div>
                                 </div>
-                                <p class=match_dtls>October 31, 2015 | 18:25PM</p>
+                                
+                                <p class=match_dtls>{{m.dateMatch.format('d/m/Y')}} | {{m.tournoi}} </p>
 
-                                <p class=match_dtls>Wemsddley stadium (london)</p></div>
+                                <p class=match_dtls>{{m.stade}}</p></div>
+                                {% endfor %}
                         </div>
                     </div>
                     <div class=match_timing>
@@ -272,157 +326,53 @@
                     <div class=match_versus-wrap>
                         <div class=wrap_match-innerdetails>
                             <ul class="home_tInfo scrollable">
+                            {% for m in upcomingMatches %}
                                 <li><a href="#">
                                     <ul class="t_info match_info01 headline01 clearfix">
-                                        <li>1</li>
+                                        <li></li>
                                         <li>
-                                            <div class="headline01 clearfix"><span>FC Militant Flyers</span><span
-                                                    class=vs>vs</span> <span>fc Black & White Blasters</span></div>
-                                            <div class="paragraph02 clearfix"><span>August 24,2015</span>
-                                                <span>18.25pm</span></div>
+                                            <div class="headline01 clearfix"><span>{{m.equipeA}}</span><span
+                                                    class=vs>vs</span> <span>{{m.equipeB}}</span></div>
+                                            <div class="paragraph02 clearfix"><span>{{m.dateMatch.format('d/m/Y')}}</span>
+                                                <span>{{m.heureDebM.format('H:i')}}</span></div>
                                         </li>
                                     </ul>
                                 </a></li>
-                                <li><a href="#">
-                                    <ul class="t_info match_info01 headline01 clearfix">
-                                        <li>2</li>
-                                        <li>
-                                            <div class="headline01 clearfix"><span>FC Crimson Buccaneers</span><span
-                                                    class=vs>vs</span> <span>fc Poison Reapers</span></div>
-                                            <div class="paragraph02 clearfix"><span>August 24,2015</span>
-                                                <span>18.25pm</span></div>
-                                        </li>
-                                    </ul>
-                                </a></li>
-                                <li><a href="#">
-                                    <ul class="t_info match_info01 headline01 clearfix">
-                                        <li>3</li>
-                                        <li>
-                                            <div class="headline01 clearfix"><span>FC Muffin Kickers</span><span
-                                                    class=vs>vs</span> <span>fc Ghost Assassins</span></div>
-                                            <div class="paragraph02 clearfix"><span>August 24,2015</span>
-                                                <span>18.25pm</span></div>
-                                        </li>
-                                    </ul>
-                                </a></li>
-                                <li><a href="#">
-                                    <ul class="t_info match_info01 headline01 clearfix">
-                                        <li>4</li>
-                                        <li>
-                                            <div class="headline01 clearfix"><span>FC Demolition Rockets</span><span
-                                                    class=vs>vs</span> <span>fc Wind Flyers</span></div>
-                                            <div class="paragraph02 clearfix"><span>August 24,2015</span>
-                                                <span>18.25pm</span></div>
-                                        </li>
-                                    </ul>
-                                </a></li>
-                                <li><a href="#">
-                                    <ul class="t_info match_info01 headline01 clearfix">
-                                        <li>5</li>
-                                        <li>
-                                            <div class="headline01 clearfix"><span>FC Alpha Monsters</span><span
-                                                    class=vs>vs</span> <span>fc Delta Miners</span></div>
-                                            <div class="paragraph02 clearfix"><span>August 24,2015</span>
-                                                <span>18.25pm</span></div>
-                                        </li>
-                                    </ul>
-                                </a></li>
-                                <li><a href="#">
-                                    <ul class="t_info match_info01 headline01 clearfix">
-                                        <li>6</li>
-                                        <li>
-                                            <div class="headline01 clearfix"><span>FC Zulu Ninjas</span><span class=vs>vs</span>
-                                                <span>fc Sneaky Mutants</span></div>
-                                            <div class="paragraph02 clearfix"><span>August 24,2015</span>
-                                                <span>18.25pm</span></div>
-                                        </li>
-                                    </ul>
-                                </a></li>
+                            {% endfor %}    
+                               
                             </ul>
                         </div>
                     </div>
                     <div class=match_next>
                         <div class="wrap_match_next left_triangle">
-                            <div class=left_padding><h4 class=headline03>upcoming feature</h4>
+                            <div class=left_padding><h4 class=headline03>matchs à venir</h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div>
+                               </div>
                         </div>
                     </div>
                 </div>
                 <div class="matchSchedule_details row">
                     <div class=match_next>
                         <div class="wrap_match_next right-triangle">
-                            <div class=right-padding><h4 class=headline03>pointed table</h4>
+                            <div class=right-padding><h4 class=headline03>classement division 1 Tunisie</h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div>
+                               </div>
                         </div>
                     </div>
                     <div class=match_versus-wrap>
                         <div class=wrap_match-innerdetails>
+                        
                             <ul class="point_table scrollable">
+                            {% for t in teams %}
                                 <li class=clearfix>
                                     <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">1</div>
-                                        <div class="headline01 largepoint">FC Silver Bullets</div>
-                                        <div class="headline01 smallpoint row row"><span>p</span><span>10</span></div>
+                                        <div class="headline01 smallpoint">{{t.classement}}</div>
+                                        <div class="headline01 largepoint">{{t.nom}}</div>
+                                        <div class="headline01 smallpoint row row"><span>p</span><span>{{t.points}}</span></div>
                                     </div>
                                 </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">2</div>
-                                        <div class="headline01 largepoint">FC Spinning Slammers</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">3</div>
-                                        <div class="headline01 largepoint">FC Crimson Executioners</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">4</div>
-                                        <div class="headline01 largepoint">FC Shaolin Robots</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">5</div>
-                                        <div class="headline01 largepoint">FC Silent Xpress</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">6</div>
-                                        <div class="headline01 largepoint">FC Dark Scorpions</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">7</div>
-                                        <div class="headline01 largepoint">FC Cyborg Snakes</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">8</div>
-                                        <div class="headline01 largepoint">FC Skull Killers</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">1</div>
-                                        <div class="headline01 largepoint">FC Reptile Kickers</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>11</span></div>
-                                    </div>
-                                </li>
+                            {% endfor %}    
+                                
                             </ul>
                         </div>
                     </div>
@@ -1045,6 +995,9 @@
     </section>
     {% endblock %}
     
+<script src="{{asset('js/vendor/vendor.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
+    
     {% block footer %}
     <footer class=footer-type01>
         <div class=container>
@@ -1158,9 +1111,8 @@
     </footer>
 </div>
     {% endblock %}
-    
-<script src="{{asset('js/vendor/vendor.js')}}"></script>
-<script src="{{asset('js/main.js')}}"></script>
-</body>
 
+</body>
+{% block javascripts %}
+{% endblock %}
 </html>

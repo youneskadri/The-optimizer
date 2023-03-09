@@ -6,6 +6,7 @@ use App\Repository\EquipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EquipeRepository::class)]
 class Equipe
@@ -24,9 +25,25 @@ class Equipe
     #[ORM\OneToMany(mappedBy: 'equipeA', targetEntity: MatchF::class)]
     private Collection $matchFs;
 
+    #[ORM\OneToMany(mappedBy: 'equipeB', targetEntity: MatchF::class)]
+    private Collection $matchF;
+
+    #[ORM\Column]
+    private ?int $classement = null;
+
+    #[ORM\Column]
+    private ?int $points = null;
+
+    
+
+    
+
+   
+
     public function __construct()
     {
         $this->matchFs = new ArrayCollection();
+        $this->matchF = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,6 +73,12 @@ class Equipe
         $this->slug = $slug;
 
         return $this;
+    }
+
+    
+    public function __toString()
+    {
+        return $this->nom; 
     }
 
     /**
@@ -88,8 +111,42 @@ class Equipe
         return $this;
     }
 
-    public function __toString()
+    /**
+     * @return Collection<int, MatchF>
+     */
+    public function getMatchF(): Collection
     {
-        return $this->nom; 
+        return $this->matchF;
     }
+
+    public function getClassement(): ?int
+    {
+        return $this->classement;
+    }
+
+    public function setClassement(int $classement): self
+    {
+        $this->classement = $classement;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    
+    
+
+    
+
+    
 }

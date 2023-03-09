@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\TypeType;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TypeEventController extends AbstractController
 {
@@ -80,6 +84,75 @@ class TypeEventController extends AbstractController
         return $this->redirectToRoute("readTypeEvent");
         
     }
+
+
+
+
+    #[Route('/listTypeEvent', name: 'list_Type_Event')]
+    public function listMatchs(TypeEventRepository $repository, SerializerInterface $serializerintertface): Response
+    {
+        $typeevent =$repository->findAll();
+        $serializedData = $serializerintertface->serialize($typeevent,'json',['groups' => 'typeevent']);
+        return new Response($serializedData, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+       
+    }
+
+    #[Route('/addTypeEvent/{NomType}', name: 'addT', methods: ['GET'])]
+    public function AddMatchF($NomType)
+        {
+    
+        $typeevent = new TypeEvent();
+        $typeevent->setNomType($NomType);
+        
+        
+    
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($typeevent);
+        $entityManager->flush();
+        
+        return new Response('Type added with ID: ' . $typeevent->getId());
+    }
+
+    #[Route('/supprimerTypeEvent/{id}', name: 'suppT', methods: ['GET'])]
+    public function supprimerT($id, Request $request, TypeEventRepository $repository, ManagerRegistry $doctrine): JsonResponse
+    {
+
+        $typeevent = $repository->find($id);
+        $em = $doctrine->getManager();
+
+        /* $idE = $request->get($id);
+        $em = $this->getDoctrine()->getManager();
+        $equipement = $em->getRepository(Equipement::class)->find($idE);*/
+        
+            $em->remove($typeevent);
+            $em->flush();
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formated = $serializer->normalize("Type a ete supprimé avec succées ");
+            return new JsonResponse($formated);
+       
+    }
+
+    #[Route('/updateTypeEvent/{id}/{NomType}', name: 'updateT', methods: ['GET'])]
+    public function updateTypeEvent($id, $NomType, TypeEventRepository $repository)
+        {
+    
+        $typeevent = $repository->find($id);
+        
+        $typeevent->setNomType($NomType);
+        
+        
+    
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($typeevent);
+        $entityManager->flush();
+        
+        return new Response('Type modifié avec ID: ' . $typeevent->getId());
+    }
+
 
 }
 

@@ -6,6 +6,7 @@ use App\Repository\StadeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: StadeRepository::class)]
 class Stade
@@ -20,6 +21,10 @@ class Stade
 
     #[ORM\OneToMany(mappedBy: 'stade', targetEntity: MatchF::class)]
     private Collection $matchFs;
+
+
+
+    
 
     public function __construct()
     {
@@ -41,6 +46,12 @@ class Stade
         $this->nom = $nom;
 
         return $this;
+    }
+
+    
+    public function __toString()
+    {
+        return $this->nom; 
     }
 
     /**
@@ -72,8 +83,6 @@ class Stade
 
         return $this;
     }
-    public function __toString()
-    {
-        return $this->nom; 
-    }
+
+    
 }

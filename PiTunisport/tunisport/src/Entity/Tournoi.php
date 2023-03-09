@@ -6,6 +6,7 @@ use App\Repository\TournoiRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TournoiRepository::class)]
 class Tournoi
@@ -20,6 +21,8 @@ class Tournoi
 
     #[ORM\OneToMany(mappedBy: 'tournoi', targetEntity: MatchF::class)]
     private Collection $matchFs;
+
+    
 
     public function __construct()
     {
@@ -43,6 +46,13 @@ class Tournoi
         $this->nom = $nom;
 
         return $this;
+    }
+
+    
+
+    public function __toString()
+    {
+        return $this->nom; 
     }
 
     /**
@@ -73,11 +83,6 @@ class Tournoi
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->nom; 
     }
 
     

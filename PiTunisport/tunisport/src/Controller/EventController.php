@@ -26,7 +26,16 @@ class EventController extends AbstractController
         ]);
     }
 
-
+    #[Route('/listE', name: 'list_Evet')]
+    public function listEvet(EventFRepository $repository, SerializerInterface $serializerintertface): Response
+    {
+        $evet =$repository->findAll();
+        $serializedData = $serializerintertface->serialize($evet,'json',['groups' => 'Evet']);
+        return new Response($serializedData, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+       
+    }
     #[Route('/detailsE/{id}', name: 'detailsE')]
     public function detailsE(EventRepository $repository, $id): Response
     {

@@ -6,10 +6,17 @@ use App\Repository\BilletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\StripeTrait;
+
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
 class Billet
+
 {
+    use StripeTrait;
+    
+    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

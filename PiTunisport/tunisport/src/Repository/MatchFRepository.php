@@ -39,6 +39,47 @@ class MatchFRepository extends ServiceEntityRepository
         }
     }
 
+    public function findFinishedMatches()
+    {
+        return $this->createQueryBuilder('m')
+                    ->where('m.heurefinM < :current_time')
+                    ->andWhere('m.resultatA IS NOT NULL')
+                    ->andWhere('m.resultatB IS NOT NULL')
+                    ->setParameter('current_time', new \DateTime())
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findUpcomingMatches()
+    {
+        $qb = $this->createQueryBuilder('m');
+        $qb->where('m.dateMatch >= :currentDate')
+        ->andWhere('m.heurefinM > :currentTime')
+        ->setParameter('currentDate', new \DateTime())
+        ->setParameter('currentTime', new \DateTime());
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByFilters($price)
+    {
+        return $this->createQueryBuilder('m')
+                    ->where('m.prix = :prix')
+                    ->setParameter('prix', $price)
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findMatches($limit = 10)
+    {
+        return $this->createQueryBuilder('m')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+
 //    /**
 //     * @return MatchF[] Returns an array of MatchF objects
 //     */

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\BilletRepository;
 use App\Repository\ReservationRepository;
 use App\Entity\Billet;
+use App\Entity\Reservation;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,14 +25,20 @@ class BilletController extends AbstractController
         ]);
     }
 
-    #[Route('/readBillet', name: 'read_Billet')]
-    public function readBillet(BilletRepository $repository): Response
+    /**
+     * @Route("/readBillet/{id}", name="read_Billet")
+     * @param Reservation $reservation
+     * @return Response
+     */
+    
+    public function readBillet(BilletRepository $repository,Reservation $reservation): Response
     {
         $b =$repository->findAll();
+       
         
         return $this->render('billet/readBillet.html.twig', [
             'billet' => $b,
-            
+            'reservation' => $reservation,
         ]);
     }
 

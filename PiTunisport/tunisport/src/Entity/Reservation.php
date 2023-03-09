@@ -34,7 +34,9 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservation')]
     private ?MatchF $matchF = null;
 
-    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Billet::class)]
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Billet", mappedBy="reservation", cascade={"remove"})
+    */
     private Collection $billet;
 
     #[ORM\Column(length: 255)]

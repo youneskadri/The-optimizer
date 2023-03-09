@@ -29,21 +29,13 @@ class ReservationType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'data' => $user,
-                'disabled' => true,
+                
                 'choice_label' => function ($user) {
                     return sprintf('%s, %s, %s', $user->getUserName(), $user->getEmail(), $user->getPhone());
                 }
             ])
-            ->add('matchF', EntityType::class, [
-                'class' => MatchF::class,
-                'data' => $match,
-                'disabled' => true,
-                'choice_label' => function ($match) {
-                    return $match->getId();
-                }
-            ])
             ->add('Etat', HiddenType::class, [
-                'data' => 'pending', 
+                'data' => 'en attente', 
             ])
             ->add('save', SubmitType::Class)
         ;
