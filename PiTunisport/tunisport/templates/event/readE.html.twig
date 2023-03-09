@@ -1,6 +1,11 @@
+
 {% extends 'back.html.twig' %}
 
+
+
 {% block main %}
+
+
 <main id="main" class="main">
 <section class="section">
     <div class="row">
@@ -12,7 +17,11 @@
             
 
             <!-- Table with stripped rows -->
-            <table class="table datatable">
+            <form class="search-container">
+              <input class="form-control border-0" type="search" placeholder="Search" id="myInput" >
+            </form>
+            <div  class="table-responsive">
+            <table class="table datatable" id="mytable">
               <thead>
                 <tr>
                   <th scope="col" class="border-0 rounded-start">Numéro_événement</th>
@@ -26,7 +35,7 @@
                 </tr>
               </thead>
               {%  for e in  event %}
-            <tbody>
+            <tbody id="myTable">
             <!-- Table item -->
             <tr>
                 <td>
@@ -59,7 +68,7 @@
             {% endfor %}
             </table>
             <!-- End Table with stripped rows -->
-
+          </div>
           </div>
           <form action="{{ path('createEvent') }}">
             <button class="btn btn-primary mb-0 mt-3" >Ajouter un événement</button>
@@ -71,6 +80,24 @@
   </section>
 
 </main><!-- End #main -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    
+    $("#myInput").on("keyup", function() {
+        
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          console.log("hello");
+
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
+
+
 {% endblock %}
+
 
 

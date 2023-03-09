@@ -13,6 +13,7 @@ use App\Form\MatchFType;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class MatchFController extends AbstractController
 {
@@ -110,6 +111,16 @@ class MatchFController extends AbstractController
         return $this->render('bookTicket.html.twig', [
             'controller_name' => 'IndexController',
         ]);
+    }
+
+    #[Route('/listeM', name: 'listeM')]
+    public function listeM(MatchFRepository $repository,SerializerInterface $SerializerInterface)
+    {
+        $event =$repository->findAll();
+        $json=$SerializerInterface->Serialize($event,'json',['groups'=>'match'] );
+        dump($json);
+        die;
+        
     }
 }
 

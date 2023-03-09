@@ -23,6 +23,8 @@
                   <th scope="col" class="border-0">Heure de fin</th>
                   <th scope="col" class="border-0">Image</th>
                   <th scope="col" class="border-0">Type</th>
+                
+                 
                   <th scope="col" class="border-0 rounded-end">supprimer</th>
                   <th scope="col" class="border-0 rounded-end">modifier</th>
                 </tr>
@@ -46,8 +48,8 @@
                 <td>{{ e.localisation }}</td>
                 <td>{{ e.heureDeb.format('H:i') }}</td>
                 <td>{{ e.heureFin.format('H:i') }}</td>
-                <td><img src="{{ asset('uploads/event/' ~ e.getImage()) }}"/></td>
-          
+                <td><img  width="70" height="70"src="{{ asset('uploads/event/' ~ e.getImage()) }}"/></td>
+                
                 <td>{{ e.typeEvent }}</td>
         
                 <!-- Action item -->
@@ -63,15 +65,38 @@
             <!-- End Table with stripped rows -->
 
           </div>
-          
+          <form action="{{ path('readEvent') }}">
+            <button class="btn btn-primary mb-0 mt-3" >retour a la liste</button>
+            <form action="{{ path('createEvent') }}">
+              <button class="btn btn-primary mb-0 mt-3" >Ajouter un événement</button>
+        </form>
         </div>
-        <form action="{{ path('createEvent') }}">
-          <button class="btn btn-primary mb-0 mt-3" >Ajouter un événement</button>
+        
       </form>
 
       </div>
     </div>
   </section>
-
+  <li class="d-flex align-items-center"><p>partager dans facebook</p><a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.uri }}&amp;quote=Check+out+this+awesome+post" target="_blank">
+    <i class="bi bi-facebook"></i>
+    </a>
+  </li>
+ 
+   <li class="d-flex align-items-center">
+    <p>partager dans twitter</p>
+<a href="https://twitter.com/intent/tweet?url={{ app.request.uri }}&amp;text=consulter notre nouveau evenement" target="_blank">
+<i class="bi bi-twitter"></i>
 </main><!-- End #main -->
+<script>
+  function activeSelect(e) {
+      if (!check) {
+          check = true;
+          document.querySelector('.note').innerHTML = 'Note ' + e.target.dataset.note;
+          $.post('save_rating.php', { rating: e.target.dataset.note }, function(response) {
+              // Réponse du serveur
+              console.log(response);
+          });
+      }
+  }
+  </script>
 {% endblock %}

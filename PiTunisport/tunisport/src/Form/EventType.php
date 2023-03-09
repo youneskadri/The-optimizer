@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 
+
 class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -42,6 +43,7 @@ class EventType extends AbstractType
                     
                 ],
             ])
+            ->add('videourl')
             ->add('save', SubmitType::Class)
         ;
     }

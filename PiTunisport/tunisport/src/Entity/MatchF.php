@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MatchFRepository::class)]
 class MatchF
@@ -15,6 +16,7 @@ class MatchF
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("match")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
@@ -28,31 +30,37 @@ class MatchF
     private ?\DateTimeInterface $dateMatch = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("match")]
     #[Assert\NotBlank(message: "Le nom de l équipe à domicile est obligatoire")]
     #[Assert\Length(min: 3 ,minMessage: "Le nom de l équipe à domicile contient moins de 3 charactères")]
     private ?string $equipeA = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("match")]
     #[Assert\NotBlank(message: "Le nom de l équipe éxterieure est obligatoire")]
     #[Assert\Length(min: 3 ,minMessage: "Le nom de l équipe éxterieure contient moins de 3 charactères")]
     private ?string $equipeB = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("match")]
     #[Assert\NotBlank(message: "Le type du match est obligatoire")]
     #[Assert\Length(min: 3 ,minMessage: "Le type du match contient moins de 3 charactères")]
     private ?string $typeMatch = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("match")]
     #[Assert\NotBlank(message: "Le nom du stade est obligatoire")]
     #[Assert\Length(min: 3 ,minMessage: "Le nom du stade contient moins de 3 charactères")]
     private ?string $stade = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("match")]
     #[Assert\NotBlank(message: "Le nom du tournoi est obligatoire")]
     #[Assert\Length(min: 3 ,minMessage: "Le nom du tournoi contient moins de 3 charactères")]
     private ?string $tournois = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("match")]
     #[Assert\Type(
         type: 'integer',
         message: 'La valeur {{ value }} n est pas valide {{ type }}.',
@@ -60,6 +68,7 @@ class MatchF
     private ?int $resultatA = null;
 
     #[ORM\Column]
+    #[Groups("match")]
     #[Assert\Type(
         type: 'integer',
         message: 'La valeur {{ value }} n est pas valide {{ type }}.',
@@ -70,6 +79,7 @@ class MatchF
     private Collection $reservation;
 
     #[ORM\Column]
+    #[Groups("match")]
     private ?int $prix = null;
 
  

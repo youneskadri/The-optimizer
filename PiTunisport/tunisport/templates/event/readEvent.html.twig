@@ -1,5 +1,7 @@
 {% extends 'front.html.twig' %}
 
+
+
 {% block header %}
     <header class=header-main>
         <div class=header-upper>
@@ -76,8 +78,20 @@
     <div class=innerbanner><h2 class=bannerHeadline>Découvrir<span>Tunisie</span></h2></div>
 </div>
 {% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #calendrier{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
+
 <section class=matchSchedule>
+    <div id='calendrier'></div>
     <div class=container>
         <div class=row><h2 class=heading>Trouver <span>un evenement</span></h2>
 
@@ -113,4 +127,38 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/vendor/vendor.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendrier');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: "{{ path('event_list') }}"
+    });
+
+    calendar.render();
+    
+    calendar.on('dateClick', function(info) {
+        $.ajax({
+            url: "{{ path('event_list') }}",
+            data: {
+                start: info.dateStr
+            },
+            success: function(data) {
+                calendar.removeAllEvents();
+                calendar.addEventSource(data);
+            }
+        });
+    });
+});
+
+</script>
 {% endblock %}

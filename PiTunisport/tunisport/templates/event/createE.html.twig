@@ -1,8 +1,21 @@
 {% extends 'back.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{% endblock %}
 {% block main %}
 <main id="main" class="main">
     <h1> Ajouter un événement </h1>
+    {% for flash_message in app.session.flashBag.get('toastr') %}
+    <script>
+        toastr['{{ flash_message.type }}']('{{ flash_message.message }}');
+    </script>
+{% endfor %}
     {{ form_start(f, { 'attr': {'novalidate': 'novalidate'}}) }}
 
         {{ form_label(f.nomEvent, 'Nom ') }}
@@ -21,11 +34,14 @@
         {{ form_label(f.image, 'Type') }}
         {{ form_widget(f.image, { 'attr': {'class': 'form-control'} }) }}
         {{ form_errors(f.image)}}
-        
-    
-       
-       
+
+        {{ form_label(f.videourl, 'videourl') }}
+        {{ form_widget(f.videourl, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(f.videourl)}}
         
     {{ form_end(f) }}
+    
 </main>    
+
+
 {% endblock %}

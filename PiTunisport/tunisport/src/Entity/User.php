@@ -56,11 +56,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $banned = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: EventLike::class)]
+    private Collection $eventLikes;
+
+    
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
         
         $this->reclamation = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->eventLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -301,4 +307,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username; 
     }
+
+    /**
+     * @return Collection<int, EventLike>
+     */
+    public function getEventLikes(): Collection
+    {
+        return $this->eventLikes;
+    }
+
+    public function addEventLike(EventLike $eventLike): self
+    {
+        if (!$this->eventLikes->contains($eventLike)) {
+            $this->eventLikes->add($eventLike);
+            $eventLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventLike(EventLike $eventLike): self
+    {
+        if ($this->eventLikes->removeElement($eventLike)) {
+            // set the owning side to null (unless already changed)
+            if ($eventLike->getUser() === $this) {
+                $eventLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -75,6 +75,7 @@ class TypeEventController extends AbstractController
     {
         $m = $repository->find($id);
         $em = $doctrine->getManager();
+        
         $em->remove($m);
         $em->flush();
         return $this->redirectToRoute("readTypeEvent");
