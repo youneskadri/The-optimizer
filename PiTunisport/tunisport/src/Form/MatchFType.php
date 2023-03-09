@@ -29,7 +29,7 @@ class MatchFType extends AbstractType
             ->add('nbBilletTotal')
             ->add('nbBilletReserve')
             ->add('image', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'image 1',
 
                 
                 'mapped' => false,
@@ -40,7 +40,7 @@ class MatchFType extends AbstractType
                 
                 'constraints' => [
                     new File([
-                        'maxSize' => '200k',
+                        'maxSize' => '2000k',
                         
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ]),
@@ -49,7 +49,7 @@ class MatchFType extends AbstractType
                 ],
             ])
             ->add('image2', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'image2',
 
                 
                 'mapped' => false,
@@ -60,7 +60,7 @@ class MatchFType extends AbstractType
                 
                 'constraints' => [
                     new File([
-                        'maxSize' => '200k',
+                        'maxSize' => '2000k',
                         
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ]),
@@ -68,7 +68,7 @@ class MatchFType extends AbstractType
                     
                 ],
             ])
-            ->add('save', SubmitType::Class)
+            
         ;
     }
 

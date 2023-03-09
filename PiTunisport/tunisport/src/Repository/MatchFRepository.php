@@ -46,6 +46,7 @@ class MatchFRepository extends ServiceEntityRepository
                     ->andWhere('m.resultatA IS NOT NULL')
                     ->andWhere('m.resultatB IS NOT NULL')
                     ->setParameter('current_time', new \DateTime())
+                    ->setMaxResults(1)
                     ->getQuery()
                     ->getResult();
     }
@@ -54,9 +55,10 @@ class MatchFRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('m');
         $qb->where('m.dateMatch >= :currentDate')
-        ->andWhere('m.heurefinM > :currentTime')
-        ->setParameter('currentDate', new \DateTime())
-        ->setParameter('currentTime', new \DateTime());
+        
+        ->setMaxResults(3)
+        ->setParameter('currentDate', new \DateTime());
+        
 
         return $qb->getQuery()->getResult();
     }

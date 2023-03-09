@@ -145,13 +145,56 @@ class MatchFController extends AbstractController
 
 
     #[Route('/updateM/{id}', name: 'updateMatch')]
-    public function updateM(ManagerRegistry $doctrine, MatchFRepository $repository, Request $request, $id): Response
+    public function updateM(ManagerRegistry $doctrine, MatchFRepository $repository, Request $request, $id, SluggerInterface $slugger): Response
     {
         $match = $repository->find($id);
         $form = $this->createForm(MatchFType::class, $match);
         $form->handleRequest($request);
         
         if ($form->isSubmitted())  {
+            $brochureFile = $form->get('image')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+               
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('equipe_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $match->setImage($newFilename);
+                }
+
+                $brochureFile2 = $form->get('image2')->getData();
+            if ($brochureFile2) {
+                $originalFilename2 = pathinfo($brochureFile2->getClientOriginalName(), PATHINFO_FILENAME);
+                
+                $safeFilename2 = $slugger->slug($originalFilename2);
+                $newFilename2 = $safeFilename2.'-'.uniqid().'.'.$brochureFile2->guessExtension();
+
+               
+                try {
+                    $brochureFile2->move(
+                        $this->getParameter('equipe_directory'),
+                        $newFilename2
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $match->setImage2($newFilename2);
+            }
             $em = $doctrine->getManager();
             $em->persist($match);
             $em->flush();

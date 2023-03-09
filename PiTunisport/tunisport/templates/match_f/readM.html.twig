@@ -46,13 +46,13 @@
             
                     <!-- Action item -->
                     <td><form action="{{ path('deleteMatch', {id:m.id}) }}">
-                      <button  >supprimer</button>
+                      <button  class="btn btn-danger">supprimer</button>
                       </form> </td>
                       <td><form action="{{ path('updateMatch', {id:m.id}) }}">
-                    <button  >modifier</button>
+                    <button  class="btn btn-success">modifier</button>
                 </form>  </td>
                 <td> <form action="{{ path('detailsM', {id:m.id}) }}">
-                  <button  >details</button>
+                  <button  class="btn btn-primary">details</button>
               </form> </td>
                 
                 </tbody>

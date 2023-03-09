@@ -40,10 +40,10 @@
             
                     <!-- Action item -->
                     <td><form action="{{ path('deleteReservation', {id:r.id}) }}">
-                      <button  >supprimer</button>
+                      <button  class="btn btn-danger">supprimer</button>
                   </form> </td>
                   <td><form action="{{ path('updateReservation', {id:r.id}) }}">
-                    <button  >modifier</button>
+                    <button  class="btn btn-success">modifier</button>
                 </form> 
                </td>
                 
