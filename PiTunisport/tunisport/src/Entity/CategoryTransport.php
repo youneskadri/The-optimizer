@@ -17,7 +17,7 @@ class CategoryTransport
     #[ORM\Column]
     private ?int $id = null;
     #[Assert\Length(
-        min: 10,
+        min: 2,
         minMessage: 'Your transport type0 must be at least {{ limit }} characters long',
        )]
     #[ORM\Column(length: 255)]

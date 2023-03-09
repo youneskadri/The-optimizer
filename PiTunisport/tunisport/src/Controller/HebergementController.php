@@ -109,9 +109,10 @@ class HebergementController extends AbstractController
     public function listS(HebergementRepository $repository,Request $request):Response
     {
         $form=$this->createForm(NSCType::class);
+
         $Hebergements=$repository->findHebergementByemail();
         $form=$form->handleRequest($request);
-        if ($form->isSubmitted()) { 
+        if ($form->isSubmitted()&& $form->isValid()) { 
             $NSC=$form->get('NSC')->getData();
             $Hebergements=$repository->findHebergementByNSC($NSC);
 
@@ -127,6 +128,7 @@ class HebergementController extends AbstractController
     public function listA(HebergementRepository $repository,Request $request,PaginatorInterface $paginator):Response
     {
         $form=$this->createForm(NSCType::class);
+
         $Hebergements=$repository->findHebergementByemail();
 
         $Hebergements = $paginator->paginate(

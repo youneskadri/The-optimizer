@@ -11,6 +11,7 @@
  <link rel=stylesheet href="{{asset('assetsFront/vendor.css')}}">
     <link rel=stylesheet href="{{asset('assetsFront/style.css')}}">
     <link rel=stylesheet  href="{{asset('assetsFront/css/layerslider.css')}}">
+   
 
     <script src="{{asset('assetsFront/js/vendor/modernizr.js')}}"></script>
 </head>
@@ -60,7 +61,7 @@
                                         </li>
                                         <li><a href=blog.html>blog <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                            <li><a "{{path('listHebergement')}}"  class=active>Hebergement <span></span> <span></span> <span></span>
+                                            <li><a href="{{path('listHebergement')}}"  class=active>Hebergement <span></span> <span></span> <span></span>
                                                 <span></span></a></li>
                                         <li><a href=bookTicket.html>book Tickets <span></span> <span></span>
                                             <span></span> <span></span></a></li>
@@ -83,8 +84,8 @@
                             </div>
                         </nav>
                     </div>
-                    <div class=social><a href=https://www.facebook.com/templatespoint.net class=facebook><i
-                            class="fa fa-facebook"></i></a> <a href=https://twitter.com/itobuztech class=twitter><i
+                    <div class=social>transport<a href="{{ path ('listTransport')}}" class=transport><i
+                            class="fa fa-Transport"></i></a> <a href=https://twitter.com/itobuztech class=twitter><i
                             class="fa fa-twitter"></i></a> <a href=https://www.behance.net/ class=behance><i
                             class="fa fa-behance"></i></a></div>
                 </div>

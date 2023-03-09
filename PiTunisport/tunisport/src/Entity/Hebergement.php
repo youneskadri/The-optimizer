@@ -12,6 +12,7 @@ class Hebergement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("Hebergement")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable:true)]
@@ -23,6 +24,8 @@ class Hebergement
        )]
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"le nom est obligatoire")]
+    #[Groups("Hebergement")]
+
     private ?string $nomHeberg = null;
     #[Assert\Length(
         min: 10,
@@ -30,6 +33,8 @@ class Hebergement
        )]
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"la desc est obligatoire")]
+    #[Groups("Hebergement")]
+
     private ?string $deschebergement = null;
 
     #[ORM\ManyToOne(targetEntity: Localisation::class, inversedBy: 'hebergements')]

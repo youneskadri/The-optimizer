@@ -3,6 +3,7 @@
 namespace App\Controller;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Form\TransportType;
+use Knp\Component\Pager\PaginatorInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,8 @@ use App\Entity\CategoryTransport;
 use App\Entity\Transport;
 use App\Form\CategoryTransportType;
 use App\Entity\Hebergement;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPaginationInterface;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
@@ -103,6 +106,37 @@ class TransportController extends AbstractController
             $Transports=$repository->findTransportByNSC($NSC);
         }
         return $this->render('Transport/list.html.twig', [
+            'controller_name' => 'TransportController',
+            'Transports' => $Transports,
+            'form'=>$form->createView()
+            ]);
+
+    }
+    #[Route('/listk', name: 'listTransport')]
+    public function listA(TransportRepository $repository,Request $request,PaginatorInterface $paginator):Response
+    {
+        $form=$this->createForm(NSCType::class);
+
+        $Transports=$repository->findTransportByemail();
+
+        $Transports = $paginator->paginate(
+            $Transports, /* query NOT result */
+            $request->query->getInt('page', 1),
+            2
+        );
+        $form=$form->handleRequest($request);
+        if ($form->isSubmitted()&& $form->isValid()) { 
+            $NSC=$form->get('NSC')->getData();
+            $Transports=$repository->findTransportByNSC($NSC);
+            $Transports=$repository->findTransportByNSC($NSC);
+
+            $Transports = $paginator->paginate(
+                $Transports, /* query NOT result */
+                $request->query->getInt('page', 1),
+                2
+            );
+        }
+        return $this->render('Transport/test.html.twig', [
             'controller_name' => 'TransportController',
             'Transports' => $Transports,
             'form'=>$form->createView()

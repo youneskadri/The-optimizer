@@ -15,50 +15,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
   </head>
-  <audio controls>
-    <source src="{{ asset('public/audio/Hayya Hayya (Better Together) Lyrics  FIFA World Cup 2022.mp3') }}" type="audio/mpeg">
-    Your browser does not support the audio tag.
-  </audio>
-              <div class=row><h2 class=heading>Liste Hebergement <span>dans Tunisie</span></h2>
+ 
+              <div class=row><h2 class=heading>Liste Transport <span>dans Tunisie</span></h2>
               </div
   <div class="card" style=" padding-left:700px;">
 
   <button  type="button" class="btn btn-secondary rounded-pill">
 						<a href="{{ path ('map')}}">voir en map</a>
-					
-
+					</button>
           <br>
-
   <body>
     </div>
   
-    {% for s in Hebergements %}
+    {% for s in Transports %}
 		   <div class=shop_detais>
                                 <div class="shop01 clearfix">
                                     <div class=shop-img>
                                         <div class=bgimg>			
-                                        <img src="{{ asset('/uploads/images/' ~ s.getImage()) }}" width="400px" height="300px" alt="" />
+                                        <img src="{{ asset('/uploads/images/' ~ s.getImageTransport()) }}" width="400px" height="300px" alt="" />
 
 </div>
                                     </div>
-                                    <div class=shop_info><h4 class=headline01><a href=product-details.html>{{s.nomheberg}}</a></h4>
+                                    <br><br>
+                                    <div class=shop_info><h4 class=headline01><a href=product-details.html>			{{s.nomTransport}}
+                                    </a></h4>
 
                                         <div class=star><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                 class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                                 class="fa fa-star"></i></div>
-                                        <p>{{ s.deschebergement}}</p>
+                                        <p>			{{s.categoryTransport}}
+                                        </p>
 
-                                        <div class=headline01>{{ s.localisation}}</div>
-                                        <div class=addcart-wrap><a href=# class=btn-fav>add to wish list</a></div>
                                     </div>
                                 </div>
                             </div>
 		{% endfor %}
   </body>
-  <div  class="pagination-links"> 
-  {{ knp_pagination_render(Hebergements) }}
-</div>
+    {{ knp_pagination_render(Transports) }}
+    
 </html>
-    {{form(form_NSC)}}
+{{form(form)}}
 {% endblock %}
                            

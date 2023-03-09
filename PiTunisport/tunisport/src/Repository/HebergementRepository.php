@@ -40,14 +40,15 @@ class HebergementRepository extends ServiceEntityRepository
     }
     public function findHebergementByemail(){
         return $this->createQueryBuilder('q')
-        ->orderBy('q.nomHeberg','ASC')
+        
+        ->orderBy('q.id','ASC')
         ->getQuery()
         ->getResult();
     }
     #DQL
     public function findHebergementByemailDQL(){
         $entityManager=$this->getEntityManager();
-        $query=$entityManager->createQuery('SELECT p from App\Entity\Hebergement p ORDER BY p.nomHeberg ASC');
+        $query=$entityManager->createQuery('SELECT p from App\Entity\Hebergement p ORDER BY p.id ASC');
         return $query->getResult();
     }
     #filtrer les etudiants par NSC
@@ -55,7 +56,11 @@ class HebergementRepository extends ServiceEntityRepository
 public function findHebergementByNSC($NSC){
     return $this->createQueryBuilder('h')
         ->join('h.localisation', 'l')
-        ->where('l.lieux LIKE :NSC')
+        //->join('h.nomHeberg', 'n')
+        ->where('h.nomHeberg LIKE :NSC')
+
+        ->orWhere('l.lieux LIKE :NSC')
+      
         ->setParameter('NSC', '%' . $NSC . '%')
         ->getQuery()
         ->getResult();
@@ -65,7 +70,7 @@ public function findHebergementByNSC($NSC){
         $entityManager=$this->getEntityManager();
         $query=$entityManager->createQuery('
     SELECT p FROM App\Entity\Hebergement p
-    WHERE p.localisation = :NSC'
+    WHERE p.localisation = :NSC OR  p.nomHeberg = :NSC'
 
 )
 ->setParameter('NSC', '%' . $NSC . '%');
