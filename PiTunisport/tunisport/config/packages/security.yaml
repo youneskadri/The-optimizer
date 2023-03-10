@@ -31,18 +31,11 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-<<<<<<< Updated upstream
-                target: app_login
-            remember_me:
-                secret: '%kernel.secret%'
-                always_remember_me: true
-=======
                 target: tunisport
             remember_me:
                 secret: '%kernel.secret%'
                 always_remember_me: true
             user_checker: App\Security\UserChecker
->>>>>>> Stashed changes
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -54,13 +47,10 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/client, roles: ROLE_USER }
-<<<<<<< Updated upstream
-=======
-         - { path: ^/client, roles: PUBLIC_ACCESS }
+    
          - { path: ^/logout, role: PUBLIC_ACCESS }
         # This ensures that the form can only be accessed when two-factor authentication is in progress.
          - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
->>>>>>> Stashed changes
 
 when@test:
     security:

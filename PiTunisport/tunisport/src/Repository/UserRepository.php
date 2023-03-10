@@ -56,6 +56,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+
+ public function orderByNom()
+ {
+    $em = $this->getEntityManager();
+    $query = $em->createQuery('SELECT P from App\Entity\User P  WHERE P.roles LIKE \'ROLE_ADMIN\' ORDER BY P.firstName'  );
+    return $query->getResult();
+
+ }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
@@ -102,8 +110,6 @@ public function findAdmin($firstName){
        ->getResult();
 }
 
-<<<<<<< Updated upstream
-=======
 // public function findOneByEmail($email){
 //     return $this->createQueryBuilder('user')
 //     ->where('user.email LIKE :email')
@@ -112,5 +118,4 @@ public function findAdmin($firstName){
 //        ->getResult();
 // }
 
->>>>>>> Stashed changes
 }

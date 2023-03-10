@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Event>
+ * @extends ServiceEntityRepository<Matchf>
  *
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
  * @method Event|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function save(Event $entity, bool $flush = false): void
+    public function add(Event $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -44,10 +44,10 @@ class EventRepository extends ServiceEntityRepository
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
@@ -56,11 +56,22 @@ class EventRepository extends ServiceEntityRepository
 
 //    public function findOneBySomeField($value): ?Event
 //    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function search($term)
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+
+        if ($term) {
+            $queryBuilder->where('a.titre LIKE :term OR a.description LIKE :term Or a.image LIKE :term')
+                         ->setParameter('term', '%'.$term.'%');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

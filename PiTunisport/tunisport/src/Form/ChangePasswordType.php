@@ -9,28 +9,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-<<<<<<< Updated upstream
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-=======
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 
->>>>>>> Stashed changes
 class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
         
-<<<<<<< Updated upstream
-        ->add('password', PasswordType::class, [
-            'label' => 'Current Password',
-        ])
-        ->add('newPassword', PasswordType::class, [
-            'label' => 'New Password',
-        ])
-=======
         ->add('password',RepeatedType::class,[
             'type'=>Passwordtype::class,
             'first_options'=>['label'=>'Password'],
@@ -50,7 +38,6 @@ class ChangePasswordType extends AbstractType
             ]),
         ],
     ])
->>>>>>> Stashed changes
    ;
         
         

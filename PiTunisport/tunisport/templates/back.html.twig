@@ -306,13 +306,28 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="{{path('AddHebergement')}}">
               <i class="bi bi-circle"></i><span>Hebergement</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{path('list_CategoryHebergement')}}">
+              <i class="bi bi-circle"></i><span>Category Hebergement</span>
+            </a>
+          </li>
+           <li>
+            <a href="{{path('list_Transport')}}">
               <i class="bi bi-circle"></i><span>Transport</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{path('list_CategoryTransport')}}">
+              <i class="bi bi-circle"></i><span>category Transport</span>
+            </a>
+          </li>
+           <li>
+            <a href="{{path('app_localisation_new')}}">
+              <i class="bi bi-circle"></i><span>Localisation</span>
             </a>
           </li>
          
@@ -325,12 +340,12 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="{{path('read_blog')}}">
               <i class="bi bi-circle"></i><span>Blog</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{path('read_commentaire')}}">
               <i class="bi bi-circle"></i><span>Blog commentaire</span>
             </a>
           </li>
@@ -343,17 +358,17 @@
         </a>
         <ul id="Match-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="#">
+            <a href="{{path('readReservation')}}">
               <i class="bi bi-circle"></i><span>Reservation</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{{path(('readMatch'))}}">
               <i class="bi bi-circle"></i><span>Match</span>
             </a>
           </li>
             <li>
-            <a href="#">
+            <a href="{{path(('readBillet'))}}">
               <i class="bi bi-circle"></i><span>Billet</span>
             </a>
           </li>
@@ -392,12 +407,12 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{path('readTypeEvent')}}">
               <i class="bi bi-circle"></i><span>Type</span>
             </a>
           </li>
           <li>
-            <a href="icons-remix.html">
+            <a href="{{path('readEvent')}}">
               <i class="bi bi-circle"></i><span>Evenement</span>
             </a>
           </li>

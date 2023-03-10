@@ -7,12 +7,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<MatchF>
+ * @extends ServiceEntityRepository<Matchf>
  *
- * @method MatchF|null find($id, $lockMode = null, $lockVersion = null)
- * @method MatchF|null findOneBy(array $criteria, array $orderBy = null)
- * @method MatchF[]    findAll()
- * @method MatchF[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Matchf|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Matchf|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Matchf[]    findAll()
+ * @method Matchf[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class MatchFRepository extends ServiceEntityRepository
 {
@@ -21,7 +21,7 @@ class MatchFRepository extends ServiceEntityRepository
         parent::__construct($registry, MatchF::class);
     }
 
-    public function save(MatchF $entity, bool $flush = false): void
+    public function add(MatchF $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -38,6 +38,50 @@ class MatchFRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findFinishedMatches()
+    {
+        return $this->createQueryBuilder('m')
+                    ->where('m.heurefinM < :current_time')
+                    ->andWhere('m.resultatA IS NOT NULL')
+                    ->andWhere('m.resultatB IS NOT NULL')
+                    ->setParameter('current_time', new \DateTime())
+                    ->setMaxResults(1)
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findUpcomingMatches()
+    {
+        $qb = $this->createQueryBuilder('m');
+        $qb->where('m.dateMatch >= :currentDate')
+        ->andWhere('m.heurefinM >= :currentTime')
+        ->setMaxResults(3)
+        ->setParameter('currentDate', new \DateTime())
+        ->setParameter('currentTime', new \DateTime());
+        
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByFilters($price)
+    {
+        return $this->createQueryBuilder('m')
+                    ->where('m.prix = :prix')
+                    ->setParameter('prix', $price)
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findMatches($limit = 10)
+    {
+        return $this->createQueryBuilder('m')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    
 
 //    /**
 //     * @return MatchF[] Returns an array of MatchF objects

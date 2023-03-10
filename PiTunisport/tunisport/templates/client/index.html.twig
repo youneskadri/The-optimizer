@@ -17,7 +17,7 @@
                         {% else %}
                         <img src="{{asset('/uploads/images/' ~ app.user.image)}}" alt="Profile"  class="rounded-circle"style="width: 25px;padding-top:6px;">
                        {% endif %}</li>
-                        <li><a href="{{path('clientProfile')}}">{{app.user.firstName}} {{app.user.secondName}}</a></li>
+                        <li><a href="{{path('clientProfileee')}}">{{app.user.firstName}} {{app.user.secondName}}</a></li>
                         
                         <li><a href="{{path('app_logout')}}"><i class="fa fa-sign-out"></i> 
                         <span>Logout</span></a>

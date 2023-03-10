@@ -9,10 +9,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<TypeEvent>
  *
- * @method TypeEvent|null find($id, $lockMode = null, $lockVersion = null)
- * @method TypeEvent|null findOneBy(array $criteria, array $orderBy = null)
- * @method TypeEvent[]    findAll()
- * @method TypeEvent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Billet|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Billet|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Billet[]    findAll()
+ * @method Billet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class TypeEventRepository extends ServiceEntityRepository
 {
@@ -21,7 +21,7 @@ class TypeEventRepository extends ServiceEntityRepository
         parent::__construct($registry, TypeEvent::class);
     }
 
-    public function save(TypeEvent $entity, bool $flush = false): void
+    public function add(BTypeEvent $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -40,24 +40,24 @@ class TypeEventRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return TypeEvent[] Returns an array of TypeEvent objects
+//     * @return Billet[] Returns an array of Billet objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?TypeEvent
+//    public function findOneBySomeField($value): ?Billet
 //    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

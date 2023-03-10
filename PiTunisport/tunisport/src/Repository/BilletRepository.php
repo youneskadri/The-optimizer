@@ -21,7 +21,7 @@ class BilletRepository extends ServiceEntityRepository
         parent::__construct($registry, Billet::class);
     }
 
-    public function save(Billet $entity, bool $flush = false): void
+    public function add(Billet $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -44,10 +44,10 @@ class BilletRepository extends ServiceEntityRepository
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
@@ -56,8 +56,8 @@ class BilletRepository extends ServiceEntityRepository
 
 //    public function findOneBySomeField($value): ?Billet
 //    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

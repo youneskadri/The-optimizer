@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Controller;
-<<<<<<< Updated upstream
-=======
 use App\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Entity\Transport;
->>>>>>> Stashed changes
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,33 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-<<<<<<< Updated upstream
-use App\Service\MailerService;
-use App\Service\ValidService;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
-
-class RegistrationaaaController extends AbstractController
-{
-    private $passwordHasher;
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->passwordHasher = $passwordHasher;
-    }
-
-   
-    #[Route('/registration', name: 'registration',methods: ['GET', 'POST'])]
-
-    public function index(Request $request,ManagerRegistry $doctrine ,MailerInterface $mailer)
-    {
-        $user = new User();
-    
-        $form = $this->createForm(UserType::class, $user);
-        // $form->add('Add',SubmitType::class);
-=======
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
@@ -86,46 +56,22 @@ class RegistrationaaaController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         // $form->add('Add',SubmitType::class);
  
->>>>>>> Stashed changes
 
         $form->handleRequest($request);
         $errors = $form->getErrors();
         $user->setDateJoin(new \DateTime('now'));
         $user->setBanned(0);
-<<<<<<< Updated upstream
-=======
         $content = $request->getContent();
         // $user=$serializer->deserialize($content,User::class,'json');
         // $json =$SerializerInterface->serialize($user,'json',['groups'=>'user']);
         //       dump($json);
         //         die;
->>>>>>> Stashed changes
         if ($form->isSubmitted() && $form->isValid()) {
             // Encode the new users password
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
             // Set their role
             $user->setRoles(['ROLE_USER']);
-<<<<<<< Updated upstream
-           
-            
-            // Save
-            $em = $doctrine->getManager();
-            $em->persist($user);
-            $em->flush();
-             $message="a ete ajouter correctement";
-            $email = (new Email())
-            ->from('mailtrap@example.com')
-            ->to($user->getEmail())
-            ->subject($message)
-            ->text('This is a test email.');
-
-        $mailer->send($email);
-
-
-            return $this->redirectToRoute('app_login');
-
-=======
             //  $token = $request->get('_token');
             //  if (!$csrfTokenManager->isTokenValid(new CsrfToken('registration', $token))) {
             //      throw $this->createAccessDeniedException('Invalid CSRF token.');
@@ -144,17 +90,11 @@ class RegistrationaaaController extends AbstractController
             
            return $this->redirectToRoute('app_mailer');
            
->>>>>>> Stashed changes
 
         }
      
         return $this->render('registration/index.html.twig', [
             'form' => $form->createView(),
-<<<<<<< Updated upstream
-            'errors' => $errors
-        ]);
-    }
-=======
             'errors' => $errors,
            
         ]);
@@ -180,5 +120,4 @@ class RegistrationaaaController extends AbstractController
             return $this->redirectToRoute('front');
         }
     }
->>>>>>> Stashed changes
 }

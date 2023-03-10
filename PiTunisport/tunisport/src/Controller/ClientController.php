@@ -9,10 +9,6 @@ use App\Repository\UserRepository;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-<<<<<<< Updated upstream
-use Doctrine\Persistence\ManagerRegistry;
-=======
->>>>>>> Stashed changes
 use App\Form\EditProfileType;
 use App\Form\UserEditType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -22,20 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-<<<<<<< Updated upstream
-use Symfony\Component\HttpFoundation\RequestStack;
-class ClientController extends AbstractController
-{
-    private $requestStack;
-
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-
-        
-    }
-
-=======
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use App\Entity\Transport;
 use App\Form\UserType;
@@ -59,21 +41,22 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
+#[Route('/client',methods: ['GET', 'POST'])]
 class ClientController extends AbstractController
 {
     private $passwordHasher;
     private $randomStringGenerator;
     private $mailer;
     private $SerializerInterface;
+
     public function __construct(UserPasswordHasherInterface $passwordHasher,RandomStringGenerator  $randomStringGenerator ,Mailer $mailer,SerializerInterface $SerializerInterface)
     {
         $this->passwordHasher = $passwordHasher;
         $this->randomStringGenerator = $randomStringGenerator;
         $this->mailer =$mailer;
         $this->SerializerInterface = $SerializerInterface;
+    
     }
->>>>>>> Stashed changes
     
     #[Route('/front', name: 'front',methods: ['GET', 'POST'])]
     public function Front(): Response
@@ -81,37 +64,22 @@ class ClientController extends AbstractController
         return $this->render('frontTest.html.twig');
     }
 
-    #[Route('/', name: 'tunisport',methods: ['GET', 'POST'])]
-    public function index(): Response
-    {
-        return $this->render('front.html.twig');
-    }
+    
 
-    #[Route('/client', name: 'client',methods: ['GET', 'POST'])]
+    #[Route('/frontuser', name: 'client',methods: ['GET', 'POST'])]
     public function Client(): Response
     {
         return $this->render('frontUser.html.twig');
     }
 
-#[Route('/client/profile/modifier', name: 'clientProfile',methods: ['GET', 'POST'])]
+#[Route('/profile/modifier', name: 'clientProfileee',methods: ['GET', 'POST'])]
 
-<<<<<<< Updated upstream
-public function userProfile(ManagerRegistry $doctrine, Request $request, UserRepository $repository, SluggerInterface $slugger): response
-{
-    $user= $this->getUser();
-    $form=$this->createForm(UserEditType::class,$user);
-
-=======
 public function userProfile(ManagerRegistry $doctrine, Request $request, UserRepository $repository, SluggerInterface $slugger,SerializerInterface $SerializerInterface): response
 {
     $user= $this->getUser();
-    $user =$repository->findAll();
-    // $json =$SerializerInterface->serialize($user,'json',['groups'=>'user']);
-    // dump($json);
-    //   die;
+
     $form=$this->createForm(UserEditType::class,$user);
      
->>>>>>> Stashed changes
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
@@ -138,7 +106,7 @@ public function userProfile(ManagerRegistry $doctrine, Request $request, UserRep
 
             // updates the 'brochureFilename' property to store the PDF file name
             // instead of its contents
-            $user->setImage($newFilename);
+             $user->setImage($newFilename);
         }
         $em = $doctrine->getManager();
         $em->persist($user);
@@ -153,11 +121,7 @@ public function userProfile(ManagerRegistry $doctrine, Request $request, UserRep
 }
 
 
-<<<<<<< Updated upstream
- #[Route('/client/profile/modifier/{id}', name: 'deleteProfile')]
-=======
  #[Route('/client/profile/modifier/{id}', name: 'deleteProfile',methods: ['GET', 'POST'])]
->>>>>>> Stashed changes
      
 public function DeleteUser(EntityManagerInterface $entityManager,User $user, UserRepository $repository,$id,ManagerRegistry $doctrine,Request $request ){
 
@@ -173,9 +137,6 @@ public function DeleteUser(EntityManagerInterface $entityManager,User $user, Use
 
   }
 
-<<<<<<< Updated upstream
-
-=======
     #[Route('/forgotpassword', name: 'forgot_password',methods: ['GET', 'POST'])]
 
     public function forgotPassword(UserRepository $repository,ManagerRegistry $doctrine,Request $request, Mailer $mailer,TokenGeneratorInterface $tokenGenerator)
@@ -209,7 +170,7 @@ public function DeleteUser(EntityManagerInterface $entityManager,User $user, Use
     }
    
 
-    #[Route('/resetPassword/{token}', name: 'resetPass',methods: ['GET', 'POST'])]
+    #[Route('/resetPassword/{token}', name: 'resetPass',methods: ['GET'])]
     public function resetPass(
         string $token,
         Request $request,
@@ -245,7 +206,6 @@ public function DeleteUser(EntityManagerInterface $entityManager,User $user, Use
       
         return $this->redirectToRoute('app_login');
     }
->>>>>>> Stashed changes
 }
 
 
@@ -253,8 +213,5 @@ public function DeleteUser(EntityManagerInterface $entityManager,User $user, Use
 
 
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes

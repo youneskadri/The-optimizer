@@ -21,7 +21,7 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function save(Reservation $entity, bool $flush = false): void
+    public function add(Reservation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -44,10 +44,10 @@ class ReservationRepository extends ServiceEntityRepository
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
@@ -56,8 +56,8 @@ class ReservationRepository extends ServiceEntityRepository
 
 //    public function findOneBySomeField($value): ?Reservation
 //    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

@@ -38,6 +38,18 @@ class TransportRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findTransportByemail(){
+        return $this->createQueryBuilder('q')
+        ->orderBy('q.nomTransport','ASC')
+        ->getQuery()
+        ->getResult();
+    }
+    #DQL
+    public function findTransportByemailDQL(){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery('SELECT p from App\Entity\Transport p ORDER BY p.nomTransport ASC');
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Transport[] Returns an array of Transport objects
