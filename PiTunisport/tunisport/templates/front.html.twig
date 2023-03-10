@@ -13,6 +13,35 @@
     <link rel=stylesheet  href="{{asset('assetsFront/css/layerslider.css')}}">
 
     <script src="{{asset('assetsFront/js/vendor/modernizr.js')}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+
+    
+
+    <link href="{{ asset('node_modules/@fullcalendar/core/main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('node_modules/@fullcalendar/daygrid/main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('node_modules/@fullcalendar/timegrid/main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('node_modules/@fullcalendar/list/main.css') }}" rel="stylesheet" />
+
+
+  {% block stylesheets %}{% endblock %}
+
+    <script src="https://kit.fontawesome.com/994eefcd51.js" crossorigin="anonymous"></script>
+    <script src="{{asset('assetsFront/js/vendor/modernizr.js')}}"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>note</title>
+    <style>
+        .star {
+            font-size: 1.5rem;
+        }
+        
+        .hover {
+            color: rgb(255, 196, 0);
+        }
+    </style>
 </head>
 <body><!--[if lt IE 10]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
@@ -20,6 +49,7 @@
 <![endif]-->
 <div class=wrapper>
 {% block body1 %}{% endblock %}
+<<<<<<< Updated upstream
 
 {% block header %}
     <header class=header-main>
@@ -30,15 +60,58 @@
                         <li><a href="#">Signup/login</a></li>
                         <li><a href=shopcart.html><i class="fa fa-shopping-cart"></i> <span>cart(<span
                                 class=cartitems>0</span>)</span></a></li>
+=======
+{% block blogshow %}{% endblock %}
+{% block headerUser %}{% endblock %}
+
+{% block header %}
+  <script>
+            var botmanWidget = {
+            bubbleAvatarUrl: '{{ asset('/uploads/images/user.jpg') }}',
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("tunibot") }}',
+            introMessage: 'Hello, my name is TUNIBOT. Say "Help" to see what I can do :) ',
+            title: 'tunibot', 
+            mainColor: '#456765',
+            bubbleBackground: '#ff76f4s',
+            aboutText: ''
+        };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+    <header class=header-main>
+        <div class=header-upper>
+            <div class=container>
+          
+                <div class="row">
+                <ul>
+                {% if is_granted('IS_AUTHENTICATED_FULLY')  %} 
+
+                 <li>                
+                 {% if app.user.image == null   %}
+                        <img src="{{asset('/uploads/images/user.jpg')}}" alt="Profile"  class="rounded-circle" style="width: 25px;padding-top:2px;">
+                        {% else %}
+                        <img src="{{asset('/uploads/images/' ~ app.user.image)}}" alt="Profile"  class="rounded-circle" style="width: 25px;padding-top:6px;">
+                       {% endif %}</li>
+                        <li><a href="{{path('clientProfileee')}}">{{app.user.firstName}} {{app.user.secondName}}</a></li>
+                        
+                        <li><a href="{{path('app_logout')}}"><i class="fa fa-sign-out"></i> 
+                        <span>Logout</span></a>
+                    </li>                 
+                    {% else %}
+                     <ul>
+
+                        <li><a href="{{path('app_login')}}">Signup/login</a></li>
+                        <li><a href=shopcart.html><i class="fa fa-shopping-cart"></i> <span>cart(<span  class=cartitems>0</span>)</span></a></li>
+>>>>>>> Stashed changes
                     </ul>
                 </div>
             </div>
         </div>
-        <div class=header-lower clearfix>
+       <div class=header-lower clearfix>
             <div class=container>
                 <div class=row><h1 class=logo><a href=index-2.html><img src=assetsFront/images/tunisport.png alt=image></a></h1>
 
-                    <div class=menubar>
+                 <div class=menubar>
                         <nav class=navbar>
                             <div class=nav-wrapper>
                                 <div class=navbar-header>
@@ -46,36 +119,36 @@
                                         <span class=icon-bar></span></button>
                                 </div>
                                 <div class=nav-menu>
+<<<<<<< Updated upstream
                                     <ul class=nav navbar-nav menu-bar>
                                         <li><a href=index-2.html class=active>Home <span></span> <span></span>
                                             <span></span> <span></span></a></li>
                                         <li><a href=about.html>about <span></span> <span></span> <span></span>
+=======
+                                    <ul class="nav navbar-nav menu-bar">
+                                        <li><a href="{{path('frontMatch')}}">Home <span></span> <span></span> <span></span>
+>>>>>>> Stashed changes
                                             <span></span></a></li>
-                                        <li><a>Event <span></span> <span></span> <span></span> <span></span></a>
+                                         <li><a href="{{path('read_Match')}}">Matchs <span></span> <span></span>
+                                            <span></span> <span></span></a></li>
+                                        <li><a href="#">réservation <span></span> <span></span> <span></span>
+                              
+
+                                        <li><a href="{{path('readblogfront')}}" >blog <span></span> <span></span>
+                                            <span></span> <span></span></a></li>
+                                       
+                                        <li><a href="{{path('read_Event')}}">Evenement <span></span> <span></span> <span></span>
+                                            <span></span></a></li>
+                                             <li><a >Hebergement <span></span> <span></span> <span></span> <span></span></a>
                                             <ul class=sub-menu>
-                                                <li><a href=gallerypage01.html>masonry</a></li>
-                                                <li><a href=gallery02.html>gallery column two</a></li>
-                                                <li><a href=gallery03.html>gallery column 03</a></li>
+                                                <li><a href="{{path('listHebergement')}}">Liste hebergement </a></li>
+                                                <li><a href="{{path('listTransport')}}">Transport</a></li>
+                     
                                             </ul>
                                         </li>
-                                        <li><a href=blog.html>blog <span></span> <span></span> <span></span>
-                                            <span></span></a></li>
-                                        <li><a href=bookTicket.html>book Tickets <span></span> <span></span>
-                                            <span></span> <span></span></a></li>
-                                        <li><a href=shop.html>shop <span></span> <span></span> <span></span>
-                                            <span></span></a></li>
                                         <li><a href=contact.html>contact <span></span> <span></span> <span></span>
                                             <span></span></a></li>
-                                        {# <li><a>error <span></span> <span></span> <span></span> <span></span></a>
-                                            <ul class=sub-menu>
-                                                <li><a href=400.html>400 page</a></li>
-                                                <li><a href=401.html>401 page</a></li>
-                                                <li><a href=403.html>403 page</a></li>
-                                                <li><a href=404.html>404 page</a></li>
-                                                <li><a href=500.html>500 page</a></li>
-                                                <li><a href=503.html>503 page</a></li>
-                                            </ul>
-                                        </li> #}
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -126,7 +199,15 @@
     </div>
 
 {% endblock %}
+<<<<<<< Updated upstream
 {% block bodyKrichen %}{% endblock %}
+=======
+{% block login %}{% endblock %}
+{% block calendar %}{% endblock %}
+{% block bodyFront %}{% endblock %}
+{% block idCalender %}{% endblock %}
+{% block javascriptsCalender %}{% endblock %}
+>>>>>>> Stashed changes
     {% block body %}
     <section class="booking bg-smallwhite">
         <div class=container>
@@ -1157,10 +1238,19 @@
         </div>
     </footer>
 </div>
+
     {% endblock %}
-    
+  
 <script src="{{asset('js/vendor/vendor.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/font-awesome.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+<script src="{{ asset('node_modules/@fullcalendar/core/main.js') }}"></script>
+<script src="{{ asset('node_modules/@fullcalendar/daygrid/main.js') }}"></script>
+<script src="{{ asset('node_modules/@fullcalendar/timegrid/main.js') }}"></script>
+<script src="{{ asset('node_modules/@fullcalendar/list/main.js') }}"></script>
+
 </body>
 
 </html>

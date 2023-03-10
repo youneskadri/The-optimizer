@@ -6,10 +6,17 @@ use App\Repository\BilletRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\StripeTrait;
+
 
 #[ORM\Entity(repositoryClass: BilletRepository::class)]
 class Billet
+
 {
+    use StripeTrait;
+    
+    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -18,13 +25,9 @@ class Billet
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\OneToMany(mappedBy: 'billet', targetEntity: reservation::class)]
-    private Collection $reservation;
+    #[ORM\ManyToOne(inversedBy: 'billet')]
+    private ?Reservation $reservation = null;
 
-    public function __construct()
-    {
-        $this->reservation = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -43,33 +46,24 @@ class Billet
         return $this;
     }
 
-    /**
-     * @return Collection<int, reservation>
-     */
-    public function getReservation(): Collection
+    public function getReservation(): ?Reservation
     {
         return $this->reservation;
     }
 
-    public function addReservation(reservation $reservation): self
+    public function setReservation(?Reservation $reservation): self
     {
-        if (!$this->reservation->contains($reservation)) {
-            $this->reservation->add($reservation);
-            $reservation->setBillet($this);
-        }
+        $this->reservation = $reservation;
 
         return $this;
     }
 
-    public function removeReservation(reservation $reservation): self
-    {
-        if ($this->reservation->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getBillet() === $this) {
-                $reservation->setBillet(null);
-            }
-        }
+ 
 
-        return $this;
-    }
+  
 }
+
+
+
+    
+

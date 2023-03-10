@@ -9,7 +9,15 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+<<<<<<< Updated upstream
 
+=======
+use Symfony\Component\Validator\Constraints as Assert;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfiguration;
+use Scheb\TwoFactorBundle\Model\Totp\TotpConfigurationInterface;
+use Scheb\TwoFactorBundle\Model\Totp\TwoFactorInterface;
+use symfony\Component\Serializer\Annotation\Groups;
+>>>>>>> Stashed changes
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -27,10 +35,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+<<<<<<< Updated upstream
     #[ORM\Column]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+=======
+
+    #[ORM\Column(nullable: true), Groups('user')]
+    private ?string $password = null;
+
+    #[ORM\Column(nullable: true), Groups('user')]
+    private ?string $token = null;
+/**
+ * @Assert\Email(message="The email '{{ value }}' is not a valid email address.")
+ */
+    #[ORM\Column(length: 255,nullable: true), Groups('user')]
+>>>>>>> Stashed changes
     private ?string $email = null;
 
     #[ORM\OneToMany(targetEntity:Commentaire::class, mappedBy: 'user')]
@@ -53,10 +74,56 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateJoin = null;
+<<<<<<< Updated upstream
 
     #[ORM\Column]
     private ?bool $banned = null;
 
+=======
+ 
+    #[ORM\Column(name: 'googleId', type: 'integer', length: 255, nullable: true), Groups('user')]
+    private ?string $googleId = null;
+
+
+    #[ORM\Column(name: 'facebookId', type: 'integer', length: 255, nullable: true), Groups('user')]
+    private ?string $facebookId = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: EventLike::class)]
+    private Collection $eventLikes;
+    // /**
+    //  * @ORM\OneToOne(targetEntity=ConfirmToken::class, cascade={"persist", "remove"})
+    //  * @ORM\JoinColumn(onDelete="SET NULL")
+    //  */
+    // private $token;
+
+   
+    #[ORM\Column(nullable: true), Groups('user')]
+    private ?bool $banned = null;
+
+    #[ORM\Column(type: 'boolean', nullable:true), Groups('user')]
+    private $isVerified = false;
+
+
+  #[Assert\Length(
+     min: 2,
+       max: 20,
+     minMessage: 'Your first name must be at least {{ limit }} characters long',
+       maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
+    #[ORM\Column(length: 255, nullable:true), Groups('user')]
+    private ?string $firstName = null;
+
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+        minMessage: 'Your second name must be at least {{ limit }} characters long',
+        maxMessage: 'Your second name cannot be longer than {{ limit }} characters',
+    )]
+    #[ORM\Column(length: 255, nullable:true), Groups('user')]
+    private ?string $secondName = null;
+    
+  
+>>>>>>> Stashed changes
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
@@ -297,4 +364,127 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+<<<<<<< Updated upstream
+=======
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getSecondName(): ?string
+    {
+        return $this->secondName;
+    }
+
+    public function setSecondName(string $secondName): self
+    {
+        $this->secondName = $secondName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of googleId
+     */ 
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
+
+    /**
+     * Set the value of googleId
+     *
+     * @return  self
+     */ 
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of facebookId
+     */ 
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * Set the value of facebookId
+     *
+     * @return  self
+     */ 
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set the value of token
+     *
+     * @return  self
+     */ 
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+   
+
+
+
+    /**
+     * Get the value of eventLikes
+     */ 
+    public function getEventLikes()
+    {
+        return $this->eventLikes;
+    }
+
+    /**
+     * Set the value of eventLikes
+     *
+     * @return  self
+     */ 
+    public function setEventLikes($eventLikes)
+    {
+        $this->eventLikes = $eventLikes;
+
+        return $this;
+    }
+>>>>>>> Stashed changes
 }

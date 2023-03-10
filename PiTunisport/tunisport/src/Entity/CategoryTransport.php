@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\CategoryTransportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryTransportRepository::class)]
@@ -14,13 +16,16 @@ class CategoryTransport
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    #[Assert\Length(
+        min: 2,
+        minMessage: 'Your transport type0 must be at least {{ limit }} characters long',
+       )]
     #[ORM\Column(length: 255)]
     private ?string $typetransport = null;
 
-    #[ORM\OneToMany(mappedBy: 'categoryTransport', targetEntity: Transport::class)]
+   
+    #[ORM\OneToMany(targetEntity: Transport::class, mappedBy: 'categoryTransport')]
     private Collection $transports;
-
     public function __construct()
     {
         $this->transports = new ArrayCollection();
@@ -30,7 +35,9 @@ class CategoryTransport
     {
         return $this->id;
     }
-
+    public function __toString() {
+        return $this->typetransport;
+    }
     public function getTypetransport(): ?string
     {
         return $this->typetransport;
